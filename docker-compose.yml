@@ -17,8 +17,29 @@ services:
       # the mediawiki service
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
       - ./extensions:/var/www/html/extensions
-      - ./skins:/var/www/html/skins
+    #  - ./skins:/var/www/html/skins
       - ./logo:/var/www/html/logo
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  elasticsearch:
+      container_name: elasticsearch
+      image: elasticsearch:8.2.0
+      environment:
+        - xpack.security.enabled=false
+        - discovery.type=single-node
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+        nofile:
+          soft: 65536
+          hard: 65536
+      cap_add:
+          - IPC_LOCK
+      volumes:
+        - ./elasticsearch-data:/usr/share/elasticsearch/data
+      ports:
+        - 9200:9200
+      depends_on:
+        - mediawiki
