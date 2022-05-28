@@ -1,3 +1,6 @@
 [submodule "extensions/PollResults"]
 	path = extensions/PollResults
 	url = git@github.com:Objective-Earth/PollResults.git
+[submodule "extensions/EmbeddedSearch"]
+	path = extensions/EmbeddedSearch
+	url = git@github.com:Objective-Earth/EmbeddedSearch.git
