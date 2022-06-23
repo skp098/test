@@ -9,4 +9,5 @@ extensions/InputBox/
 extensions/mediawiki-extensions-Cargo-3.1/
 extensions/MyVariables/
 extensions/PageForms/
-extensions/WikiEditor/
+extensions/
+skins/

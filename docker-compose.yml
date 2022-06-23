@@ -17,14 +17,14 @@ services:
       # the mediawiki service
       - ./LocalSettings.php:/var/www/html/LocalSettings.php
       - ./extensions:/var/www/html/extensions
-    #  - ./skins:/var/www/html/skins
+      - ./skins:/var/www/html/skins
       - ./logo:/var/www/html/logo
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
   elasticsearch:
       container_name: elasticsearch
-      image: elasticsearch:8.2.0
+      image: elasticsearch:6.5.4
       environment:
         - xpack.security.enabled=false
         - discovery.type=single-node
