@@ -7,3 +7,6 @@
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
 	url = git@gitlab.com:objective-earth/mediawiki-extensions-PageForms.git
+[submodule "extensions/mediawiki-extensions-AJAXPoll"]
+	path = extensions/mediawiki-extensions-AJAXPoll
+	url = git@gitlab.com:objective-earth/mediawiki-extensions-AJAXPoll.git

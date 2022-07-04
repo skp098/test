@@ -9,5 +9,7 @@ extensions/InputBox/
 extensions/mediawiki-extensions-Cargo-3.1/
 extensions/MyVariables/
 extensions/PageForms/
-extensions/
 skins/
+extensions/BreadCrumbs2/
+extensions/WikiEditor/
+extensions/logs/
