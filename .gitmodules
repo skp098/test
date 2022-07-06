@@ -1,9 +1,9 @@
 [submodule "extensions/PollResults"]
 	path = extensions/PollResults
-	url = git@git@gitlab.com:objective-earth/PollResults.git
+	url = git@gitlab.com:objective-earth/PollResults.git
 [submodule "extensions/EmbeddedSearch"]
 	path = extensions/EmbeddedSearch
-	url = git@git@gitlab.com:objective-earth/EmbeddedSearch.git
+	url = git@gitlab.com:objective-earth/EmbeddedSearch.git
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
 	url = git@gitlab.com:objective-earth/mediawiki-extensions-PageForms.git
