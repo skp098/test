@@ -10,3 +10,6 @@
 [submodule "extensions/mediawiki-extensions-AJAXPoll"]
 	path = extensions/mediawiki-extensions-AJAXPoll
 	url = git@gitlab.com:objective-earth/mediawiki-extensions-AJAXPoll.git
+[submodule "extensions/upvote-extension"]
+	path = extensions/upvote-extension
+	url = git@gitlab.com:objective-earth/upvote-extension.git
