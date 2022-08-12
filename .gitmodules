@@ -13,3 +13,6 @@
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
 	url = git@gitlab.com:objective-earth/upvote-extension.git
+[submodule "extensions/comment-extension"]
+	path = extensions/comment-extension
+	url = git@gitlab.com:objective-earth/comment-extension.git
