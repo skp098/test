@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediawiki
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app.kubernetes.io/name: mediawiki
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mediawiki
+    spec:
+      containers:
+        - name: mediawiki
+          image: mediawiki:1.38
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: datadir
+              mountPath: /var/www/html/LocalSettings.php
+              subPath: "mnt/LocalSettings.php"
+             
+            - name: datadir
+              mountPath: /usr/local/etc/php/conf.d/uploads.ini
+              subPath: "mnt/uploads.ini"
+             
+            - name: datadir
+              mountPath: /var/www/html/extensions
+              subPath: "extensions"
+             
+            - name: datadir
+              mountPath: /var/www/html/images
+              subPath: "images"
+            - name: datadir
+              mountPath: /var/www/html/skins
+              subPath: "skins"
+             
+            - name: datadir
+              mountPath: /var/www/html/logo
+              subPath: "logo"
+
+            - name: datadir
+              mountPath: /var/www/html/mnt
+              subPath: "mnt"
+             
+        - name: cloud-sql-proxy
+          # It is recommended to use the latest version of the Cloud SQL proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.28.0 # make sure the use the latest version
+          command:
+            - "/cloud_sql_proxy"
+            - "-log_debug_stdout"
+
+            # Replace DB_PORT with the port the proxy should listen on
+            # Defaults: MySQL: 3306, Postgres: 5432, SQLServer: 1433
+            - "-instances=objective-earth:us-central1:mediawiki=tcp:3306"
+            # This flag specifies where the service account key can be found
+            - "-credential_file=/secrets/service_account.json"
+
+          securityContext:
+            runAsNonRoot: true
+          volumeMounts:
+          - name: sql-access-vol
+            mountPath: /secrets/
+            readOnly: true
+      volumes:
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: pvc-mediawiki
+        - name: sql-access-vol
+          secret:
+            secretName: sql-access-secret
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediawiki-service
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: mediawiki
+  ports:
+  - port: 80
+    targetPort: 80
