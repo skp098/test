@@ -46,4 +46,12 @@ The installation of Objective.Earth project has been clearly documented in the [
 
 ## How to Contribute
 
-Everyone or anyone can contribute to Objective.Earth project. We welcome any type of contribution, not only code. A detailed guide on how to contribute can be found at [CONTRIBUTING.md](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/CONTRIBUTING.md) page.
+Everyone or anyone can contribute to Objective.Earth project. We welcome any type of contribution, not only code. A detailed guide on how to contribute can be found at [CONTRIBUTING](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/CONTRIBUTING.md) page.
+
+## Support
+
+- Open bug reports and feature requests (not questions) on [GitLab](https://gitlab.com/objective-earth/objective-earth-wiki/-/issues) issues.
+
+## License
+
+This project is licensed under the terms of the GPL v3 license. See [LICENSE](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/LICENSE) for additional details.
