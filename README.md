@@ -44,10 +44,6 @@ The following is the list of WHAT we are building in Objective.Earth so that it 
 
 The installation of Objective.Earth project has been clearly documented in the [INSTALL.md](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/INSTALL.md) file. Where a step by step guide has been provided to get started contributing to Objective Earth as a developer.
 
-## Extensions in use for OE
+## How to Contribute
 
-* Cargo 3.1
-* PageForms
-* BreadCrumbs2
-* Upvote (Customised for OE could be pulled from Extensions group)
-* Comments (Customised for OE could be pulled from Extensions group)
+Everyone or anyone can contribute to Objective.Earth project. We welcome any type of contribution, not only code. A detailed guide on how to contribute can be found at [CONTRIBUTING.md](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/CONTRIBUTING.md) page.
