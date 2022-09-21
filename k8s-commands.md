@@ -32,7 +32,7 @@ kubectl exec -it --namespace=dev  mediawiki-5458f4766c-nr7zw  -- bash
 
 kubectl cp  LocalSettings.php   mediawiki-68f64b9dd5-jn5mv:/var/www/html/mnt  -c mediawiki --namespace=dev 
 kubectl cp  uploads.ini mediawiki-5458f4766c-nr7zw:/var/www/html/mnt  -c mediawiki --namespace=dev 
-kubectl cp  ./extensions mediawiki-5458f4766c-nr7zw:/var/www/html  -c mediawiki --namespace=dev 
+kubectl cp  ./extensions/mediawiki-extensions-PageForms  mediawiki-68f64b9dd5-zqqcp:/var/www/html/extensions  -c mediawiki --namespace=dev 
 kubectl cp  ./images mediawiki-5458f4766c-nr7zw:/var/www/html  -c mediawiki --namespace=dev 
 kubectl cp  ./skins mediawiki-5458f4766c-nr7zw:/var/www/html  -c mediawiki --namespace=dev 
 kubectl cp  ./logo mediawiki-5458f4766c-nr7zw:/var/www/html  -c mediawiki --namespace=dev 
