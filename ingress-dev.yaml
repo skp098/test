@@ -16,7 +16,7 @@ spec:
   tls:
     - secretName: oe-domain-secret
   rules:
-  - host: 'oe-dev.smarter.codes'
+  - host: 'oe-test.smarter.codes'
     http:
       paths:
       - path: "/"
