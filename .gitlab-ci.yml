@@ -10,7 +10,9 @@ variables:
   REGISTRY: gitlab-registry-$CI_PROJECT_NAME
   AGENT: objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:test-agent  
-  HOST_DEV: oe-test.smarter.codes  
+  HOST_DEV: oe-test.smarter.codes 
+
+
 build:
   image: docker:19.03.12
   stage: build
@@ -36,6 +38,6 @@ deploy-db-test:
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment-mongo.yml    
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment-mysql.yml   
   only:
     - test
