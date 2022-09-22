@@ -41,6 +41,5 @@ deploy-db-test:
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f mediawiki-deployment.yml
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f nginx-ingress.
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f mediawiki-pvc.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f ingress-dev.yaml
   only:
     - test
