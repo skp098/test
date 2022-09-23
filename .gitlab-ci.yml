@@ -38,8 +38,6 @@ deploy-db-test:
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f mediawiki-deployment.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f nginx-ingress.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f mediawiki-pvc.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
   only:
     - test
