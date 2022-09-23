@@ -62,7 +62,7 @@ deploy-mediawiki-test:
       -e 's|$URL|'"$HOST"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
   only:
     - test
 
