@@ -10,7 +10,7 @@ variables:
   REGISTRY: gitlab-registry-$CI_PROJECT_NAME
   AGENT: objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:test-agent  
-  HOST_DEV: oe-test.smarter.codes 
+  HOST: oe-test.smarter.codes 
 
 
 build:
@@ -27,17 +27,52 @@ build:
   only:
     - test
 
-deploy-db-test:
+# deploy-db-test:
+#   image:
+#     name: bitnami/kubectl
+#     entrypoint: [""]
+#   stage: deploy-db
+#   script:
+#     - kubectl config get-contexts
+#     - kubectl config use-context $CONTEXT_DEV
+#     - >-
+#       kubectl create namespace $CI_COMMIT_BRANCH
+#       -o yaml --dry-run=client | kubectl apply -f -
+#     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
+#   only:
+#     - test
+
+deploy-mediawiki-test:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
-  stage: deploy-db
+  stage: deploy
+  environment:
+    name: dev/$CI_COMMIT_BRANCH-$CI_PROJECT_NAME
+    url: https://$HOST
   script:
     - kubectl config get-contexts
-    - kubectl config use-context $CONTEXT_DEV
+    - kubectl config use-context $CONTEXT
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
+    - >-
+      kubectl create secret
+      docker-registry $REGISTRY
+      --namespace $CI_COMMIT_BRANCH
+      --docker-server="$CI_REGISTRY"
+      --docker-username="$CI_DEPLOY_USER"
+      --docker-password="$CI_DEPLOY_PASSWORD"
+      --docker-email="$GITLAB_USER_EMAIL"
+      -o yaml --dry-run=client | kubectl apply -f -
+    - >-
+      sed -i 
+      -e 's|$IMAGE_TAG|'"mediawiki:1.38"'|'
+      -e 's|$APP|'"$CI_PROJECT_NAME"'|'
+      -e 's|$URL|'"$HOST"'|'
+      -e 's|$PORT|'"80"'|'
+      kube-deployment.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment.yml
   only:
     - test
+

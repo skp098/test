@@ -1,60 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-mediawiki
+  name: deployment-$APP
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mediawiki
+      app: $APP
   template:
     metadata:
       labels:
-        app: mediawiki
+        app: $APP
     spec:
       containers:
-        - name: mediawiki
-          image: mediawiki:1.38
+        - name: container-$APP
+          image: $IMAGE_TAG
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: $PORT
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: entrypoint-mediawiki
+  name: entrypoint-$APP
 spec:
   type: ClusterIP
   selector:
-    app: mediawiki
+    app: $APP
   ports:
-    - port: 80
-      targetPort: 80
+    - port: $PORT
+      targetPort: $PORT
       protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-mediawiki
+  name: ingress-$APP
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
 spec:
   tls:
     - hosts:
-        - oe-test.smarter.codes
-      secretName: oe-test.smarter.codes-tls
+        - $URL
+      secretName: $URL-tls
   rules:
-    - host: oe-test.smarter.codes
+    - host: $URL
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: entrypoint-mediawiki
+                name: entrypoint-$APP
                 port:
-                  number: 80
+                  number: $PORT
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
