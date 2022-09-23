@@ -14,10 +14,12 @@ spec:
     spec:
       containers:
         - name: container-$APP
-          image: $REGISTRY
+          image: $IMAGE
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT
+      imagePullSecrets:
+        - name: $REGISTRY
 ---
 apiVersion: v1
 kind: Service

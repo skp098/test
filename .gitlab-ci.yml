@@ -57,7 +57,8 @@ deploy-mediawiki-test:
     url: https://$HOST
   script:
     - kubectl config get-contexts
-    - kubectl config use-context $CONTEXT_DEV
+    - kubectl config use-context $
+    - echo $REGISTRY $CI_DEPLOY_USER $CI_DEPLOY_PASSWORD
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
