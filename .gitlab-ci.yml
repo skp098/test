@@ -66,3 +66,19 @@ deploy-mediawiki-test:
   only:
     - test
 
+
+
+deploy-mysql-test:
+  image:
+    name: bitnami/kubectl
+    entrypoint: [""]
+  stage: deploy-db
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context $CONTEXT_DEV
+    - >-
+      kubectl create namespace $CI_COMMIT_BRANCH
+      -o yaml --dry-run=client | kubectl apply -f -
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mysql.yml
+  only:
+    - test
