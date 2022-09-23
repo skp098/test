@@ -5,7 +5,7 @@ stages:
 
   
 variables:
-  IMAGE_TAG: mediawiki:1.38
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-$CI_PIPELINE_ID
   IMAGE_TAG_LATEST: $CI_REGISTRY_IMAGE:latest
   REGISTRY: gitlab-registry-$CI_PROJECT_NAME
   AGENT: objective-earth/objective-earth-wiki
@@ -58,7 +58,6 @@ deploy-mediawiki-test:
       -o yaml --dry-run=client | kubectl apply -f -
     - >-
       sed -i 
-      -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$URL|'"$HOST"'|'
       -e 's|$PORT|'"80"'|'
