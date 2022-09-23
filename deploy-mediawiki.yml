@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: container-$APP
-          image: mediawiki:1.38
+          image: $REGISTRY
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT

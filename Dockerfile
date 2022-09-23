@@ -1,3 +1,6 @@
-FROM python:3.8-slim-buster
+FROM mediawiki:1.38
 
-WORKDIR /app
+COPY ./uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+COPY ./LocalSettings.php /var/www/html/LocalSettings.php
+COPY ./extensions /var/www/html/extensions
+COPY ./logo /var/www/html/logo

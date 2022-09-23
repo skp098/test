@@ -10,7 +10,7 @@ variables:
   REGISTRY: gitlab-registry-$CI_PROJECT_NAME
   AGENT: objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:test-agent  
-  HOST: oetestgitlab.smarter.codes 
+  HOST: oetestgitlab.smarter.codes
 
 
 build:
@@ -27,20 +27,24 @@ build:
   only:
     - test
 
-# deploy-db-test:
-#   image:
-#     name: bitnami/kubectl
-#     entrypoint: [""]
-#   stage: deploy-db
-#   script:
-#     - kubectl config get-contexts
-#     - kubectl config use-context $CONTEXT_DEV
-#     - >-
-#       kubectl create namespace $CI_COMMIT_BRANCH
-#       -o yaml --dry-run=client | kubectl apply -f -
-#     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
-#   only:
-#     - test
+
+deploy-mysql-test:
+  image:
+    name: bitnami/kubectl
+    entrypoint: [""]
+  stage: deploy-db
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context $CONTEXT_DEV
+    - >-
+      kubectl create namespace $CI_COMMIT_BRANCH
+      -o yaml --dry-run=client | kubectl apply -f -
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mysql.yml
+  only:
+    - test
+
 
 deploy-mediawiki-test:
   image:
@@ -57,30 +61,22 @@ deploy-mediawiki-test:
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
     - >-
+      kubectl create secret
+      docker-registry $REGISTRY
+      --namespace $CI_COMMIT_BRANCH
+      --docker-server="$CI_REGISTRY"
+      --docker-username="$CI_DEPLOY_USER"
+      --docker-password="$CI_DEPLOY_PASSWORD"
+      --docker-email="$GITLAB_USER_EMAIL"
+      -o yaml --dry-run=client | kubectl apply -f -
+    - >-
       sed -i 
+      -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
+      -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$HOST"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
-  only:
-    - test
-
-
-
-deploy-mysql-test:
-  image:
-    name: bitnami/kubectl
-    entrypoint: [""]
-  stage: deploy-db
-  script:
-    - kubectl config get-contexts
-    - kubectl config use-context $CONTEXT_DEV
-    - >-
-      kubectl create namespace $CI_COMMIT_BRANCH
-      -o yaml --dry-run=client | kubectl apply -f -
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mysql.yml
   only:
     - test
