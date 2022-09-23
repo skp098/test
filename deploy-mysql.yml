@@ -8,5 +8,3 @@ spec:
   instances: 1
   router:
     instances: 1
-  requests:
-    storage: 2Gi
