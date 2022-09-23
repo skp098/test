@@ -79,6 +79,8 @@ deploy-mysql-test:
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mysql.yml
   only:
     - test
