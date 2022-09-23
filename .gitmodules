@@ -1,18 +1,18 @@
 [submodule "extensions/PollResults"]
 	path = extensions/PollResults
-	url = ../../PollResults.git
+	url = ../../objective-earth/PollResults.git
 [submodule "extensions/EmbeddedSearch"]
 	path = extensions/EmbeddedSearch
-	url = ../../EmbeddedSearch.git
+	url = ../../objective-earth/EmbeddedSearch.git
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
-	url = ../../mediawiki-extensions-PageForms.git
+	url = ../../objective-earth/mediawiki-extensions-PageForms.git
 [submodule "extensions/mediawiki-extensions-AJAXPoll"]
 	path = extensions/mediawiki-extensions-AJAXPoll
-	url = ../../mediawiki-extensions-AJAXPoll.git
+	url = ../../objective-earth/mediawiki-extensions-AJAXPoll.git
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
-	url = ../../upvote-extension.git
+	url = ../../objective-earth/upvote-extension.git
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
-	url = ../../comment-extension.git
+	url = ../../objective-earth/comment-extension.git
