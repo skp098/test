@@ -118,10 +118,10 @@ deploy-mr:
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$WG_SERVER|'"https://$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
-      -e 's|$MEDIAWIKI_DB_HOST|'"mysqltest.test"'|'
+      -e 's|$MEDIAWIKI_DB_HOST|'"localhost:3306"'|'
       -e 's|$PORT|'"80"'|'
-      deploy-mediawiki.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mediawiki.yml
+      deploy-mr-mysql.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mr-mysql.yml
   only:
     - merge_requests
 
