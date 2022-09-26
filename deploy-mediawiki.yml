@@ -18,6 +18,17 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT
+          env:
+            - name: MEDIAWIKI_DB_TYPE
+              value: "mysql"
+            - name: MEDIAWIKI_DB_HOST
+              value: "mysqltest"
+            - name: MEDIAWIKI_DB_NAME
+              value: "my_wiki"
+            - name: MEDIAWIKI_DB_USER
+              value: "root"
+            - name: MEDIAWIKI_DB_PASSWORD
+              value: "sakila"
       imagePullSecrets:
         - name: $REGISTRY
 ---
