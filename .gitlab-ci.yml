@@ -12,6 +12,7 @@ variables:
   AGENT: objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:test-agent  
   HOST: oetestgitlab.smarter.codes
+  MEDIAWIKI_DB_HOST: mysqltest
 
 
 build:
@@ -78,6 +79,7 @@ deploy-mediawiki-test:
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$HOST"'|'
       -e 's|$WG_SERVER|'"$HOST"'|'
+      -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
