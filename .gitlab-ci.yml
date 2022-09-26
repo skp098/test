@@ -113,15 +113,20 @@ deploy-mr:
       -o yaml --dry-run=client | kubectl apply -f -
     - >-
       sed -i 
+      -e 's|$CI_MERGE_REQUEST_ID|'"$CI_MERGE_REQUEST_ID"'|'
+      mysql-mr.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f mysql-mr.yml
+    - >-
+      sed -i 
       -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$WG_SERVER|'"https://$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
-      -e 's|$MEDIAWIKI_DB_HOST|'"localhost:3306"'|'
+      -e 's|$MEDIAWIKI_DB_HOST|'"mysql-$CI_MERGE_REQUEST_ID"'|'
       -e 's|$PORT|'"80"'|'
-      deploy-mr-mysql.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mr-mysql.yml
+      deploy-mediawiki.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mediawiki.yml
   only:
     - merge_requests
 
