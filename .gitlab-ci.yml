@@ -116,8 +116,6 @@ deploy-mr:
       -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
     - kubectl create --namespace=$CI_MERGE_REQUEST_ID secret generic mypwds \
         --from-literal=rootUser=root \
         --from-literal=rootHost=% \
