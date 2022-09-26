@@ -116,6 +116,7 @@ deploy-mr:
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$WG_SERVER|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
+      -e 's|$MEDIAWIKI_DB_HOST|'"localhost"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
     - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml

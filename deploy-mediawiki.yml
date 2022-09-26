@@ -22,13 +22,15 @@ spec:
             - name: MEDIAWIKI_DB_TYPE
               value: "mysql"
             - name: MEDIAWIKI_DB_HOST
-              value: "mysqltest"
+              value: $MEDIAWIKI_DB_HOST
             - name: MEDIAWIKI_DB_NAME
               value: "my_wiki"
             - name: MEDIAWIKI_DB_USER
               value: "root"
             - name: MEDIAWIKI_DB_PASSWORD
               value: "sakila"
+            - name: WG_SERVER
+              value: $WG_SERVER
       imagePullSecrets:
         - name: $REGISTRY
 ---
