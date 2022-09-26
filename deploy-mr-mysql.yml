@@ -37,7 +37,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: "sakila"
           ports:
-            - containerPort: 8080
+            - containerPort: 3306
       imagePullSecrets:
         - name: $REGISTRY
 ---
