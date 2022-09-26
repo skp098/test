@@ -34,7 +34,7 @@ $wgMetaNamespace = "Hello";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "https://oetestgitlab.smarter.codes";
+$wgServer = loadenv('WG_SERVER', "https://oetestgitlab.smarter.codes");
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
