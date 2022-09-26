@@ -35,7 +35,7 @@ spec:
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "sakila"
+              value: sakila
           ports:
             - containerPort: 3306
       imagePullSecrets:
