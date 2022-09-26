@@ -58,7 +58,6 @@ deploy-mediawiki-test:
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT_DEV
-    - echo $REGISTRY $CI_DEPLOY_USER $CI_DEPLOY_PASSWORD
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
@@ -82,3 +81,57 @@ deploy-mediawiki-test:
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
   only:
     - test
+
+
+deploy-mr:
+  image:
+    name: bitnami/kubectl
+    entrypoint: [""]
+  stage: deploy
+  environment:
+    name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID
+    url: https://$CI_MERGE_REQUEST_ID.oe-test.smarter.codes
+    on_stop: teardown-mr
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context $CONTEXT_DEV
+    - >-
+      kubectl create namespace $CI_MERGE_REQUEST_ID
+      -o yaml --dry-run=client | kubectl apply -f -
+    - >-
+      kubectl create secret
+      docker-registry $REGISTRY
+      --namespace $CI_MERGE_REQUEST_ID
+      --docker-server="$CI_REGISTRY"
+      --docker-username="$CI_DEPLOY_USER"
+      --docker-password="$CI_DEPLOY_PASSWORD"
+      --docker-email="$GITLAB_USER_EMAIL"
+      -o yaml --dry-run=client | kubectl apply -f -
+    - >-
+      sed -i 
+      -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
+      -e 's|$APP|'"$CI_PROJECT_NAME"'|'
+      -e 's|$REGISTRY|'"$REGISTRY"'|'
+      -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
+      -e 's|$PORT|'"80"'|'
+      deploy-mediawiki.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mediawiki.yml
+  only:
+    - merge_requests
+
+
+teardown-mr:
+  image:
+    name: bitnami/kubectl
+    entrypoint: [""]
+  stage: deploy
+  environment:
+    name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID
+    action: stop
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context $CONTEXT_DEV
+    - kubectl delete namespace $CI_MERGE_REQUEST_ID
+  when: manual
+  only:
+    - merge_requests
