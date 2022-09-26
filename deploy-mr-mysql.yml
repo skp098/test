@@ -31,12 +31,11 @@ spec:
               value: "sakila"
             - name: WG_SERVER
               value: $WG_SERVER
-              
         - name: db-$APP
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "objective"
+              value: "sakila"
           ports:
             - containerPort: 8080
       imagePullSecrets:
