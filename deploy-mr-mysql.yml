@@ -31,8 +31,9 @@ spec:
               value: "sakila"
             - name: WG_SERVER
               value: $WG_SERVER
-        - name: db-$APP
+        - name: mysql
           image: mysql:8.0
+          imagePullPolicy: "Always"
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: sakila
