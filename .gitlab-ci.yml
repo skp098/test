@@ -117,7 +117,7 @@ deploy-mr:
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
-      -e 's|$WG_SERVER|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
+      -e 's|$WG_SERVER|'"https://$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$MEDIAWIKI_DB_HOST|'"mysqltest.test"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
