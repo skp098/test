@@ -37,8 +37,6 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: sakila
-            - name: MYSQL_USER
-              value: root
             - name: MYSQL_PASSWORD
               value: sakila
           ports:
