@@ -84,31 +84,6 @@ deploy-mediawiki-test:
   only:
     - test
 
-deploy-mr-db:
-  image:
-    name: bitnami/kubectl
-    entrypoint: [""]
-  stage: deploy
-  environment:
-    name: testing-database/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID
-    on_stop: teardown-mr
-  script:
-    - kubectl config get-contexts
-    - kubectl config use-context $CONTEXT_DEV
-    - >-
-      kubectl create namespace $CI_MERGE_REQUEST_ID
-      -o yaml --dry-run=client | kubectl apply -f -
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
-    - >-
-      kubectl create --namespace=$CI_MERGE_REQUEST_ID secret generic mypwds
-      --from-literal=rootUser=root
-      --from-literal=rootHost=%
-      --from-literal=rootPassword="sakila"
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mysql.yml
-  only:
-    - merge_requests
-
 
 deploy-mr:
   image:
@@ -143,6 +118,17 @@ deploy-mr:
       -e 's|$WG_SERVER|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
       -e 's|$PORT|'"80"'|'
       deploy-mediawiki.yml
+    - >-
+      kubectl create namespace $CI_MERGE_REQUEST_ID
+      -o yaml --dry-run=client | kubectl apply -f -
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
+    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
+    - >-
+      kubectl create --namespace=$CI_MERGE_REQUEST_ID secret generic mypwds
+      --from-literal=rootUser=root
+      --from-literal=rootHost=%
+      --from-literal=rootPassword="sakila"
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mysql.yml
     - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mediawiki.yml
   only:
     - merge_requests
