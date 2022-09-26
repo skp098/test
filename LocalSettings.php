@@ -23,7 +23,7 @@ function loadenv($envName, $default = "") {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = "hello";
+$wgSitename = "Objective Earth";
 $wgMetaNamespace = "Hello";
 
 ## The URL base path to the directory containing the wiki;
