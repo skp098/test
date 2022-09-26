@@ -57,11 +57,17 @@ $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
 ## Database settings
-$wgDBtype = "mysql";
-$wgDBserver = "mysqltest";
-$wgDBname = "my_wiki";
-$wgDBuser = "root";
-$wgDBpassword = "sakila";
+$wgDBtype = loadenv('MEDIAWIKI_DB_TYPE', "mysql");
+$wgDBserver = loadenv('MEDIAWIKI_DB_HOST', "mysqltest");
+$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "my_wiki");
+$wgDBuser = loadenv('MEDIAWIKI_DB_USER', "root");
+$wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "sakila");
+
+// $wgDBtype = "mysql";
+// $wgDBserver = "mysqltest";
+// $wgDBname = "my_wiki";
+// $wgDBuser = "root";
+// $wgDBpassword = "sakila";
 
 # MySQL specific settings
 $wgDBprefix = "";
