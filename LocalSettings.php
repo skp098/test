@@ -15,6 +15,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+function loadenv($envName, $default = "") {
+    return getenv($envName) ? getenv($envName) : $default;
+}
+
 
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
