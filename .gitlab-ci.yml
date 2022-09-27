@@ -1,9 +1,8 @@
 stages:
   - build
-  - deploy-db
   - deploy
 
-  
+
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-$CI_PIPELINE_ID
@@ -12,7 +11,22 @@ variables:
   AGENT: objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:test-agent  
   HOST: oetestgitlab.smarter.codes
+
+  # Change this to gitlab variables
   MEDIAWIKI_DB_HOST: mysqltest
+  WG_SERVER: https://$HOST
+  MEDIAWIKI_DB_TYPE: mysql
+  MEDIAWIKI_DB_NAME: my_wiki
+  MEDIAWIKI_DB_USER: root
+  MEDIAWIKI_DB_PASSWORD: sakila
+  # Change this to gitlab variables MR CI/CD
+  HOST_MR : $CI_MERGE_REQUEST_ID.oe-test.smarter.codes
+  MEDIAWIKI_DB_HOST_MR: mysql-$CI_MERGE_REQUEST_ID
+  WG_SERVER_MR: https://$HOST_MR
+  MEDIAWIKI_DB_TYPE_MR: mysql
+  MEDIAWIKI_DB_NAME_MR: my_wiki
+  MEDIAWIKI_DB_USER_MR: root
+  MEDIAWIKI_DB_PASSWORD_MR: sakila
 
 
 build:
@@ -31,11 +45,11 @@ build:
     - merge_requests
 
 
-deploy-mysql-test:
+deploy-mysql:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
-  stage: deploy-db
+  stage: deploy
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT_DEV
@@ -44,18 +58,22 @@ deploy-mysql-test:
       -o yaml --dry-run=client | kubectl apply -f -
     - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
     - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mysql.yml
+    - >-
+      sed -i
+      -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
+      kube-deployment-mysql.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment-mysql.yml
   only:
     - test
 
 
-deploy-mediawiki-test:
+deploy-mediawiki:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
   stage: deploy
   environment:
-    name: dev/$CI_COMMIT_BRANCH-$CI_PROJECT_NAME
+    name: deploy/$CI_COMMIT_BRANCH-$CI_PROJECT_NAME
     url: https://$HOST
   script:
     - kubectl config get-contexts
@@ -78,11 +96,15 @@ deploy-mediawiki-test:
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$REGISTRY|'"$REGISTRY"'|'
       -e 's|$URL|'"$HOST"'|'
-      -e 's|$WG_SERVER|'"https://$HOST"'|'
+      -e 's|$WG_SERVER|'"$WG_SERVER"'|'
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
+      -e 's|$MEDIAWIKI_DB_TYPE|'"$MEDIAWIKI_DB_TYPE"'|'
+      -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
+      -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER"'|'
+      -e 's|$MEDIAWIKI_DB_PASSWORD|'"$MEDIAWIKI_DB_PASSWORD"'|'
       -e 's|$PORT|'"80"'|'
-      deploy-mediawiki.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f deploy-mediawiki.yml
+      kube-deployment.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment.yml
   only:
     - test
 
@@ -114,19 +136,23 @@ deploy-mr:
     - >-
       sed -i 
       -e 's|$CI_MERGE_REQUEST_ID|'"$CI_MERGE_REQUEST_ID"'|'
-      mysql-mr.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f mysql-mr.yml
+      kube-deployment-mysql-mr.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment-mysql-mr.yml
     - >-
-      sed -i 
+      sed -i
       -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$REGISTRY|'"$REGISTRY"'|'
-      -e 's|$URL|'"$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
-      -e 's|$WG_SERVER|'"https://$CI_MERGE_REQUEST_ID.oe-test.smarter.codes"'|'
-      -e 's|$MEDIAWIKI_DB_HOST|'"mysql-$CI_MERGE_REQUEST_ID"'|'
+      -e 's|$URL|'"$HOST_MR"'|'
+      -e 's|$WG_SERVER|'"$WG_SERVER_MR"'|'
+      -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST_MR"'|'
+      -e 's|$MEDIAWIKI_DB_TYPE|'"$MEDIAWIKI_DB_TYPE_MR"'|'
+      -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME_MR"'|'
+      -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER_MR"'|'
+      -e 's|$MEDIAWIKI_DB_PASSWORD|'"$MEDIAWIKI_DB_PASSWORD_MR"'|'
       -e 's|$PORT|'"80"'|'
-      deploy-mediawiki.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f deploy-mediawiki.yml
+      kube-deployment.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment.yml
   only:
     - merge_requests
 
