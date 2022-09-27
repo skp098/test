@@ -142,4 +142,4 @@ wfLoadSkin( 'Vector' );
 // wfLoadExtension( 'Cargo' );
 wfLoadExtension( 'mediawiki-extensions-PageForms' );
 wfLoadExtension( 'Upvote' );
-wfLoadExtension( 'Comments' );
+// wfLoadExtension( 'Comments' );
