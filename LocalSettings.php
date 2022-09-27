@@ -139,7 +139,7 @@ wfLoadSkin( 'Vector' );
 # Add more configuration options below.
 
 #adding extensions
-wfLoadExtension( 'Cargo' );
+// wfLoadExtension( 'Cargo' );
 wfLoadExtension( 'mediawiki-extensions-PageForms' );
 wfLoadExtension( 'Upvote' );
 wfLoadExtension( 'Comments' );
