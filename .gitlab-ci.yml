@@ -54,7 +54,7 @@ deploy-dev-mysql:
       -o yaml --dry-run=client | kubectl apply -f -
     - >-
       head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10 |
-      kubectl create secret generic mysqlAuthSecret
+      kubectl create secret generic mysqlauthsecret
       --from-literal=rootUser=root
       --from-literal=rootHost=%
       --from-literal=rootPassword=/dev/stdin || :
