@@ -141,7 +141,7 @@ wfLoadSkin( 'Vector' );
 wfLoadExtension( 'Cargo' );
 wfLoadExtension( 'mediawiki-extensions-PageForms' );
 wfLoadExtension( 'Upvote' );
-wfLoadExtension( 'Comments' );
+wfLoadExtension( 'comment-extension' );
 
 $wgGroupPermissions['*']['lookupuser'] = true;
 $wgGroupPermissions['lookupuser']['lookupuser'] = true;
