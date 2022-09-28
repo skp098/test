@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy-db
   - deploy
 
 variables:
@@ -45,7 +46,7 @@ deploy-dev-mysql:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
-  stage: deploy
+  stage: deploy-db
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT_DEV
@@ -54,7 +55,8 @@ deploy-dev-mysql:
       -o yaml --dry-run=client | kubectl apply -f -
     - >-
       head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10 |
-      kubectl create secret generic mysqlauthsecret
+      kubectl create --namespace=$CI_COMMIT_BRANCH
+      secret generic mysqlAuthSecret
       --from-literal=rootUser=root
       --from-literal=rootHost=%
       --from-literal=rootPassword=/dev/stdin || :

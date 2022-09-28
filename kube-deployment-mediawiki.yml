@@ -30,7 +30,7 @@ spec:
             - name: MEDIAWIKI_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysqlauthsecret
+                  name: mysqlAuthSecret
                   key: rootPassword
             - name: WG_SERVER
               value: $WG_SERVER
