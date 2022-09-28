@@ -1,21 +1,21 @@
 [submodule "extensions/PollResults"]
 	path = extensions/PollResults
-	url = ../../objective-earth/PollResults.git
+	url = ../../objective-earth/extensions/PollResults.git
 [submodule "extensions/EmbeddedSearch"]
 	path = extensions/EmbeddedSearch
-	url = ../../objective-earth/EmbeddedSearch.git
+	url = ../../objective-earth/extensions/EmbeddedSearch.git
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
-	url = ../../objective-earth/mediawiki-extensions-PageForms.git
+	url = ../../objective-earth/extensions/mediawiki-extensions-PageForms.git
 [submodule "extensions/mediawiki-extensions-AJAXPoll"]
 	path = extensions/mediawiki-extensions-AJAXPoll
-	url = ../../objective-earth/mediawiki-extensions-AJAXPoll.git
+	url = ../../objective-earth/extensions/mediawiki-extensions-AJAXPoll.git
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
-	url = ../../objective-earth/upvote-extension.git
+	url = ../../objective-earth/extensions/upvote-extension.git
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
-	url = ../../objective-earth/comment-extension.git
+	url = ../../objective-earth/extensions/comment-extension.git
 [submodule "extensions/Cargo"]
 	path = extensions/Cargo
-	url = ../../objective-earth/Cargo.git
+	url = ../../objective-earth/extensions/Cargo.git
