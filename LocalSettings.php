@@ -139,17 +139,10 @@ wfLoadSkin('Vector');
 # Add more configuration options below.
 
 #adding extensions
-<<<<<<< HEAD
-wfLoadExtension( 'Cargo' );
-wfLoadExtension( 'mediawiki-extensions-PageForms' );
-wfLoadExtension( 'Upvote' );
-wfLoadExtension( 'comment-extension' );
-=======
 wfLoadExtension('Cargo');
 wfLoadExtension('mediawiki-extensions-PageForms');
 wfLoadExtension('Upvote');
-wfLoadExtension('Comments');
->>>>>>> c5746d7cfbaf8434f36f69921da5220772a6be3a
+wfLoadExtension('comment-extension');
 
 $wgGroupPermissions['*']['lookupuser'] = true;
 $wgGroupPermissions['lookupuser']['lookupuser'] = true;
