@@ -16,3 +16,6 @@
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
 	url = ../../objective-earth/comment-extension.git
+[submodule "extensions/Cargo"]
+	path = extensions/Cargo
+	url = ../../objective-earth//Cargo.git
