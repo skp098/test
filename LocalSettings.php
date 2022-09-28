@@ -11,12 +11,13 @@
 # https://www.mediawiki.org/wiki/Manual:Configuration_settings
 
 # Protect against web entry
-if ( !defined( 'MEDIAWIKI' ) ) {
+if (!defined('MEDIAWIKI')) {
 	exit;
 }
 
-function loadenv($envName, $default = "") {
-    return getenv($envName) ? getenv($envName) : $default;
+function loadenv($envName, $default = "")
+{
+	return getenv($envName) ? getenv($envName) : $default;
 }
 
 
@@ -34,7 +35,7 @@ $wgMetaNamespace = "Objective_Earth";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = loadenv('WG_SERVER', "https://oetestgitlab.smarter.codes");
+$wgServer = loadenv('WG_SERVER', "http://localhost");
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -61,10 +62,10 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = loadenv('MEDIAWIKI_DB_TYPE', "mysql");
-$wgDBserver = loadenv('MEDIAWIKI_DB_HOST', "mysqltest");
-$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "my_wiki");
+$wgDBserver = loadenv('MEDIAWIKI_DB_HOST', "mysqldb");
+$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "oearth");
 $wgDBuser = loadenv('MEDIAWIKI_DB_USER', "root");
-$wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "sakila");
+$wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "changeme");
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -131,25 +132,32 @@ $wgDefaultSkin = "vector-2022";
 
 # Enabled skins.
 # The following skins were automatically enabled:
-wfLoadSkin( 'Vector' );
+wfLoadSkin('Vector');
 
 
 # End of automatically generated settings.
 # Add more configuration options below.
 
 #adding extensions
+<<<<<<< HEAD
 wfLoadExtension( 'Cargo' );
 wfLoadExtension( 'mediawiki-extensions-PageForms' );
 wfLoadExtension( 'Upvote' );
 wfLoadExtension( 'comment-extension' );
+=======
+wfLoadExtension('Cargo');
+wfLoadExtension('mediawiki-extensions-PageForms');
+wfLoadExtension('Upvote');
+wfLoadExtension('Comments');
+>>>>>>> c5746d7cfbaf8434f36f69921da5220772a6be3a
 
 $wgGroupPermissions['*']['lookupuser'] = true;
 $wgGroupPermissions['lookupuser']['lookupuser'] = true;
 
-	 
+
 $wgScribuntoDefaultEngine = 'luastandalone';
 
-$wgGroupPermissions['user']['editinterface'] = true;				
+$wgGroupPermissions['user']['editinterface'] = true;
 $wgGroupPermissions['user']['editsitecss'] = true;
 
 // Define constants for my additional namespaces.

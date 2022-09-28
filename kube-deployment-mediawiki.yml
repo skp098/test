@@ -28,7 +28,10 @@ spec:
             - name: MEDIAWIKI_DB_USER
               value: $MEDIAWIKI_DB_USER
             - name: MEDIAWIKI_DB_PASSWORD
-              value: "sakila"
+              valueFrom:
+                secretKeyRef:
+                  name: mysqlAuthSecret
+                  key: rootPassword
             - name: WG_SERVER
               value: $WG_SERVER
       imagePullSecrets:

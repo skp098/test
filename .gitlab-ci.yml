@@ -2,32 +2,29 @@ stages:
   - build
   - deploy
 
-
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-$CI_PIPELINE_ID
   IMAGE_TAG_LATEST: $CI_REGISTRY_IMAGE:latest
   REGISTRY: gitlab-registry-$CI_PROJECT_NAME
   AGENT: objective-earth/objective-earth-wiki
-  CONTEXT_DEV: $AGENT:test-agent  
-  HOST: oetestgitlab.smarter.codes
+  CONTEXT_DEV: $AGENT:test-agent
+  HOST_DEV: oetestgitlab.smarter.codes
 
   # Change this to gitlab variables
-  MEDIAWIKI_DB_HOST: mysqltest
-  WG_SERVER: https://$HOST
+  MEDIAWIKI_DB_HOST: entrypoint-mysql
   MEDIAWIKI_DB_TYPE: mysql
   MEDIAWIKI_DB_NAME: my_wiki
   MEDIAWIKI_DB_USER: root
   MEDIAWIKI_DB_PASSWORD: sakila
   # Change this to gitlab variables MR CI/CD
-  HOST_MR : $CI_MERGE_REQUEST_ID.oe-test.smarter.codes
+  HOST_MR: $CI_MERGE_REQUEST_ID.oe-test.smarter.codes
   MEDIAWIKI_DB_HOST_MR: mysql-$CI_MERGE_REQUEST_ID
   WG_SERVER_MR: https://$HOST_MR
   MEDIAWIKI_DB_TYPE_MR: mysql
   MEDIAWIKI_DB_NAME_MR: my_wiki
   MEDIAWIKI_DB_USER_MR: root
   MEDIAWIKI_DB_PASSWORD_MR: sakila
-
 
 build:
   image: docker:19.03.12
@@ -44,8 +41,7 @@ build:
     - test
     - merge_requests
 
-
-deploy-mysql:
+deploy-dev-mysql:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
@@ -56,6 +52,12 @@ deploy-mysql:
     - >-
       kubectl create namespace $CI_COMMIT_BRANCH
       -o yaml --dry-run=client | kubectl apply -f -
+    - >-
+      head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10 |
+      kubectl create secret generic mysqlAuthSecret
+      --from-literal=rootUser=root
+      --from-literal=rootHost=%
+      --from-literal=rootPassword=/dev/stdin || :
     - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
     - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
     - >-
@@ -66,15 +68,14 @@ deploy-mysql:
   only:
     - test
 
-
-deploy-mediawiki:
+deploy-dev-mediawiki:
   image:
     name: bitnami/kubectl
     entrypoint: [""]
   stage: deploy
   environment:
     name: deploy/$CI_COMMIT_BRANCH-$CI_PROJECT_NAME
-    url: https://$HOST
+    url: https://$HOST_DEV
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT_DEV
@@ -95,19 +96,17 @@ deploy-mediawiki:
       -e 's|$IMAGE_TAG|'"$IMAGE_TAG"'|'
       -e 's|$APP|'"$CI_PROJECT_NAME"'|'
       -e 's|$REGISTRY|'"$REGISTRY"'|'
-      -e 's|$URL|'"$HOST"'|'
-      -e 's|$WG_SERVER|'"$WG_SERVER"'|'
+      -e 's|$URL|'"$HOST_DEV"'|'
+      -e 's|$WG_SERVER|'"https://$HOST_DEV"'|'
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       -e 's|$MEDIAWIKI_DB_TYPE|'"$MEDIAWIKI_DB_TYPE"'|'
       -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
       -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER"'|'
-      -e 's|$MEDIAWIKI_DB_PASSWORD|'"$MEDIAWIKI_DB_PASSWORD"'|'
       -e 's|$PORT|'"80"'|'
-      kube-deployment.yml
-    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment.yml
+      kube-deployment-mediawiki.yml
+    - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment-mediawiki.yml
   only:
     - test
-
 
 deploy-mr:
   image:
@@ -151,11 +150,10 @@ deploy-mr:
       -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER_MR"'|'
       -e 's|$MEDIAWIKI_DB_PASSWORD|'"$MEDIAWIKI_DB_PASSWORD_MR"'|'
       -e 's|$PORT|'"80"'|'
-      kube-deployment.yml
-    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment.yml
+      kube-deployment-mediawiki.yml
+    - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment-mediawiki.yml
   only:
     - merge_requests
-
 
 teardown-mr:
   image:
