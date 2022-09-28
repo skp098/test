@@ -18,4 +18,4 @@
 	url = ../../objective-earth/comment-extension.git
 [submodule "extensions/Cargo"]
 	path = extensions/Cargo
-	url = ../../objective-earth//Cargo.git
+	url = ../../objective-earth/Cargo.git
