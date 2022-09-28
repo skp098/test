@@ -24,7 +24,7 @@ function loadenv($envName, $default = "") {
 # $wgDisableOutputCompression = true;
 
 $wgSitename = "Objective Earth";
-$wgMetaNamespace = "Hello";
+$wgMetaNamespace = "Objective_Earth";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -42,11 +42,10 @@ $wgResourceBasePath = $wgScriptPath;
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
-	'1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
-	
-	
-	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo-icon.svg",
+	// '1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",		
+	// 'icon' => "$wgResourceBasePath/resources/assets/change-your-logo-icon.svg",
 ];
+
 
 ## UPO means: this is also a user preference option
 
@@ -139,7 +138,38 @@ wfLoadSkin( 'Vector' );
 # Add more configuration options below.
 
 #adding extensions
-// wfLoadExtension( 'Cargo' );
+wfLoadExtension( 'Cargo' );
 wfLoadExtension( 'mediawiki-extensions-PageForms' );
 wfLoadExtension( 'Upvote' );
-// wfLoadExtension( 'Comments' );
+wfLoadExtension( 'Comments' );
+
+$wgGroupPermissions['*']['lookupuser'] = true;
+$wgGroupPermissions['lookupuser']['lookupuser'] = true;
+
+	 
+$wgScribuntoDefaultEngine = 'luastandalone';
+
+$wgGroupPermissions['user']['editinterface'] = true;				
+$wgGroupPermissions['user']['editsitecss'] = true;
+
+// Define constants for my additional namespaces.
+define("NS_WELCOME", 5000); // This MUST be even.
+define("NS_WELCOME_TALK", 5001); // This MUST be the following odd integer.
+
+define("NS_OE", 5002); // This MUST be even.
+define("NS_OE_TALK", 5003); // This MUST be the following odd integer.
+
+// Add namespaces.
+$wgExtraNamespaces[NS_WELCOME] = "Welcome";
+$wgExtraNamespaces[NS_WELCOME_TALK] = "Welcome_talk"; // Note underscores in the namespace name.
+
+$wgExtraNamespaces[NS_OE] = "ObjectiveEarth";
+$wgExtraNamespaces[NS_OE_TALK] = "ObjectiveEarth_talk"; // Note underscores in the namespace name.
+
+// enabling sql functions 
+$wgCargoAllowedSQLFunctions[] = 'LEFT';
+$wgCargoAllowedSQLFunctions[] = 'LENGTH';
+
+
+// Google Place API Key
+$gPlaceApiKey = "AIzaSyDuzoNq49SnDQhfY5QTtBzT9QZvZLSXzmQ";
