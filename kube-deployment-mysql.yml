@@ -3,7 +3,7 @@ kind: InnoDBCluster
 metadata:
   name: $MEDIAWIKI_DB_HOST
 spec:
-  secretName: mysqlAuthSecret
+  secretName: mysqlauth
   tlsUseSelfSigned: true
   instances: 3
   router:

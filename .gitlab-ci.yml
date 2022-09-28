@@ -56,7 +56,7 @@ deploy-dev-mysql:
     - >-
       head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10 |
       kubectl create --namespace=$CI_COMMIT_BRANCH
-      secret generic mysqlAuthSecret
+      secret generic mysqlauth
       --from-literal=rootUser=root
       --from-literal=rootHost=%
       --from-literal=rootPassword=/dev/stdin || :
