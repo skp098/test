@@ -16,7 +16,7 @@ gcloud compute addresses create oe-dev-ingress --global
 kubectl create secret generic mediawiki-mysql-secret \
   --from-literal=username=wikiuser \
   --from-literal=password=MtIvuTrk7dN \
-  --from-literal=database=my_wiki \
+  --from-literal=database=oearth \
   --namespace=dev
 
 
@@ -46,12 +46,12 @@ kubectl create secret tls oe-domain-secret \
   --cert /etc/letsencrypt/live/oe-dev.smarter.codes/fullchain.pem --key /etc/letsencrypt/live/oe-dev.smarter.codes/privkey.pem --namespace dev
 
 
-mysqldump -h 0.0.0.0 -u wikiuser -p my_wiki > my_wiki_dump.sql
+mysqldump -h 0.0.0.0 -u wikiuser -p oearth > oearth_dump.sql
 
 
 ./cloud_sql_proxy -instances=objective-earth:us-central1:mediawiki=tcp:0.0.0.0:3306
 
  mysql  -h 0.0.0.0 -u wikiuser -p
 
-mysql> use my_wiki;
-mysql> source my_wiki_dump.sql;
+mysql> use oearth;
+mysql> source oearth_dump.sql;

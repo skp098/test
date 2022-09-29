@@ -1,7 +1,7 @@
 <mediawiki>
   <siteinfo>
     <sitename>Objective Earth</sitename>
-    <dbname>my_wiki</dbname>
+    <dbname>oearth</dbname>
     <base>https://oe-dev.smarter.codes/index.php/Main_Page</base>
     <generator>MediaWiki 1.38.2</generator>
     <case>first-letter</case>
