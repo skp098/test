@@ -14,6 +14,7 @@
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
 	url = ../../objective-earth/extensions/upvote-extension.git
+	branch = master
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
 	url = ../../objective-earth/extensions/comment-extension.git
