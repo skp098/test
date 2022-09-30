@@ -142,6 +142,8 @@ $wgShowExceptionDetails = true;
 $wgShowDBErrorBacktrace = true; 
 $wgShowSQLErrors = true;
 
+$wgDeprecationReleaseLimit = '1.x'; //to hide Deprecated warnings
+
 #adding extensions
 wfLoadExtension('Cargo');
 wfLoadExtension('mediawiki-extensions-PageForms');
