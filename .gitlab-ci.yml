@@ -120,7 +120,7 @@ deploy-test:
     - >-
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
-      -e 's|$INSTANCES|'"1"'|'
+      -e 's|$INSTANCES|'"2"'|'
       kube-deployment-mysql.yml
     - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment-mysql.yml
     - >-
