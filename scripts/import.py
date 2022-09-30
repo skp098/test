@@ -75,7 +75,7 @@ else:
 
 # Creating Datatables from the imported templates
 if(recreate_data_flag):
-    tree = ET.parse('./cargo-and-mw-templates.xml')
+    tree = ET.parse(FILE_PATH)
     root = tree.getroot()
     templates = []
 
