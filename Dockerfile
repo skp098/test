@@ -5,5 +5,4 @@ COPY ./LocalSettings.php /var/www/html/LocalSettings.php
 COPY ./extensions /var/www/html/extensions
 COPY ./logo /var/www/html/logo
 
-COPY ./scripts/run.sh /scripts/run.sh
-COPY ./scripts/prepare.py /scripts/prepare.py
+COPY ./scripts /scripts

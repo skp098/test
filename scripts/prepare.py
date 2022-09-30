@@ -25,7 +25,7 @@ dbs = list([x[0] for x in mycursor])
 
 html_path = "/var/www/html"
 
-install_command = f'php maintenance/install.php --dbname={database} --dbserver={host} --dbuser={user} --dbpass={password} --server={hostname} --lang=en --pass=changemeplease "Objective Earth" "Admin"'
+install_command = f'php maintenance/install.php --dbname={database} --dbserver={host} --dbuser={user} --dbpass={password} --server={hostname} --lang=en --pass={password} "Objective Earth" "Admin"'
 
 update_command = f'php maintenance/update.php'
 

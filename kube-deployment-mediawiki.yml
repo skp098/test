@@ -12,32 +12,10 @@ spec:
       labels:
         app: $APP
     spec:
-      initContainers:
-        - name: prepare-$APP
-          image: $IMAGE_TAG
-          command: ["/bin/bash", "/scripts/run.sh"]
-          imagePullPolicy: Always
-          ports:
-            - containerPort: $PORT
-          env:
-            - name: MEDIAWIKI_DB_TYPE
-              value: $MEDIAWIKI_DB_TYPE
-            - name: MEDIAWIKI_DB_HOST
-              value: $MEDIAWIKI_DB_HOST
-            - name: MEDIAWIKI_DB_NAME
-              value: $MEDIAWIKI_DB_NAME
-            - name: MEDIAWIKI_DB_USER
-              value: $MEDIAWIKI_DB_USER
-            - name: MEDIAWIKI_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysqlauth
-                  key: rootPassword
-            - name: WG_SERVER
-              value: $WG_SERVER
       containers:
         - name: container-$APP
           image: $IMAGE_TAG
+          command: ["/bin/bash", "/scripts/run.sh"]
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT
