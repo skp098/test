@@ -63,6 +63,11 @@ deploy-staging:
       --from-literal=rootHost=%
       --from-literal=rootPassword={} || :
     - >-
+      head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | xargs -I {}
+      kubectl create --namespace=$CI_COMMIT_BRANCH
+      secret generic mywikiauth
+      --from-literal=adminPassword={} || :
+    - >-
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       -e 's|$INSTANCES|'"3"'|'
@@ -118,6 +123,11 @@ deploy-test:
       --from-literal=rootUser=root
       --from-literal=rootHost=%
       --from-literal=rootPassword={} || :
+    - >-
+      head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | xargs -I {}
+      kubectl create --namespace=$CI_COMMIT_BRANCH
+      secret generic mywikiauth
+      --from-literal=adminPassword={} || :
     - >-
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'

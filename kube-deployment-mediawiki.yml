@@ -33,6 +33,11 @@ spec:
                 secretKeyRef:
                   name: mysqlauth
                   key: rootPassword
+            - name: MEDIAWIKI_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mywikiauth
+                  key: adminPassword
             - name: WG_SERVER
               value: $WG_SERVER
       imagePullSecrets:

@@ -4,8 +4,8 @@ from time import sleep
 
 import requests
 
-USERNAME = "Admin"
-PASSWORD = getenv('MEDIAWIKI_DB_PASSWORD', "changeme")
+USERNAME = "InternalAdmin"
+PASSWORD = getenv('MEDIAWIKI_ADMIN_PASSWORD', "changeme")
 
 URL = "http://localhost/api.php"
 FILE_PATH = './templates.xml'
