@@ -138,6 +138,10 @@ wfLoadSkin('Vector');
 # End of automatically generated settings.
 # Add more configuration options below.
 
+$wgShowExceptionDetails = true;
+$wgShowDBErrorBacktrace = true; 
+$wgShowSQLErrors = true;
+
 #adding extensions
 wfLoadExtension('Cargo');
 wfLoadExtension('mediawiki-extensions-PageForms');
