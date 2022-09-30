@@ -2,6 +2,7 @@ apiVersion: mysql.oracle.com/v2
 kind: InnoDBCluster
 metadata:
   name: $MEDIAWIKI_DB_HOST
+  namespace: $NAMESPACE
 spec:
   secretName: mysqlauth
   tlsUseSelfSigned: true
