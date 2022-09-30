@@ -47,6 +47,9 @@ deploy-staging:
   environment:
     name: deploy/$CI_COMMIT_BRANCH-$CI_PROJECT_NAME
     url: https://$HOST_STAGING
+  before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --remote --recursive    
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT_STAGING
