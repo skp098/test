@@ -64,7 +64,6 @@ deploy-staging:
     - >-
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
-      -e 's|$NAMESPACE|'"$CI_COMMIT_BRANCH"'|'
       -e 's|$INSTANCES|'"3"'|'
       kube-deployment-mysql.yml
     - kubectl apply --namespace=$CI_COMMIT_BRANCH -f kube-deployment-mysql.yml
@@ -121,7 +120,6 @@ deploy-test:
     - >-
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
-      -e 's|$NAMESPACE|'"$CI_MERGE_REQUEST_ID"'|'
       -e 's|$INSTANCES|'"1"'|'
       kube-deployment-mysql.yml
     - kubectl apply --namespace=$CI_MERGE_REQUEST_ID -f kube-deployment-mysql.yml

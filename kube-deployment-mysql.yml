@@ -2,15 +2,14 @@ apiVersion: mysql.oracle.com/v2
 kind: InnoDBCluster
 metadata:
   name: $MEDIAWIKI_DB_HOST
-  namespace: "$NAMESPACE"
 spec:
   secretName: mysqlauth
   tlsUseSelfSigned: true
   instances: $INSTANCES
-  version: 8.0.29
+  version: 8.0.30
   router:
     instances: 1
-    version: 8.0.29
+    version: 8.0.30
   datadirVolumeClaimTemplate:
     accessModes:
       - ReadWriteOnce
