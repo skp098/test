@@ -15,7 +15,7 @@ spec:
       initContainers:
         - name: prepare-$APP
           image: $IMAGE_TAG
-          command: ["bin/bash", "/scripts/run.sh"]
+          command: ["/bin/bash", "/scripts/run.sh"]
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT
