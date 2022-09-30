@@ -125,7 +125,7 @@ deploy-test:
       --from-literal=rootPassword={} || :
     - >-
       head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | xargs -I {}
-      kubectl create --namespace=$CI_COMMIT_BRANCH
+      kubectl create --namespace=$CI_MERGE_REQUEST_ID_STR
       secret generic mywikiauth
       --from-literal=adminPassword={} || :
     - >-
