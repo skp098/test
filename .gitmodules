@@ -7,18 +7,15 @@
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
 	url = ../../objective-earth/extensions/mediawiki-extensions-PageForms.git
-	branch = develop
 [submodule "extensions/mediawiki-extensions-AJAXPoll"]
 	path = extensions/mediawiki-extensions-AJAXPoll
 	url = ../../objective-earth/extensions/mediawiki-extensions-AJAXPoll.git
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
 	url = ../../objective-earth/extensions/upvote-extension.git
-	branch = master
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
 	url = ../../objective-earth/extensions/comment-extension.git
 [submodule "extensions/Cargo"]
 	path = extensions/Cargo
 	url = ../../objective-earth/extensions/Cargo.git
-	branch = main

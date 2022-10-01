@@ -1,8 +1,8 @@
-version: '3'
+version: "3"
+
 services:
   traefik:
     image: traefik:v1.7-alpine
-    container_name: traefik
     logging:
       options:
         max-size: "50m"
@@ -20,7 +20,7 @@ services:
       --docker.exposedbydefault=true
       --docker.watch=true
     ports:
-          - "80:80"
+      - "80:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
@@ -30,40 +30,32 @@ services:
     networks:
       - docker_net
 
-
-  mediawiki:
-    container_name: mediawiki
-    restart: always
-    ports:
-      - 8080:80
+  objective-earth:
     build:
       context: ./
       dockerfile: Dockerfile
-    labels:
-        - "traefik.port=8080"
-        - "traefik.frontend.rule=Host:mediawiki.localhost"
-        - "traefik.protocol=http"
-    networks:
-      - docker_net
-  
-  database:
-
-    image: mysql:8.0
-    container_name: mysqldb
-    restart: always
-    command: --init-file /data/application/init.sql
+    command: ["/bin/bash", "/scripts/run.sh"]
     environment:
-      MYSQL_DATABASE: oearth
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_USER: wikimedia
-      MYSQL_PASSWORD: changeme
-    volumes:
-      - /var/lib/mysql
-      - ./init.sql:/data/application/init.sql
-
+      MEDIAWIKI_DB_TYPE: mysql
+      MEDIAWIKI_DB_HOST: mysqldb
+      MEDIAWIKI_DB_NAME: oearth
+      MEDIAWIKI_DB_USER: root
+      MEDIAWIKI_DB_PASSWORD: changemeplease
+      MEDIAWIKI_ADMIN_PASSWORD: changemeplease
+      WG_SERVER: http://oe.localhost
+    labels:
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:oe.localhost"
+      - "traefik.protocol=http"
     networks:
       - docker_net
 
+  mysqldb:
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: changemeplease
+    networks:
+      - docker_net
 
 networks:
   docker_net:
