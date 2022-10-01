@@ -21,7 +21,7 @@ variables:
 
   HOST_TEST: $CI_MERGE_REQUEST_ID_STR.oe-test.smarter.codes
   HOST_STAGING: oe-staging.smarter.codes
-  HOST_PROD: oe-prod.smarter.codes
+  HOST_PROD: objective.earth
 
 build:
   image: docker:19.03.12
