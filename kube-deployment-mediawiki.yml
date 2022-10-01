@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-$APP
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $APP
+  template:
+    metadata:
+      labels:
+        app: $APP
+    spec:
+      containers:
+        - name: container-$APP
+          image: $IMAGE_TAG
+          command: ["/bin/bash", "/scripts/run.sh"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: $PORT
+          env:
+            - name: MEDIAWIKI_DB_TYPE
+              value: $MEDIAWIKI_DB_TYPE
+            - name: MEDIAWIKI_DB_HOST
+              value: $MEDIAWIKI_DB_HOST
+            - name: MEDIAWIKI_DB_NAME
+              value: $MEDIAWIKI_DB_NAME
+            - name: MEDIAWIKI_DB_USER
+              value: $MEDIAWIKI_DB_USER
+            - name: MEDIAWIKI_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysqlauth
+                  key: rootPassword
+            - name: MEDIAWIKI_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mywikiauth
+                  key: adminPassword
+            - name: WG_SERVER
+              value: $WG_SERVER
+      imagePullSecrets:
+        - name: $REGISTRY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: entrypoint-$APP
+spec:
+  type: ClusterIP
+  selector:
+    app: $APP
+  ports:
+    - port: $PORT
+      targetPort: $PORT
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-$APP
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - hosts:
+        - $URL
+      secretName: $URL-tls
+  rules:
+    - host: $URL
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: entrypoint-$APP
+                port:
+                  number: $PORT
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: cert-manager
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: mayank.g@solutionbeyond.net
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

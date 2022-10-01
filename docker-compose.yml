@@ -1,69 +1,63 @@
-# MediaWiki with MariaDB
-#
-# Access via "http://localhost:8080"
-#   (or "http://$(docker-machine ip):8080" if using docker-machine)
-version: '3'
+version: "3"
+
 services:
-  mediawiki:
-    image: mediawiki:1.37
-    container_name: mediawiki
-    restart: always
+  traefik:
+    image: traefik:v1.7-alpine
+    logging:
+      options:
+        max-size: "50m"
+        max-file: "3"
+    command: >
+      --logLevel='INFO'
+      --web
+      --InsecureSkipVerify=true
+      --defaultentrypoints=https,http
+      --entryPoints='Name:http Address::80'
+      --entryPoints='Name:https Address::443 TLS Redirect.EntryPoint:http'
+      --retry
+      --docker
+      --docker.endpoint='unix:///var/run/docker.sock'
+      --docker.exposedbydefault=true
+      --docker.watch=true
     ports:
-      - 8080:80
+      - "80:80"
     volumes:
-      - ./images:/var/www/html/images
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
-      # After initial setup, download LocalSettings.php to the same directory as
-      # this yaml and uncomment the following line and use compose to restart
-      # the mediawiki service
-      - ./LocalSettings.php:/var/www/html/LocalSettings.php
-      - ./extensions:/var/www/html/extensions
-      - ./skins:/var/www/html/skins
-      - ./logo:/var/www/html/logo
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.port=8080"
+      - "traefik.frontend.rule=Host:localhost"
+      - "traefik.protocol=http"
     networks:
-      - webapp
+      - docker_net
 
-
-  elasticsearch:
-      container_name: elasticsearch
-      image: elasticsearch:6.5.4
-      environment:
-        - xpack.security.enabled=false
-        - discovery.type=single-node
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
-        nofile:
-          soft: 65536
-          hard: 65536
-      cap_add:
-          - IPC_LOCK
-      volumes:
-        - ./elasticsearch-data:/usr/share/elasticsearch/data
-      ports:
-        - 9200:9200
-      depends_on:
-        - mediawiki
-      networks:
-      - webapp
-
-  
-  webserver:
-    image: nginx:latest
-    ports:
-      - 80:80
-      - 443:443
-    volumes: 
-     - ./certs:/etc/nginx/certs
-     - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
-    depends_on:
-        - mediawiki
+  objective-earth:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: ["/bin/bash", "/scripts/run.sh"]
+    environment:
+      MEDIAWIKI_DB_TYPE: mysql
+      MEDIAWIKI_DB_HOST: mysqldb
+      MEDIAWIKI_DB_NAME: oearth
+      MEDIAWIKI_DB_USER: root
+      MEDIAWIKI_DB_PASSWORD: changemeplease
+      MEDIAWIKI_ADMIN_PASSWORD: changemeplease
+      WG_SERVER: http://oe.localhost
+    labels:
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:oe.localhost"
+      - "traefik.protocol=http"
     networks:
-      - webapp
+      - docker_net
 
+  mysqldb:
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: changemeplease
+    networks:
+      - docker_net
 
 networks:
-  webapp:
+  docker_net:
+    name: docker_net
+    driver: bridge

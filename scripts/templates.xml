@@ -1,0 +1,782 @@
+<mediawiki>
+  <siteinfo>
+    <sitename>Objective Earth</sitename>
+    <dbname>my_wiki</dbname>
+    <base>https://oe-dev.smarter.codes/index.php/Main_Page</base>
+    <generator>MediaWiki 1.38.2</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Objective Earth</namespace>
+      <namespace key="5" case="first-letter">Objective Earth talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="106" case="first-letter">Form</namespace>
+      <namespace key="107" case="first-letter">Form talk</namespace>
+      <namespace key="5002" case="first-letter">ObjectiveEarth</namespace>
+      <namespace key="5003" case="first-letter">ObjectiveEarth talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>MediaWiki:Sidebar</title>
+    <ns>8</ns>
+    <id>250170</id>
+    <revision>
+      <id>261587</id>
+      <parentid>261586</parentid>
+      <timestamp>2022-08-16T08:01:18Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261587</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="767" sha1="h7o93zgm53d8do6xr0q3rtbz6lv7bum" xml:space="preserve">
+* navigation
+** mainpage|mainpage-description
+** recentchanges-url|recentchanges
+** randompage-url|randompage
+** helppage|help-mediawiki
+
+* Contribute
+** Special:AddProblem|Add a Problem
+** Form:Solution|Add a Solution
+** Form:Measurement|Add a Measurement
+** Form:Problem_Type|Add a Problem Type
+** Form:Solution_Type|Add a Solution Type
+** Form:Project|Create a Project
+** Form:Job|Add a Job
+
+* Data
+** Category:Problem|Problems
+** Category:Problem_Type|Problem Types
+** Category:Solution|Solutions
+** Category:Solution_Type|Solution Types
+** Category:Project|Projects
+** Category:Job|Volunteer Jobs
+** Category:Measurement|Measurements
+
+* Objective Earth
+** ObjectiveEarth:About | About Objective.Earth
+** ObjectiveEarth:WHYs| WHYs
+
+* SEARCH
+* TOOLBOX
+* LANGUAGES</text>
+      <sha1>h7o93zgm53d8do6xr0q3rtbz6lv7bum</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Problem</title>
+    <ns>106</ns>
+    <id>177</id>
+    <revision>
+      <id>261732</id>
+      <parentid>261685</parentid>
+      <timestamp>2022-09-22T05:04:28Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261732</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1010" sha1="1kbl0pvwfoy8pu5zlvs73d8n98g0qhj" xml:space="preserve">&lt;noinclude&gt;
+This is the "Problem" form. '''An example page name would be Hunger, India.'''
+To create a page with this form, enter the page name below; 
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Problem|autocomplete on category=Problem}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Problem}}}
+{| class="formtable"
+! Region: 
+| {{{field|Region|input type=text|helptext=Select a region here|class=readonly|restricted=temp-xyz231-group}}}
+|-
+! Description: 
+| {{{field|Description|input type=textarea|autogrow|helptext=Write some description about this Problem}}}
+| {{{field|parent|hidden}}}
+| {{{field|country|hidden}}}
+| {{{field|state|hidden}}}
+| {{{field|city|hidden}}}
+| {{{field|coordinate|hidden}}}
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+
+&lt;/includeonly&gt;</text>
+      <sha1>1kbl0pvwfoy8pu5zlvs73d8n98g0qhj</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Problem Type</title>
+    <ns>106</ns>
+    <id>250090</id>
+    <revision>
+      <id>261687</id>
+      <parentid>261621</parentid>
+      <timestamp>2022-08-29T08:17:42Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261687</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1246" sha1="3rizp7700259mjocxudmwr7lkertwq1" xml:space="preserve">&lt;noinclude&gt;
+This is the "Problem Type" form.
+To create a page with this form, enter the page name below;
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Problem Type|autocomplete on category=Problem Type}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Problem Type}}}
+{| class="formtable"
+! Type: 
+| {{{field|Name|helptext=Write the type of Problem.}}}
+|-
+! Results of {{PAGENAME}}: 
+| {{{field|Effects|input type=tokens|helptext=Enter Result of the above problem type}}}
+|-
+! Same As: 
+| {{{field|Same As|input type=tokens|helptext=Drop links of references seperated by commas (,) for this Problem Type like Wikipedia Page, related SDGs etc.}}}
+|-
+! Measurement: 
+| {{{field|Measurement|input type=tokens|cargo table=Measurement|cargo field=_pageName|placeholder=Select related Measurement Parameters|existing values only}}}
+|-
+! Description: 
+| {{{field|Description|input type=textarea|helptext=Write some description about this Problem Type}}}
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+&lt;/includeonly&gt;</text>
+      <sha1>3rizp7700259mjocxudmwr7lkertwq1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Solution</title>
+    <ns>106</ns>
+    <id>16</id>
+    <revision>
+      <id>261689</id>
+      <parentid>261681</parentid>
+      <timestamp>2022-08-29T08:33:21Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261689</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1422" sha1="2uqa6t06feihvr5tvc5sbnx30d8bvsn" xml:space="preserve">&lt;noinclude&gt;
+This is the "Solution" form.
+To create a page with this form, enter the page name below;
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Solution|autocomplete on category=Solution}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Solution}}}
+{| class="formtable"
+! Solution Type: 
+| {{{field|Solution Type|input type=tokens|values from category=Solution_Type|helptext=Choose the solution type for this solution|existing values only}}}
+|-
+! Region:
+| {{{field|Region|input type=dropdown|class=select_region|values=Select region from dropdown |size=200|placeholder=Search Region|helptext=Select the region}}} 
+| {{{field|country|hidden|class=country}}}
+| {{{field|state|hidden|class=state}}}
+| {{{field|city|hidden|class=city}}}
+| {{{field|coordinate|hidden|class=coordinate}}}
+|-
+! Problem: 
+| {{{field|Problems|input type=tokens|cargo table=Problem|cargo field=_pageName|delimiter=-|existing values only|helptext=Select the related problem}}}
+|-
+! How this works: 
+| {{{field|How this works|input type=textarea|autogrow|helptext=Please eleborate how your solution works}}}
+|-
+| {{{field|parentProblem|hidden}}} 
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+
+&lt;/includeonly&gt;</text>
+      <sha1>2uqa6t06feihvr5tvc5sbnx30d8bvsn</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Solution Type</title>
+    <ns>106</ns>
+    <id>250134</id>
+    <revision>
+      <id>261694</id>
+      <parentid>261129</parentid>
+      <timestamp>2022-08-29T11:25:00Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261694</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="870" sha1="qz9v1gek765jrhzynvcjg9ug2j7urt7" xml:space="preserve">&lt;noinclude&gt;
+This is the "Solution Type" form.
+To create a page with this form, enter the page name below;
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Solution Type|autocomplete on category=Solution Type}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Solution Type}}}
+{| class="formtable"
+! Name: 
+| {{{field|Name}}}
+|-
+! Solves: 
+| {{{field|Solves Problem|input type=tokens|cargo table=Problem_Type|cargo field=Name}}}
+! Measurement: 
+| {{{field|Measurement|input type=tokens|cargo table=Measurement_Type|cargo field=Type}}}
+|-
+! Same As: 
+| {{{field|Same As}}}
+|-
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+
+&lt;/includeonly&gt;</text>
+      <sha1>qz9v1gek765jrhzynvcjg9ug2j7urt7</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Project</title>
+    <ns>106</ns>
+    <id>86</id>
+    <revision>
+      <id>261693</id>
+      <parentid>261677</parentid>
+      <timestamp>2022-08-29T11:21:30Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261693</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1452" sha1="iz4gqdnx1g2tihr02tnsh99kgd8g4hm" xml:space="preserve">&lt;noinclude&gt;
+This is the "Project" form.
+To create a page with this form, enter the page name below;
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Project|autocomplete on category=Project}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Project}}}
+{| class="formtable"
+! Region: 
+| {{{field|Region|input type=tokens|cargo table=City|cargo field=_pageName|helptext=Select a region|existing values only}}}
+|- 
+! Problem: 
+| {{{field|Problem|input type=tokens|cargo table=Problem|cargo field=_pageName|depends on=Project[Region]|depends on field=Region|delimiter=-|existing values only|helptext=Select related Problem}}}
+|- 
+! Solution: 
+| {{{field|Solution|input type=tokens|cargo table=Solution|cargo field=_pageName|depends on=Project[Region]|depends on field=Region|delimiter=-|existing values only||helptext=Select related Solution}}}
+|-
+! Overview: 
+| {{{field|Overview|input type=textarea|autogrow||helptext=Write a overview of this Project}}}
+|-
+! Feature Image: 
+| {{{field|Feature Image|uploadable|image preview|helptext=Enter file name by searching files in Special:ListFiles or click on upload files }}}
+|-
+| {{{field|parentSolution|hidden}}}
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+
+&lt;/includeonly&gt;</text>
+      <sha1>iz4gqdnx1g2tihr02tnsh99kgd8g4hm</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Form:Measurement</title>
+    <ns>106</ns>
+    <id>250114</id>
+    <revision>
+      <id>261691</id>
+      <parentid>261616</parentid>
+      <timestamp>2022-08-29T11:18:29Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261691</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1339" sha1="i176q19qbva40f1cynmvid95j6pk2nf" xml:space="preserve">&lt;noinclude&gt;
+This is the "Measurement" form. Contribute here by adding measurement unit accepted in your region.
+To create a page with this form, enter the page name below; '''please include the parameter type in the page name''' to avoid name collisions, if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Measurement|autocomplete on category=Measurement}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Measurement}}}
+{| class="formtable"
+! Parameter Name: 
+| {{{field|Parameter Name|helptext=Write the Name of the corresponding parameter to measurement}}}
+|-
+! Unit Type: 
+| {{{field|Unit Type|helptext=Write the unit of the parameter}}}
+|-
+! Value Range (Low): 
+| {{{field|Range Low|helptext=Enter the lowest range value for the above unit type.}}}
+|-
+! Value Range (High): 
+| {{{field|Range High|helptext=Enter the highest range value for the above unit type.}}}
+|-
+! Same As: 
+| {{{field|Same As|input type=tokens|helptext=Drop links of references seperated by commas (,) for this Measurement like Wikipedia Page, related Articles etc.}}}
+|-
+! References:
+| {{{field|Reference_URLs|input type=tokens|delimiter=,}}}
+|-
+|}
+{{{end template}}}
+&lt;/includeonly&gt;</text>
+      <sha1>i176q19qbva40f1cynmvid95j6pk2nf</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Problem</title>
+    <ns>14</ns>
+    <id>178</id>
+    <revision>
+      <id>577</id>
+      <timestamp>2022-05-11T10:00:06Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>577</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="25" sha1="4tpsjqpt53ji5ohrdvzw8fjhilc9fc5" xml:space="preserve">{{#default_form:Problem}}</text>
+      <sha1>4tpsjqpt53ji5ohrdvzw8fjhilc9fc5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Problem Type</title>
+    <ns>14</ns>
+    <id>250091</id>
+    <revision>
+      <id>261005</id>
+      <timestamp>2022-06-02T10:57:04Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>261005</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="30" sha1="cgazux4ce7gzau4gur1vsohsbsdoat3" xml:space="preserve">{{#default_form:Problem Type}}</text>
+      <sha1>cgazux4ce7gzau4gur1vsohsbsdoat3</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Solution</title>
+    <ns>14</ns>
+    <id>7</id>
+    <revision>
+      <id>7</id>
+      <timestamp>2022-03-18T14:51:08Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>7</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="26" sha1="r7i5l143recbl57158bf3acthh5su7a" xml:space="preserve">{{#default_form:Solution}}</text>
+      <sha1>r7i5l143recbl57158bf3acthh5su7a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Solution Type</title>
+    <ns>14</ns>
+    <id>250133</id>
+    <revision>
+      <id>261127</id>
+      <timestamp>2022-06-15T09:31:03Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>261127</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="31" sha1="9f8dj5rl1yoe08zp8ue3f7m5pvqrhb2" xml:space="preserve">{{#default_form:Solution Type}}</text>
+      <sha1>9f8dj5rl1yoe08zp8ue3f7m5pvqrhb2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Project</title>
+    <ns>14</ns>
+    <id>85</id>
+    <revision>
+      <id>282</id>
+      <timestamp>2022-04-06T10:43:45Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>282</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="25" sha1="0p9xsbn9mm95h3ruw19jaq7l8buur2i" xml:space="preserve">{{#default_form:Project}}</text>
+      <sha1>0p9xsbn9mm95h3ruw19jaq7l8buur2i</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Measurement</title>
+    <ns>14</ns>
+    <id>250113</id>
+    <revision>
+      <id>261039</id>
+      <timestamp>2022-06-04T12:34:48Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>261039</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="29" sha1="gd2m9760pz6ww527o6bn9xr0a44szzd" xml:space="preserve">{{#default_form:Measurement}}</text>
+      <sha1>gd2m9760pz6ww527o6bn9xr0a44szzd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Problem</title>
+    <ns>10</ns>
+    <id>176</id>
+    <revision>
+      <id>261738</id>
+      <parentid>261731</parentid>
+      <timestamp>2022-09-30T04:16:24Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261738</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2779" sha1="8eot8rcgmyfnl27cklhe9ytdrw5fzoo" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Region|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Problem|Reference_URLs=List (,) of URL|Region=Text|Description=Wikitext|parent=Integer|country=Text|state=Text|city=Text|coordinate=Coordinates}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Problem}}
+{{#template_display:_format=infobox}}
+{{#cargo_query:
+tables=Problem
+|fields=Description
+|where=Problem._pageID={{PAGEID}}
+|format=standard
+}}
+&lt;br/&gt;
+==How we are measuring it?==
+&lt;br/&gt;
+{{#measurement_values: {{{Problem Type}}} | {{PAGENAME}} }}
+&lt;br/&gt;
+==Sub Problems of {{PAGENAME}}==
+&lt;p class='move-to-heading'&gt;&lt;span class='mw-editsection-bracket h2-form-link plainlinks'&gt;[{{fullurl:Special:AddSubProblem|parent={{PAGEID}} }} Add Sub Problem]&lt;/span&gt;&lt;/p&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+{{#cargo_query:tables=Problem=P,Upvote=U
+|join on=P._pageID = U.page_id
+|fields=P._pageName=Problem Name,P._pageID=page_id,CONCAT( LEFT( P.Description, 350 ), IF( LENGTH( P.Description ) &gt; 200, '...', '' ) ) = Description,COUNT(U.vote_type)=Upvotes
+|where=P.parent={{PAGEID}} AND (U.vote_type IS NULL OR U.vote_type='up')
+|group by=P._pageName,P._pageID,P.Description
+|order by=Upvotes DESC
+|limit=5
+|format=template
+|template=Show Sub Problems
+|named args=yes
+}}
+&lt;br/&gt;
+&lt;br/&gt;&lt;br/&gt;
+
+==Solutions of {{PAGENAME}}==
+&lt;p class='move-to-heading'&gt;&lt;span class='mw-editsection-bracket h2-form-link plainlinks'&gt;[{{fullurl:Form:Solution}} Add a Solution]&lt;/span&gt;&lt;/p&gt;
+&lt;br/&gt;
+&lt;br/&gt;
+{{#cargo_query:tables=Solution=S, Problem=P, Upvote=U
+|join on=S.Problems HOLDS P._pageName,S._pageID = U.page_id
+|fields=S._pageName=Solution Name,,S._pageID=page_id,S.How_this_works=Description,COUNT(U.vote_type)=Upvotes
+|where=S.Problems HOLDS '{{PAGENAME}}' AND (U.vote_type IS NULL OR U.vote_type='up')
+|group by=U.vote_type,S._pageName,S.How_this_works,S._pageID
+|order by=Upvotes DESC
+|limit=5
+|format=template
+|template=Show Related Solutions
+|named args=yes
+}}
+&lt;br/&gt;&lt;br/&gt;
+==Projects of {{PAGENAME}}==
+&lt;p class='move-to-heading'&gt;&lt;span class='mw-editsection-bracket h2-form-link plainlinks'&gt;[{{fullurl:Form:Project}} Add a Project]&lt;/span&gt;&lt;/p&gt;
+&lt;br/&gt;
+{{#cargo_query:tables=Project=Pj, Problem=P, Upvote=U
+|join on=Pj.Problem HOLDS P._pageName,Pj._pageID = U.page_id
+|fields=Pj._pageName=Project Name,Pj._pageID=page_id,CONCAT( LEFT( Pj.Overview, 350 ), IF( LENGTH( Pj.Overview ) &gt; 200, '...', '' ) ) = Overview, Pj.Feature_Image = Feature_Image,COUNT(U.vote_type)=Upvotes
+|where=Pj.Problem HOLDS '{{PAGENAME}}' AND (U.vote_type IS NULL OR U.vote_type='up')
+|group by=U.vote_type,Pj._pageName,Pj.Feature_Image,Pj.Overview,Pj._pageID
+|order by=Upvotes DESC
+|limit=5
+|format=template
+|template=Show Related Projects
+|named args=yes
+}}
+&lt;br/&gt;&lt;br/&gt;
+==Have something to say about this problem? ==
+
+&lt;comments /&gt;
+
+
+
+[[Category:Problem]]
+&lt;/includeonly&gt;</text>
+      <sha1>8eot8rcgmyfnl27cklhe9ytdrw5fzoo</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Problem Type</title>
+    <ns>10</ns>
+    <id>250089</id>
+    <revision>
+      <id>261734</id>
+      <parentid>261722</parentid>
+      <timestamp>2022-09-23T03:05:25Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261734</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1351" sha1="f9gebi07rwkr65avdz9dw4vd5exu026" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Name|Same As|Measurement|Effects(label=Results of {{PAGENAME}} )|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Problem_Type|Name=String|Same_As=List (,) of String|Measurement=List (,) of Page|Effects=List (,) of String|Reference_URLs=List (,) of URL|Description=Wikitext}}
+&lt;/noinclude&gt;&lt;includeonly&gt;
+{{#cargo_store:_table=Problem_Type}}
+{{#template_display:_format=infobox}}
+== Problem Description ==
+{{#cargo_query:
+tables=Problem_Type
+|fields=Description
+|format=standard
+|where=Problem_Type._pageID={{PAGEID}}
+}}
+== How are we measuring? ==
+&lt;br/&gt;
+{{#cargo_query:tables=Problem_Type=pt,Measurement=m
+|join on=m.Parameter_Name HOLDS pt.Measurement
+|fields=m.Parameter_Name=Parameter Name,m.Unit_Type=Unit Type,m.Range_Low=Range (Low Value),m.Range_High= Range (High Value)
+|where=pt.Name = '{{{Name}}}'
+|format=table
+}}
+&lt;br&gt;
+
+
+&lt;br/&gt;
+== Linked Solution Types ==
+&lt;p class='move-to-heading'&gt;&lt;span class='mw-editsection-bracket h2-form-link plainlinks'&gt;[{{fullurl:Form:Solution_Type }} Add Solution Type]&lt;/span&gt;&lt;/p&gt;
+&lt;br&gt;
+{{#cargo_query:
+tables=Solution_Type__Solves_Problem,Solution_Type
+|join on=Solution_Type__Solves_Problem._rowID=Solution_Type._ID
+|fields=Solution_Type._pageName=Name
+|where=Solution_Type__Solves_Problem._value="{{{Name}}}"
+|limit=3
+|format=ul
+}}
+[[Category:Problem Type]]
+
+&lt;/includeonly&gt;</text>
+      <sha1>f9gebi07rwkr65avdz9dw4vd5exu026</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Solution</title>
+    <ns>10</ns>
+    <id>14</id>
+    <revision>
+      <id>261688</id>
+      <parentid>261680</parentid>
+      <timestamp>2022-08-29T08:33:18Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261688</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1118" sha1="ordlvmnz270tkd49sth78w3qv5wres2" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Solution Type|How this works|Region|Problems|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Solution|Solution_Type=Page|How_this_works=Wikitext|parentProblem=Integer|Problems=List (-) of String|Region=Text|country=Text|state=Text|city=Text|Reference_URLs=List (,) of URL|coordinates=Coordinates}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Solution}}
+
+{{#template_display:_format=standard}}
+
+&lt;h3&gt;Objectives:&lt;/h3&gt;
+{{#cargo_query:tables=Objective
+|fields=_pageName=Name
+|where=Objective.parent ='{{PAGEID}}' AND Objective.type= 'Solution'
+|format=ul
+|order by=_ID DESC
+}}
+
+'''Create a new Objective:  '''.
+{{#forminput:form=Objective|link text=Create an Objective|query string=Objective[Title]={{{Title}}}&amp;Objective[parent]={{PAGEID}}&amp;Objective[type]=Solution|returnto={{PAGENAME}} }}
+
+
+
+&lt;h3&gt;Action Items&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;{{#formredlink:form=Donation|existing page link text=Donate to Solution|target={{PAGENAME}}_Project_Donation|query string=Donation[Type]=Solution&amp;Donation[Title]={{{Title}}}|link text=Donate to Solution}}&lt;/li&gt;
+&lt;/ul&gt;
+
+[[Category:Solution]]
+&lt;/includeonly&gt;</text>
+      <sha1>ordlvmnz270tkd49sth78w3qv5wres2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Solution Type</title>
+    <ns>10</ns>
+    <id>250132</id>
+    <revision>
+      <id>261695</id>
+      <parentid>261126</parentid>
+      <timestamp>2022-08-29T11:25:39Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261695</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="430" sha1="kcm13e8qzy8n4sbn61fzbjgequtlt3g" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Name|Solves Problem (label=Solves)|Same As|Measurement|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Solution_Type|Name=String|Solves_Problem=List (,) of String|Same_As=Wikitext|Measurement=List (,) of String|Reference_URLs=List (,) of URL}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Solution_Type}}
+{{#template_display:_format=standard}}
+[[Category:Solution Type]]
+&lt;/includeonly&gt;</text>
+      <sha1>kcm13e8qzy8n4sbn61fzbjgequtlt3g</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Project</title>
+    <ns>10</ns>
+    <id>84</id>
+    <revision>
+      <id>261692</id>
+      <parentid>261673</parentid>
+      <timestamp>2022-08-29T11:21:12Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261692</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1136" sha1="5ba9v5l270a9ut4pq2014njwam24nc0" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Problem|Solution|Region|Feature Image|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Project|Overview=Wikitext|Problem=List (-) of Page|Solution=List (-) of Page|Region=Page|Feature_Image=File|Reference_URLs=List (,) of URL}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Project}}
+{{#template_display:_format=infobox}}
+{{#cargo_query:
+tables=Project
+|fields=Overview
+|format=standard
+|where=Project._pageID={{PAGEID}}
+}}
+&lt;h3&gt;Objectives:&lt;/h3&gt;
+{{#cargo_query:tables=Objective
+|fields=_pageName=Name
+|where=Objective.parent ='{{PAGEID}}' AND Objective.type= 'Project'
+|format=ul
+|order by=_ID DESC
+}}
+
+'''Create a new Objective:  '''.
+{{#forminput:form=Objective|link text=Create an Objective|query string=Objective[Title]={{{Title}}}&amp;Objective[parent]={{PAGEID}}&amp;Objective[type]=Project|returnto={{PAGENAME}} }}
+
+
+&lt;h3&gt;Action Item&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;{{#formredlink:form=Donation|existing page link text=Donate to Problem|target={{PAGENAME}}_Project_Donation|query string=Donation[Type]=Project&amp;Donation[Title]={{{Title}}}|link text=Donate to Project}}&lt;/li&gt;
+&lt;/ul&gt;
+[[Category:Project]]
+&lt;/includeonly&gt;</text>
+      <sha1>5ba9v5l270a9ut4pq2014njwam24nc0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Measurement</title>
+    <ns>10</ns>
+    <id>250112</id>
+    <revision>
+      <id>261690</id>
+      <parentid>261606</parentid>
+      <timestamp>2022-08-29T11:18:13Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261690</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="493" sha1="dxopaf8yevcl5v96f9b9d8uyshnbeth" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Parameter Name|Unit Type|Range Low (label=Value Range (Low))|Range High (label=Value Range (High))|Same As|Reference_URLs (label=References)}}
+{{#cargo_declare:_table=Measurement|Name=String|Parameter_Name=String|Unit_Type=String|Range_Low=Float|Range_High=Float|Same_As=List (,) of String|Reference_URLs=List (,) of URL}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Measurement}}
+{{#template_display:_format=standard}}
+[[Category:Measurement]]
+&lt;/includeonly&gt;</text>
+      <sha1>dxopaf8yevcl5v96f9b9d8uyshnbeth</sha1>
+    </revision>
+  </page>
+</mediawiki>

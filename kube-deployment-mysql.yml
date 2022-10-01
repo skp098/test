@@ -1,0 +1,21 @@
+apiVersion: mysql.oracle.com/v2
+kind: InnoDBCluster
+metadata:
+  name: $MEDIAWIKI_DB_HOST
+spec:
+  secretName: mysqlauth
+  tlsUseSelfSigned: true
+  instances: $INSTANCES
+  version: 8.0.30
+  router:
+    instances: 1
+    version: 8.0.30
+  datadirVolumeClaimTemplate:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  mycnf: |
+    [mysqld]
+    max_connections=162
