@@ -161,7 +161,9 @@ teardown-mr:
       sed -i
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       kube-deployment-mysql.yml
-    - kubectl delete --namespace=$CI_MERGE_REQUEST_ID_STR -f kube-deployment-mysql.yml ||:
+    - >-
+      kubectl delete --namespace=$CI_MERGE_REQUEST_ID_STR 
+      -f kube-deployment-mysql.yml || :
     - kubectl delete namespace $CI_MERGE_REQUEST_ID_STR
   when: manual
   only:
