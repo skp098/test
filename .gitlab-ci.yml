@@ -71,6 +71,12 @@ build:
       kube-deployment-mysql.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mysql.yml
     - >-
+      sed -i
+      -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
+      -e 's|$INSTANCES|'"$INSTANCES"'|'
+      kube-deployment-phpmyadmin.yml
+    - kubectl apply --namespace=$NAMESPACE -f kube-deployment-phpmyadmin.yml    
+    - >-
       kubectl create secret
       docker-registry $REGISTRY
       --namespace $NAMESPACE
