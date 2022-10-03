@@ -60,7 +60,7 @@ spec:
     - host: $URL
       http:
         paths:
-          - path: /
+          - path: /phpmyadmin
             pathType: Prefix
             backend:
               service:
