@@ -31,6 +31,37 @@
     </namespaces>
   </siteinfo>
   <page>
+    <title>Main Page</title>
+    <ns>0</ns>
+    <id>1</id>
+    <revision>
+      <id>261570</id>
+      <parentid>261569</parentid>
+      <timestamp>2022-08-15T06:56:20Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261570</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="841" sha1="jp2o3kn8mw9o7l52zlso1wukqm7tyjd" xml:space="preserve">== Welcome to the ObjectiveEarth Wiki! ==
+
+Objective.earth is a social OKR tool that helps the community to align themselves towards the 17 SDG goals. It is also a social network, where the community can talk about "Problems of a region" and "Solutions for those problems". On Objective.earth, any individual or organization will be able to crowdfund and hire people to solve the problems they care about.OE platform strongly believes in appreciating and rewarding those who are stepping forward to the right thing for the earth. Read more Rewarding DOers..
+
+We're a collaborative community website about ObjectiveEarth that anyone, including you, can build and expand. Wikis like this one depend on readers getting involved and adding content.
+
+
+=== Problem Types ===
+
+{{#cargo_query:tables=Problem_Type
+|fields=_pageName=Name
+|format=ul
+}}</text>
+      <sha1>jp2o3kn8mw9o7l52zlso1wukqm7tyjd</sha1>
+    </revision>
+  </page>
+  <page>
     <title>MediaWiki:Sidebar</title>
     <ns>8</ns>
     <id>250170</id>
@@ -382,6 +413,62 @@ To create a page with this form, enter the page name below; '''please include th
     </revision>
   </page>
   <page>
+    <title>Form:Job</title>
+    <ns>106</ns>
+    <id>89</id>
+    <revision>
+      <id>261273</id>
+      <parentid>261262</parentid>
+      <timestamp>2022-06-27T12:17:28Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>261273</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1127" sha1="s5vlfrjtz9q73y1ao7evibw92dg9mxf" xml:space="preserve">&lt;noinclude&gt;
+This is the "Job" form.
+To create a page with this form, enter the page name below; '''please include the prefix Job in the page name to avoid name collisions''', 
+if a page with that name already exists, you will be sent to a form to edit that page.
+
+{{#forminput:form=Job|autocomplete on category=Job}}
+
+&lt;/noinclude&gt;&lt;includeonly&gt;
+&lt;div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"&gt;&lt;/div&gt;
+{{{for template|Job}}}
+{| class="formtable"
+! Role: 
+| {{{field|Role}}}
+|-
+! Position: 
+| {{{field|Position}}}
+|-
+! Expertise Level: 
+| {{{field|Expertise Level}}}
+|-
+! Region: 
+| {{{field|Region|input type=tokens|cargo table=City|cargo field=_pageName}}}
+|- 
+! Project: 
+| {{{field|Project|input type=tokens|cargo table=Project|cargo field=_pageName|depends on=Job[Region]|depends on field=Region}}}
+|- 
+! Description: 
+| {{{field|Description|input type=textarea|autogrow}}}
+|-
+! You should Do: 
+| {{{field|Task|input type=textarea|autogrow}}}
+|-
+! You will Get: 
+| {{{field|Reward|input type=textarea|autogrow}}}
+|-
+|}
+{{{end template}}}
+&lt;/includeonly&gt;</text>
+      <sha1>s5vlfrjtz9q73y1ao7evibw92dg9mxf</sha1>
+    </revision>
+  </page>
+  <page>
     <title>Category:Problem</title>
     <ns>14</ns>
     <id>178</id>
@@ -397,6 +484,51 @@ To create a page with this form, enter the page name below; '''please include th
       <format>text/x-wiki</format>
       <text bytes="25" sha1="4tpsjqpt53ji5ohrdvzw8fjhilc9fc5" xml:space="preserve">{{#default_form:Problem}}</text>
       <sha1>4tpsjqpt53ji5ohrdvzw8fjhilc9fc5</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Show Sub Problems</title>
+    <ns>10</ns>
+    <id>250195</id>
+    <revision>
+      <id>261726</id>
+      <parentid>261725</parentid>
+      <timestamp>2022-09-12T11:19:35Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261726</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1347" sha1="ex9dajdmk0rofqlx0xzy1w196luggvt" xml:space="preserve">&lt;div class="sub-upvote-div" style="border:2px solid #c3c3c3;background: #f5f5f5; margin-bottom:10px; width:100%; padding: 20px; display: flex;"&gt;
+  &lt;div class="sub-problem-upvote-buttons" style="display: flex; flex-direction: column; margin-right: 10px;"&gt;
+      &lt;div class="button-upvote cursor-pointer" data-page_id="{{{page_id}}}"  data-vote_type="up"&gt;
+            [[File:Up-vote.png|32px|text-bottom|alt=|link=]]
+      &lt;/div&gt;
+        &lt;p style="margin: -5px 0 0 0;"&gt;
+          &lt;span class='sub-upvote-count' style="margin-left: 10px;"&gt;{{{Upvotes}}}&lt;/span&gt;				
+        &lt;/p&gt;
+      &lt;div class="button-downvote cursor-pointer" data-page_id="{{{page_id}}}" data-vote_type="down"&gt;
+            [[File:Down-vote.png|32px|text-bottom|alt=|link=]]
+      &lt;/div&gt;
+        &lt;p style="margin: -5px 0 0 0;"&gt;
+          &lt;span class='sub-downvote-count' style="margin-left: 10px;"&gt;0&lt;/span&gt;
+        &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="sub-problem-header" style="display: flex; flex-direction: column;"&gt;
+    &lt;div class="sub-problem-heading"&gt;
+        &lt;b&gt;&lt;span class="plainlinks sub-upvote-header-link"&gt;[{{fullurl:{{{Problem Name}}} }} {{{Problem Name}}} ]&lt;/span&gt;&lt;/b&gt;
+    &lt;/div&gt;
+    &lt;div class="sub-problem-content"&gt;
+{{#if: {{{Description|}}}
+   | {{{Description}}} &lt;span class="plainlinks"&gt;[{{fullurl:{{{Problem Name}}} }} Read more ]&lt;/span&gt;
+   | 
+}}
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</text>
+      <sha1>ex9dajdmk0rofqlx0xzy1w196luggvt</sha1>
     </revision>
   </page>
   <page>
@@ -487,6 +619,24 @@ To create a page with this form, enter the page name below; '''please include th
       <format>text/x-wiki</format>
       <text bytes="29" sha1="gd2m9760pz6ww527o6bn9xr0a44szzd" xml:space="preserve">{{#default_form:Measurement}}</text>
       <sha1>gd2m9760pz6ww527o6bn9xr0a44szzd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Category:Job</title>
+    <ns>14</ns>
+    <id>88</id>
+    <revision>
+      <id>287</id>
+      <timestamp>2022-04-06T10:54:38Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>287</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="21" sha1="bipay89hmfdurrpyc7s06xz4ajd8y4w" xml:space="preserve">{{#default_form:Job}}</text>
+      <sha1>bipay89hmfdurrpyc7s06xz4ajd8y4w</sha1>
     </revision>
   </page>
   <page>
@@ -683,6 +833,74 @@ tables=Solution_Type__Solves_Problem,Solution_Type
     </revision>
   </page>
   <page>
+    <title>Template:Show Solutions</title>
+    <ns>10</ns>
+    <id>250193</id>
+    <revision>
+      <id>261521</id>
+      <parentid>261520</parentid>
+      <timestamp>2022-08-11T19:37:19Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261521</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="337" sha1="dohblf4kt7kwlvydndjpexdskqyxbel" xml:space="preserve">{| style="background: #fafaea; padding: 7px; margin: 5px; border: 1px solid #cccccc;"
+| style="vertical-align: top;" | 
+| style="padding: 0 10px 0 10px;" | &lt;span class="plainlinks"&gt;[{{fullurl:{{{Solution Name}}} }} {{{Solution Name}}} ]&lt;/span&gt; | [[File:Up-voted.png|32px|alt=|link=]] {{{Upvotes}}}
+| style="vertical-align: bottom;" | 
+|}</text>
+      <sha1>dohblf4kt7kwlvydndjpexdskqyxbel</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Show Related Solutions</title>
+    <ns>10</ns>
+    <id>250237</id>
+    <revision>
+      <id>261727</id>
+      <parentid>261643</parentid>
+      <timestamp>2022-09-12T11:32:05Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261727</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1366" sha1="cx7khkmn8b67sztdaillgp3wror4abp" xml:space="preserve">&lt;div class="sub-upvote-div" style="border:2px solid #c3c3c3;background: #f5f5f5; margin-bottom:10px; width:100%; padding: 20px; display: flex;"&gt;
+  &lt;div class="sub-problem-upvote-buttons" style="display: flex; flex-direction: column; margin-right: 10px;"&gt;
+      &lt;div class="button-upvote cursor-pointer" data-page_id="{{{page_id}}}"  data-vote_type="up"&gt;
+            [[File:Up-vote.png|32px|text-bottom|alt=|link=]]
+      &lt;/div&gt;
+        &lt;p style="margin: -5px 0 0 0;"&gt;
+          &lt;span class='sub-upvote-count' style="margin-left: 10px;"&gt;{{{Upvotes}}}&lt;/span&gt;				
+        &lt;/p&gt;
+      &lt;div class="button-downvote cursor-pointer" data-page_id="{{{page_id}}}" data-vote_type="down"&gt;
+            [[File:Down-vote.png|32px|text-bottom|alt=|link=]]
+      &lt;/div&gt;
+        &lt;p style="margin: -5px 0 0 0;"&gt;
+          &lt;span class='sub-downvote-count' style="margin-left: 10px;"&gt;0&lt;/span&gt;
+        &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="sub-problem-header" style="display: flex; flex-direction: column;"&gt;
+    &lt;div class="sub-problem-heading"&gt;
+        &lt;b&gt;&lt;span class="plainlinks sub-upvote-header-link"&gt;[{{fullurl:{{{Solution Name}}} }} {{{Solution Name}}} ]&lt;/span&gt;&lt;/b&gt;
+    &lt;/div&gt;
+    &lt;div class="sub-problem-content"&gt;
+{{#if: {{{Description}}}
+   | {{{Description}}} &lt;span class="plainlinks"&gt;[{{fullurl:{{{Solution Name}}} }} Read more ]&lt;/span&gt;
+   | {{{Description}}}
+}}
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</text>
+      <sha1>cx7khkmn8b67sztdaillgp3wror4abp</sha1>
+    </revision>
+  </page>
+  <page>
     <title>Template:Solution Type</title>
     <ns>10</ns>
     <id>250132</id>
@@ -755,6 +973,61 @@ tables=Project
     </revision>
   </page>
   <page>
+    <title>Template:Show Related Projects</title>
+    <ns>10</ns>
+    <id>250238</id>
+    <revision>
+      <id>261662</id>
+      <parentid>261646</parentid>
+      <timestamp>2022-08-19T10:04:57Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <origin>261662</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1746" sha1="9xys6vl5yrpich4mtpv925wdw87bea6" xml:space="preserve">&lt;div class="sub-upvote-div" style="border:2px solid #c3c3c3;background: #f5f5f5; margin-bottom:10px; width:100%; padding: 10px;display: flex;"&gt;
+  &lt;div class="feature-image" style="margin-right:15px;"&gt;
+        {{#if: {{{Feature_Image|}}}
+        | [[File:{{{Feature_Image}}}|250px|text-bottom|alt=|link=]]
+        | [[File:No-preview.png|250px|text-bottom|alt=|link=]]
+        }}
+  &lt;/div&gt;
+  &lt;div class="sidebar-div" style="width: 100%;"&gt;
+    &lt;div class="sub-upvote-div-header" style="display: flex; flex-direction: row; justify-content: space-between;"&gt;
+      &lt;div class="sub-sub-upvote-div-heading" style="line-height: 32px;"&gt;
+          &lt;b&gt;&lt;span class="plainlinks sub-upvote-header-link"&gt;[{{fullurl:{{{Project Name}}} }} {{{Project Name}}} ]&lt;/span&gt;&lt;/b&gt;
+      &lt;/div&gt;
+      &lt;div class="sub-upvote-buttons" data-page_id="{{{page_id}}}" style="display: flex; flex-direction: row; width: 120px; justify-content: space-between;"&gt;
+        &lt;div class="button-upvote cursor-pointer" data-page_id="{{{page_id}}}"  data-vote_type="up"&gt;
+              [[File:Up-vote.png|32px|text-bottom|alt=|link=]]
+        &lt;/div&gt;
+          &lt;p&gt;
+            &lt;span class='sub-upvote-count'&gt;{{{Upvotes}}}&lt;/span&gt;				
+          &lt;/p&gt;
+        &lt;div class="button-downvote cursor-pointer" data-page_id="{{{page_id}}}" data-vote_type="down"&gt;
+              [[File:Down-vote.png|32px|text-bottom|alt=|link=]]
+        &lt;/div&gt;
+          &lt;p&gt;
+            &lt;span class='sub-downvote-count'&gt;0&lt;/span&gt;
+          &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="sub-upvote-div-content"&gt;
+      &lt;p&gt;
+          {{#if: {{{Overview|}}}
+          | {{{Overview}}} &lt;span class="plainlinks"&gt;[{{fullurl:{{{Project Name}}} }} Read more ]&lt;/span&gt;
+          | 
+          }}
+      &lt;/p&gt;
+    &lt;/div&gt;    
+  &lt;/div&gt;
+&lt;/div&gt;</text>
+      <sha1>9xys6vl5yrpich4mtpv925wdw87bea6</sha1>
+    </revision>
+  </page>
+  <page>
     <title>Template:Measurement</title>
     <ns>10</ns>
     <id>250112</id>
@@ -777,6 +1050,229 @@ tables=Project
 [[Category:Measurement]]
 &lt;/includeonly&gt;</text>
       <sha1>dxopaf8yevcl5v96f9b9d8uyshnbeth</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Job</title>
+    <ns>10</ns>
+    <id>87</id>
+    <revision>
+      <id>261259</id>
+      <parentid>499</parentid>
+      <timestamp>2022-06-27T10:55:19Z</timestamp>
+      <contributor>
+        <username>Wiki admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>261259</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="793" sha1="qttffv5i77so37zp1um5we352g8v17a" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:Role|Position|Expertise Level|Region|Project|Description|Task|Reward}}
+{{#cargo_declare:_table=Job|_parentTables=Project|Role=String|Position=String|Expertise_Level=String|Region=Page|
+|Project=Page|Description=Wikitext|Task=Wikitext|Reward=Wikitext}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Job}}
+{{#template_display:_format=standard}}
+&lt;h3&gt;Action Items&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;{{#formredlink:form=OKRClass|existing page link text=OKRs|target={{PAGENAME}}_OKR_Job|query string=OKRClass[Title]={{{Title}}}|link text=Define OKRs}}&lt;/li&gt;
+&lt;li&gt;{{#formredlink:form=Donation|existing page link text=Donate to Job|target={{PAGENAME}}_Problem_Job|query string=Donation[Type]=Job&amp;Donation[Title]={{{Title}}}|link text=Donate to Job}}&lt;/li&gt;
+&lt;/ul&gt;
+[[Category:Job]]
+&lt;/includeonly&gt;</text>
+      <sha1>qttffv5i77so37zp1um5we352g8v17a</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>ObjectiveEarth:About</title>
+    <ns>5002</ns>
+    <id>250206</id>
+    <revision>
+      <id>261571</id>
+      <timestamp>2022-08-15T07:48:08Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <comment>Created page with "&lt;!-- Begin CSS Flexbox --&gt; &lt;div style="display: flex; flex-wrap: wrap;"&gt; &lt;!--   Section 1 OE About  --&gt; &lt;div style="flex: 1 0 100%; position: relative; clear:left; float: left; box-sizing: border-box; margin: 0 0 1em 0; width: 100%; padding-left: 60px; text-align: center;"&gt;  =[[File:Logo.png|32px|text-bottom|alt=|link=]] '''WHAT is Objective.Earth'''=  [[Wikibooks:Welcome|'''Welcome to Objective.Earth!''']] Objective.Earth is a social network, where you can talk about "P..."</comment>
+      <origin>261571</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="2762" sha1="ijj7juigcmalglxm108yviewlc1gddk" xml:space="preserve">&lt;!-- Begin CSS Flexbox --&gt;
+&lt;div style="display: flex; flex-wrap: wrap;"&gt;
+&lt;!-- 
+
+Section 1 OE About
+
+--&gt;
+&lt;div style="flex: 1 0 100%; position: relative; clear:left; float: left; box-sizing: border-box; margin: 0 0 1em 0; width: 100%; padding-left: 60px; text-align: center;"&gt;
+
+=[[File:Logo.png|32px|text-bottom|alt=|link=]] '''WHAT is Objective.Earth'''=
+
+[[Wikibooks:Welcome|'''Welcome to Objective.Earth!''']] Objective.Earth is a social network, where you can talk about "Problems of a region" and "Solutions for those problems". Crowdfunds will enable community to sponsor the users who are applying those solutions in the region.
+
+&lt;/div&gt;
+&lt;!-- 
+
+Section 2 Aligning Mandkind
+
+--&gt;
+&lt;div style="flex: 1 0 50%; min-width: 30em; position: relative; clear: left; float: left; box-sizing: border-box; margin: 1em 0; width: 50%; padding-left: 60px;"&gt;
+&lt;div class="nomobile" style="position: absolute; top: 0.75em; left: 9px;"&gt;[[File:HelpPage_IconPack-05.png|51px|alt=|link=]]&lt;/div&gt;
+
+==Aligning Mankind- with '''WHYs'''==
+
+As a community, we often are not aligned on WHY something must be done. Drawing inspiration from OKR framework, we intend to align people worldwide by advertising them with "Flashcards of WHYs". People would crowdsource on WHYs, and allocate tasks to each other. See Aligning Mankind...
+
+
+&lt;/div&gt;
+&lt;!-- 
+
+Section 3 rewarding
+
+--&gt;
+&lt;div style="flex: 1 0 50%; min-width: 30em; position: relative; float: left; box-sizing: border-box; margin: 1em 0; width: 50%; padding-left: 60px;"&gt;
+&lt;div class="nomobile" style="position: absolute; top: 0.75em; left: 9px;"&gt;[[File:HelpPage_IconPack-03.png|51px|alt=|link=]]&lt;/div&gt;
+
+==Rewarding People - for Doing it '''Right'''==
+
+Ok, I might get convinced with some WHYs - say "Why planting trees is so much crucial". But "Doing such right things" is often costlier! Objective.Earth would run crowdfunds, and reward those people who are stepping forward to "Do it right". Read more Rewarding DOers..
+
+&lt;/div&gt;
+&lt;!-- 
+
+Section 4 Sneak Peak
+
+--&gt;
+&lt;div style="flex: 1 0 80%; min-width: 30em; position: relative; float: left; box-sizing: border-box; margin: 1em 0; width: 50%; padding-left: 60px;"&gt;
+&lt;div class="nomobile" style="position: absolute; top: 0.75em; left: 9px;"&gt;[[File:HelpPage_IconPack-03.png|51px|alt=|link=]]&lt;/div&gt;
+
+==Sneak Peak==
+
+When user googles for 'Climate on Earth" we would land the user on this page. Kindly contribute to Product Design and make it better.
+
+&lt;br/&gt;
+
+[[File:Aligning-mankind-with-whys.png|center|700px|alt=|link=]]
+
+&lt;br/&gt;
+Users can click on "Climate" dropdown or "Earth" dropdown on top left - and switch to their favorite region, or to thousands of other causes that concern them.
+&lt;br/&gt;
+&lt;br/&gt;
+
+&lt;center&gt; &lt;youtube width="700" height="400"&gt;IexM8XV1rnI&lt;/youtube&gt;&lt;/center&gt;
+&lt;br/&gt;
+
+&lt;br/&gt;
+&lt;/div&gt;</text>
+      <sha1>ijj7juigcmalglxm108yviewlc1gddk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>ObjectiveEarth:WHYs</title>
+    <ns>5002</ns>
+    <id>250211</id>
+    <revision>
+      <id>261576</id>
+      <timestamp>2022-08-15T08:07:04Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <comment>Created page with "See child pages to see the WHYs behind Objective.Earth &lt;br/&gt;&lt;br/&gt; &lt;center&gt; &lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt; &lt;br/&gt;  	 '''&lt;- Previous'''  * [[ObjectiveEarth:About|WHAT is Objective.Earth]]  '''Next -&gt;'''  * [[ObjectiveEarth:WHYs/Aligning_Mankind|Aligning Mankind]]"</comment>
+      <origin>261576</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="296" sha1="r1b8uost0eoqio5ez9n02driuakgv6l" xml:space="preserve">See child pages to see the WHYs behind Objective.Earth
+&lt;br/&gt;&lt;br/&gt;
+&lt;center&gt; &lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt;
+&lt;br/&gt;
+
+	
+'''&lt;- Previous'''
+
+* [[ObjectiveEarth:About|WHAT is Objective.Earth]]
+
+'''Next -&gt;'''
+
+* [[ObjectiveEarth:WHYs/Aligning_Mankind|Aligning Mankind]]</text>
+      <sha1>r1b8uost0eoqio5ez9n02driuakgv6l</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>ObjectiveEarth:WHYs/Aligning Mankind</title>
+    <ns>5002</ns>
+    <id>250212</id>
+    <revision>
+      <id>261577</id>
+      <timestamp>2022-08-15T08:07:46Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <comment>Created page with "Education : WHAT needs to be done, WHY and HOW.  &lt;br/&gt;  ==Problem: population Aware of SDGs== &lt;br/&gt; [https://globalgoals.org/ Sustainability Development Goals] (SDGs) are important for humans to thrive on earth. Mankind may fail to achieve these goals if majority of our population is not aware of them. &lt;br/&gt; {| class="wikitable" |- |in 2015 |in 2027 |- |less than half the world's population is aware of SDGs |90% of world's population becomes aware of SDGs |}   See [https..."</comment>
+      <origin>261577</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1564" sha1="et44jhpky4aqkzz47fjc62h1kjrak2s" xml:space="preserve">Education : WHAT needs to be done, WHY and HOW.
+
+&lt;br/&gt;
+
+==Problem: population Aware of SDGs==
+&lt;br/&gt;
+[https://globalgoals.org/ Sustainability Development Goals] (SDGs) are important for humans to thrive on earth. Mankind may fail to achieve these goals if majority of our population is not aware of them.
+&lt;br/&gt;
+{| class="wikitable"
+|-
+|in 2015
+|in 2027
+|-
+|less than half the world's population is aware of SDGs
+|90% of world's population becomes aware of SDGs
+|}
+
+
+See [https://globalgoals.org/  Source]
+
+
+===Solutions===
+
+# [https://www.objective.earth/whys/aligning-mankind/campaigns-to-educate-99-of-population-on-sdgs Campaigns to educate 99% of population on SDGs.]
+# Contribute more solutions here
+
+
+
+==Problem: population Working on SDGs==
+
+Mankind may fail to achieve SDGs if "sizeable" population does not know their tasks, what tasks others are doing, the progress everyone collectively is making to accomplish goals.
+
+
+{| class="wikitable"
+|-
+|in 2021
+|in 2024
+|-
+|no source available right now on how many people are actively working on SDGs. Please contribute here
+|5% of population actively working on SDGs
+|}
+
+
+See [https://www.objective.earth/whys/aligning-mankind/source-of-information/source-population-that-is-working-on-sdgs  Source]
+
+===Solutions===
+# [https://www.objective.earth/whys/aligning-mankind/social-network-with-okr-objective.earth Social Network + OKR = Objective.Earth]
+# Contribute more solutions here..
+
+
+
+'''&lt;- Previous'''
+
+* [[ObjectiveEarth:WHYs|WHYs]]
+
+'''Next -&gt;'''
+
+* [[ObjectiveEarth:WHYs/Educate 99% population on SDGs]]</text>
+      <sha1>et44jhpky4aqkzz47fjc62h1kjrak2s</sha1>
     </revision>
   </page>
 </mediawiki>
