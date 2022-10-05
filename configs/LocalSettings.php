@@ -140,7 +140,7 @@ wfLoadSkin('Vector');
 
 $wgShowExceptionDetails = true;
 $wgShowDBErrorBacktrace = true; 
-$wgShowSQLErrors = true;
+// $wgShowSQLErrors = true;
 $wgDebugDumpSql = true;
 
 $wgDeprecationReleaseLimit = '1.x'; //to hide Deprecated warnings
