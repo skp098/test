@@ -35,7 +35,7 @@ build:
     - docker push $IMAGE_TAG_LATEST
     - docker push $IMAGE_TAG
   only:
-    - dev
+    - develop
     - master
     - merge_requests
 
@@ -126,7 +126,7 @@ deploy-staging:
     - .deploy-conf
   resource_group: deploy-staging
   only:
-    - dev
+    - develop
 
 deploy-prod:
   variables:
