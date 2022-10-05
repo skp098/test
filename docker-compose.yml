@@ -57,6 +57,19 @@ services:
     networks:
       - docker_net
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysqldb
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: changemeplease
+    labels:
+      - "traefik.port=8000"
+      - "traefik.frontend.rule=Host:php.localhost"
+      - "traefik.protocol=http"
+    networks:
+      - docker_net
+
 networks:
   docker_net:
     name: docker_net
