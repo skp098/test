@@ -35,8 +35,8 @@ build:
     - docker push $IMAGE_TAG_LATEST
     - docker push $IMAGE_TAG
   only:
+    - main
     - develop
-    - master
     - merge_requests
 
 .deploy-conf:
@@ -104,6 +104,9 @@ deploy-test:
     name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID_STR
     url: https://$HOST_TEST
     on_stop: teardown-mr
+  before_script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
   extends:
     - .deploy-conf
   resource_group: deploy-test
@@ -120,6 +123,7 @@ deploy-staging:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
   before_script:
+    - sed -i 's|= main|= develop|g' .gitmodules
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
   extends:
@@ -144,7 +148,7 @@ deploy-prod:
     - .deploy-conf
   resource_group: deploy-prod
   only:
-    - master
+    - main
 
 teardown-mr:
   image:
