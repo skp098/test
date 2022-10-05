@@ -81,10 +81,12 @@ if(recreate_data_flag):
 
     for child in root.findall('page'):
         page = child.find('title').text
-        page_type = page.split(':')[0]
-        page_name = page.split(':')[1]
-        if(page_type == 'Template'):
-            templates.append(page_name)
+        page_split = page.split(':')
+        if len(page_split) > 1:
+            page_type = page.split(':')[0]
+            page_name = page.split(':')[1]
+            if (page_type == 'Template'):
+                templates.append(page_name)
 
     # templates = ['Problem','Problem_Type','Solution','Solution_Type','Project','Measurement'];
     for template in templates:
