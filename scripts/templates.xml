@@ -112,6 +112,29 @@ We're a collaborative community website about ObjectiveEarth that anyone, includ
     </revision>
   </page>
   <page>
+    <title>Template:Upvote</title>
+    <ns>10</ns>
+    <id>250192</id>
+    <revision>
+      <id>261514</id>
+      <timestamp>2022-08-11T19:18:30Z</timestamp>
+      <contributor>
+        <username>Santosh</username>
+        <id>14</id>
+      </contributor>
+      <comment>Created page with "&lt;noinclude&gt; {{#template_params:page_id|vote_type|user_id|created_at|updated_at}} {{#cargo_declare:_table=Upvote|page_id=Integer|vote_type=String|user_id=Integer|created_at=Datetime|updated_at=Datetime}} &lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Upvote}} {{#template_display:_format=standard}}&lt;/includeonly&gt;"</comment>
+      <origin>261514</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="311" sha1="jiqvxrc4tidz9hj16eepydm5atvdaji" xml:space="preserve">&lt;noinclude&gt;
+{{#template_params:page_id|vote_type|user_id|created_at|updated_at}}
+{{#cargo_declare:_table=Upvote|page_id=Integer|vote_type=String|user_id=Integer|created_at=Datetime|updated_at=Datetime}}
+&lt;/noinclude&gt;&lt;includeonly&gt;{{#cargo_store:_table=Upvote}}
+{{#template_display:_format=standard}}&lt;/includeonly&gt;</text>
+      <sha1>jiqvxrc4tidz9hj16eepydm5atvdaji</sha1>
+    </revision>
+  </page>  
+  <page>
     <title>Form:Problem</title>
     <ns>106</ns>
     <id>177</id>
@@ -1160,7 +1183,7 @@ Users can click on "Climate" dropdown or "Earth" dropdown on top left - and swit
 &lt;br/&gt;
 &lt;br/&gt;
 
-&lt;center&gt; &lt;youtube width="700" height="400"&gt;IexM8XV1rnI&lt;/youtube&gt;&lt;/center&gt;
+&lt;center&gt;‎&lt;youtube width="700" height="400"&gt;IexM8XV1rnI&lt;/youtube&gt;&lt;/center&gt;
 &lt;br/&gt;
 
 &lt;br/&gt;
@@ -1179,13 +1202,13 @@ Users can click on "Climate" dropdown or "Earth" dropdown on top left - and swit
         <username>Santosh</username>
         <id>14</id>
       </contributor>
-      <comment>Created page with "See child pages to see the WHYs behind Objective.Earth &lt;br/&gt;&lt;br/&gt; &lt;center&gt; &lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt; &lt;br/&gt;  	 '''&lt;- Previous'''  * [[ObjectiveEarth:About|WHAT is Objective.Earth]]  '''Next -&gt;'''  * [[ObjectiveEarth:WHYs/Aligning_Mankind|Aligning Mankind]]"</comment>
+      <comment>Created page with "See child pages to see the WHYs behind Objective.Earth &lt;br/&gt;&lt;br/&gt; &lt;center&gt;‎&lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt; &lt;br/&gt;  	 '''&lt;- Previous'''  * [[ObjectiveEarth:About|WHAT is Objective.Earth]]  '''Next -&gt;'''  * [[ObjectiveEarth:WHYs/Aligning_Mankind|Aligning Mankind]]"</comment>
       <origin>261576</origin>
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text bytes="296" sha1="r1b8uost0eoqio5ez9n02driuakgv6l" xml:space="preserve">See child pages to see the WHYs behind Objective.Earth
 &lt;br/&gt;&lt;br/&gt;
-&lt;center&gt; &lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt;
+&lt;center&gt;‎&lt;youtube width="700" height="400"&gt;fUu3c8EboGU&lt;/youtube&gt;&lt;/center&gt;
 &lt;br/&gt;
 
 	
