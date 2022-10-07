@@ -181,3 +181,6 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 
 // Google Place API Key
 $gPlaceApiKey = "AIzaSyDuzoNq49SnDQhfY5QTtBzT9QZvZLSXzmQ";
+
+
+$wgDebugLogFile = "/var/log/mediawiki/debug-{$wgDBname}.log";
