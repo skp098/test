@@ -57,7 +57,7 @@ kind: Service
 metadata:
   name: phpmyadmin-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: phpmyadmin
   ports:
