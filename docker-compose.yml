@@ -64,8 +64,8 @@ services:
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: changemeplease
     labels:
-      - "traefik.port=8000"
-      - "traefik.frontend.rule=Host:php.localhost"
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:admin.localhost"
       - "traefik.protocol=http"
     networks:
       - docker_net

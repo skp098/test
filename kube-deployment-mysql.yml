@@ -40,7 +40,7 @@ spec:
         - name: phpmyadmin
           image: phpmyadmin/phpmyadmin
           ports:
-            - containerPort: 8000
+            - 8000:80
           env:
             - name: PMA_HOST
               value: $MEDIAWIKI_DB_HOST
