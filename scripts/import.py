@@ -7,7 +7,8 @@ import requests
 USERNAME = "InternalAdmin"
 PASSWORD = getenv('MEDIAWIKI_ADMIN_PASSWORD', "changeme")
 
-URL = "http://localhost/api.php"
+# URL = "http://localhost/api.php"
+URL = "https://oe-staging.smarter.codes/api.php"
 FILE_PATH = './templates.xml'
 
 S = requests.Session()
