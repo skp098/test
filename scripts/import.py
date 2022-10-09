@@ -33,7 +33,6 @@ while not LOGIN_TOKEN:
         LOGIN_TOKEN = None
         sleep(5)
 
-
 # Post req to login
 PARAMS_2 = {
     'action': "login",
