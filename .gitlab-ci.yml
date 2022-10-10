@@ -104,7 +104,7 @@ deploy-test:
     on_stop: teardown-mr
   before_script:
     - git submodule sync --recursive
-    - git submodule update --init --recursive --remote
+    - git submodule update --init --recursive
   extends:
     - .deploy-conf
   resource_group: deploy-test
@@ -141,7 +141,7 @@ deploy-prod:
     url: https://$HOST_PROD
   before_script:
     - git submodule sync --recursive
-    - git submodule update --init --recursive
+    - git submodule update --init --recursive --remote
   extends:
     - .deploy-conf
   resource_group: deploy-prod
