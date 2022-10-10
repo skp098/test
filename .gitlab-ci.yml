@@ -35,10 +35,6 @@ variables:
     - docker build --cache-from=$IMAGE_TAG_LATEST -t $IMAGE_TAG_LATEST -t $IMAGE_TAG .
     - docker push $IMAGE_TAG_LATEST
     - docker push $IMAGE_TAG
-  only:
-    - main
-    - develop
-    - merge_requests
 
 build-test:
   before_script:
@@ -47,6 +43,8 @@ build-test:
   extends:
     - .build-conf
   resource_group: build-test
+  only:
+    - merge_requests
 
 build-staging:
   variables:
@@ -58,6 +56,8 @@ build-staging:
   extends:
     - .build-conf
   resource_group: build-staging
+  only:
+    - develop
 
 build-prod:
   variables:
@@ -68,6 +68,8 @@ build-prod:
   extends:
     - .build-conf
   resource_group: build-prod
+  only:
+    - main
 
 .deploy-conf:
   image:
