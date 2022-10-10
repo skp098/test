@@ -3,8 +3,6 @@ stages:
   - deploy
 
 variables:
-  GIT_STRATEGY: clone
-  GIT_SUBMODULE_STRATEGY: recursive
   CI_MERGE_REQUEST_ID_STR: mr-$CI_MERGE_REQUEST_ID
 
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-$CI_PIPELINE_ID
@@ -47,8 +45,6 @@ build-test:
     - merge_requests
 
 build-staging:
-  variables:
-    GIT_SUBMODULE_UPDATE_FLAGS: --remote
   before_script:
     - sed -i 's|= main|= develop|g' .gitmodules
     - git submodule sync --recursive
@@ -60,8 +56,6 @@ build-staging:
     - develop
 
 build-prod:
-  variables:
-    GIT_SUBMODULE_UPDATE_FLAGS: --remote
   before_script:
     - git submodule sync --recursive
     - git submodule update --init --recursive --remote
