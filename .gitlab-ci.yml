@@ -3,6 +3,7 @@ stages:
   - deploy
 
 variables:
+  GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: recursive
   CI_MERGE_REQUEST_ID_STR: mr-$CI_MERGE_REQUEST_ID
 
@@ -23,7 +24,7 @@ variables:
   HOST_STAGING: oe-staging.smarter.codes
   HOST_PROD: www.objective.earth
 
-build:
+.build-conf:
   image: docker:19.03.12
   stage: build
   services:
@@ -38,6 +39,35 @@ build:
     - main
     - develop
     - merge_requests
+
+build-test:
+  before_script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+  extends:
+    - .build-conf
+  resource_group: build-test
+
+build-staging:
+  variables:
+    GIT_SUBMODULE_UPDATE_FLAGS: --remote
+  before_script:
+    - sed -i 's|= main|= develop|g' .gitmodules
+    - git submodule sync --recursive
+    - git submodule update --init --recursive --remote
+  extends:
+    - .build-conf
+  resource_group: build-staging
+
+build-prod:
+  variables:
+    GIT_SUBMODULE_UPDATE_FLAGS: --remote
+  before_script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive --remote
+  extends:
+    - .build-conf
+  resource_group: build-prod
 
 .deploy-conf:
   image:
@@ -102,9 +132,6 @@ deploy-test:
     name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID_STR
     url: https://$HOST_TEST
     on_stop: teardown-mr
-  before_script:
-    - git submodule sync --recursive
-    - git submodule update --init --recursive
   extends:
     - .deploy-conf
   resource_group: deploy-test
@@ -120,10 +147,6 @@ deploy-staging:
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
-  before_script:
-    - sed -i 's|= main|= develop|g' .gitmodules
-    - git submodule sync --recursive
-    - git submodule update --init --recursive --remote
   extends:
     - .deploy-conf
   resource_group: deploy-staging
