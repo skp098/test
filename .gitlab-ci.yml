@@ -47,8 +47,6 @@ build:
   script:
     - kubectl config get-contexts
     - kubectl config use-context $CONTEXT
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-crds.yaml
-    - kubectl apply -f https://raw.githubusercontent.com/mysql/mysql-operator/trunk/deploy/deploy-operator.yaml
     - >-
       kubectl create namespace $NAMESPACE
       -o yaml --dry-run=client | kubectl apply -f -
@@ -117,7 +115,7 @@ deploy-staging:
   variables:
     CONTEXT: $CONTEXT_DEV
     NAMESPACE: $CI_COMMIT_BRANCH
-    INSTANCES: 3
+    INSTANCES: 1
     URL: $HOST_STAGING
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
@@ -136,7 +134,7 @@ deploy-prod:
   variables:
     CONTEXT: $CONTEXT_PROD
     NAMESPACE: $CI_COMMIT_BRANCH
-    INSTANCES: 3
+    INSTANCES: 1
     URL: $HOST_PROD
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH

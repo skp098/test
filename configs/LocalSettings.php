@@ -140,7 +140,7 @@ wfLoadSkin('Vector');
 
 $wgShowExceptionDetails = true;
 $wgShowDBErrorBacktrace = true; 
-// $wgShowSQLErrors = true;
+$wgShowSQLErrors = true;
 $wgDebugDumpSql = true;
 
 $wgDeprecationReleaseLimit = '1.x'; //to hide Deprecated warnings
@@ -181,3 +181,7 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 
 // Google Place API Key
 $gPlaceApiKey = "AIzaSyDuzoNq49SnDQhfY5QTtBzT9QZvZLSXzmQ";
+
+
+$wgDebugLogFile = "./debug-{$wgDBname}.log";
+$wgDebugComments = true;
