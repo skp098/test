@@ -104,7 +104,7 @@ deploy-test:
     on_stop: teardown-mr
   before_script:
     - git submodule sync --recursive
-    - git submodule update --init --recursive
+    - git submodule update --init --recursive --remote
   extends:
     - .deploy-conf
   resource_group: deploy-test
@@ -123,7 +123,7 @@ deploy-staging:
   before_script:
     - sed -i 's|= main|= develop|g' .gitmodules
     - git submodule sync --recursive
-    - git submodule update --init --recursive
+    - git submodule update --init --recursive --remote
   extends:
     - .deploy-conf
   resource_group: deploy-staging
