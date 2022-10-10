@@ -113,6 +113,7 @@ deploy-test:
 
 deploy-staging:
   variables:
+    GIT_SUBMODULE_UPDATE_FLAGS: --remote --jobs 4
     CONTEXT: $CONTEXT_DEV
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
@@ -132,6 +133,7 @@ deploy-staging:
 
 deploy-prod:
   variables:
+    GIT_SUBMODULE_UPDATE_FLAGS: --remote --jobs 4
     CONTEXT: $CONTEXT_PROD
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
@@ -139,9 +141,6 @@ deploy-prod:
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD
-  before_script:
-    - git submodule sync --recursive
-    - git submodule update --init --remote --recursive
   extends:
     - .deploy-conf
   resource_group: deploy-prod
