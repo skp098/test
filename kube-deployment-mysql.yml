@@ -1,24 +1,55 @@
-apiVersion: mysql.oracle.com/v2
-kind: InnoDBCluster
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
-  name: $MEDIAWIKI_DB_HOST
+  name: mysql-db
 spec:
-  secretName: mysqlauth
-  tlsUseSelfSigned: true
-  instances: $INSTANCES
-  version: 8.0.30
-  router:
-    instances: 1
-    version: 8.0.30
-  datadirVolumeClaimTemplate:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 10Gi
-  mycnf: |
-    [mysqld]
-    max_connections=162
+  serviceName: mysqldb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqldb
+  template:
+    metadata:
+      labels:
+        app: mysqldb
+    spec:
+      containers:
+        - name: mysqldb
+          image: mysql:8.0.30
+          env:
+            - name: MEDIAWIKI_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysqlauth
+                  key: rootPassword
+          volumeMounts:
+            - name: mysqldb-disk
+              mountPath: /var/lib/mysql
+          ports:
+            - containerPort: 3306
+  volumeClaimTemplates:
+    - metadata:
+        name: mysqldb-disk
+        annotations:
+          volume.alpha.kubernetes.io/storage-class: anything
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqldb
+spec:
+  type: ClusterIP
+  selector:
+    app: mysqldb
+  ports:
+    - port: 3306
+      targetPort: 3306
 ---
 apiVersion: apps/v1
 kind: Deployment
