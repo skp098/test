@@ -23,48 +23,62 @@ variables:
   HOST_STAGING: oe-staging.smarter.codes
   HOST_PROD: www.objective.earth
 
-.build-conf:
+setup-test:
+  stage: .pre
+  script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+    - tar -zcvf extensions.tar.gz extensions
+  artifacts:
+    paths:
+      - extensions.tar.gz
+    expire_in: 1 hour
+  only:
+    - merge_requests
+
+setup-staging:
+  stage: .pre
+  script:
+    - sed -i 's|= main|= develop|g' .gitmodules
+    - git submodule sync --recursive
+    - git submodule update --init --remote --recursive
+    - tar -zcvf extensions.tar.gz extensions
+  artifacts:
+    paths:
+      - extensions.tar.gz
+    expire_in: 1 hour
+  only:
+    - develop
+
+setup-prod:
+  stage: .pre
+  script:
+    - git submodule sync --recursive
+    - git submodule update --init --remote --recursive
+    - tar -zcvf extensions.tar.gz extensions
+  artifacts:
+    paths:
+      - extensions.tar.gz
+    expire_in: 1 hour
+  only:
+    - main
+
+build:
   image: docker:19.03.12
   stage: build
   services:
     - docker:19.03.12-dind
   script:
+    - tar -xvf extensions.tar.gz
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $IMAGE_TAG_LATEST || echo "image for cache not found"
     - docker build --cache-from=$IMAGE_TAG_LATEST -t $IMAGE_TAG_LATEST -t $IMAGE_TAG .
     - docker push $IMAGE_TAG_LATEST
     - docker push $IMAGE_TAG
-
-build-test:
-  before_script:
-    - git submodule sync --recursive
-    - git submodule update --init --recursive
-  extends:
-    - .build-conf
-  resource_group: build-test
-  only:
-    - merge_requests
-
-build-staging:
-  before_script:
-    - sed -i 's|= main|= develop|g' .gitmodules
-    - git submodule sync --recursive
-    - git submodule update --init --recursive --remote
-  extends:
-    - .build-conf
-  resource_group: build-staging
-  only:
-    - develop
-
-build-prod:
-  before_script:
-    - git submodule sync --recursive
-    - git submodule update --init --recursive --remote
-  extends:
-    - .build-conf
-  resource_group: build-prod
   only:
     - main
+    - develop
+    - merge_requests
 
 .deploy-conf:
   image:
