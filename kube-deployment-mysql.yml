@@ -3,8 +3,8 @@ kind: StatefulSet
 metadata:
   name: mysql-db
 spec:
-  serviceName: mysqldb
-  replicas: 1
+  serviceName: $MEDIAWIKI_DB_HOST
+  replicas: $INSTANCES
   selector:
     matchLabels:
       app: mysqldb
@@ -42,9 +42,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysqldb
+  name: $MEDIAWIKI_DB_HOST
 spec:
-  type: ClusterIP
+  clusterIP: None
   selector:
     app: mysqldb
   ports:
