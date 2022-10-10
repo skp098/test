@@ -150,6 +150,7 @@ wfLoadExtension('Cargo');
 wfLoadExtension('mediawiki-extensions-PageForms');
 wfLoadExtension('Upvote');
 wfLoadExtension('comment-extension');
+wfLoadExtension( 'ParserFunctions' );
 
 $wgGroupPermissions['*']['lookupuser'] = true;
 $wgGroupPermissions['lookupuser']['lookupuser'] = true;

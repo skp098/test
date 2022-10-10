@@ -26,7 +26,6 @@
 	path = extensions/Cargo
 	url = ../../objective-earth/extensions/Cargo.git
 	branch = main
-[submodule "ParserFunctions"]
-	path = ParserFunctions
+[submodule "extensions/ParserFunctions"]
+	path = extensions/ParserFunctions
 	url = ../../objective-earth/extensions/ParserFunctions.git
-	branch = main
