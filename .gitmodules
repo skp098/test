@@ -22,7 +22,7 @@
 	path = extensions/comment-extension
 	url = ../../objective-earth/extensions/comment-extension.git
 	branch = main
-[submodule "extensions/Cargo"]
-	path = extensions/Cargo
-	url = ../../objective-earth/extensions/Cargo.git
-	branch = main
+# [submodule "extensions/Cargo"]
+# 	path = extensions/Cargo
+# 	url = ../../objective-earth/extensions/Cargo.git
+# 	branch = main
