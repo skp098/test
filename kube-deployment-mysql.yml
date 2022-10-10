@@ -23,7 +23,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin-deployment
+  name: deployment-phpmyadmin
   labels:
     app: phpmyadmin
 spec:
@@ -40,7 +40,7 @@ spec:
         - name: phpmyadmin
           image: phpmyadmin/phpmyadmin
           ports:
-            - containerPort: 8000            
+            - containerPort: 80          
           env:
             - name: PMA_HOST
               value: $MEDIAWIKI_DB_HOST
@@ -62,5 +62,5 @@ spec:
     app: phpmyadmin
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 80
+      targetPort: 80
