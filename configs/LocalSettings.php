@@ -152,6 +152,10 @@ wfLoadExtension('Upvote');
 wfLoadExtension('comment-extension');
 wfLoadExtension( 'ParserFunctions' );
 
+wfLoadExtension( 'WikiEditor' );
+$wgWikiEditorRealtimePreview = true;
+$wgHiddenPrefs[] = 'usebetatoolbar';
+
 $wgGroupPermissions['*']['lookupuser'] = true;
 $wgGroupPermissions['lookupuser']['lookupuser'] = true;
 

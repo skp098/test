@@ -31,4 +31,4 @@
 	url = ../../objective-earth/extensions/ParserFunctions.git
 [submodule "extensions/WikiEditor"]
 	path = extensions/WikiEditor
-	url = git@gitlab.com:objective-earth/extensions/WikiEditor.git
+	url = ../../objective-earth/extensions//WikiEditor.git
