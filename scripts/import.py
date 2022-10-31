@@ -88,13 +88,78 @@ if(recreate_data_flag):
                 templates.append(page_name)
 
     # templates = ['Problem','Problem_Type','Solution','Solution_Type','Project','Measurement'];
+
+    cargotables_params = {
+        "action": "cargotables",
+        "format": "json",
+    }
+
+    cargotables_params_res = S.post(URL, cargotables_params)
+    cargotables = cargotables_params_res.json()
+
     for template in templates:
-        PARAMS_5 = {
-            "action": "cargorecreatetables",
-            "template": template,
-            "format": "json",
-            "token": CSRF_TOKEN,
-        }
-        R = S.post(URL, data=PARAMS_5)
-        DATA = R.json()
-        print(DATA)
+
+        if(template not in cargotables['cargotables']):
+
+            PARAMS_5 = {
+                "action": "cargorecreatetables",
+                "template": template,
+                "createReplacement":0,
+                "format": "json",
+                "token": CSRF_TOKEN,
+            }
+            R = S.post(URL, data=PARAMS_5)
+            DATA = R.json()
+            print(DATA)
+
+FILE_PATH = 'media/up-vote.png'
+
+PARAMS_6 = {
+    "action": "upload",
+    "filename": "up-vote.png",
+    "format": "json",
+    "token": CSRF_TOKEN,
+    "ignorewarnings": 1
+}
+
+FILE = {'file':('up-vote.png', open(FILE_PATH, 'rb'), 'multipart/form-data')}
+
+R = S.post(URL, files=FILE, data=PARAMS_6)
+DATA = R.json()
+print(DATA)
+
+# uploading downvote png
+
+FILE_PATH = 'media/down-vote.png'
+
+PARAMS_7 = {
+    "action": "upload",
+    "filename": "down-vote.png",
+    "format": "json",
+    "token": CSRF_TOKEN,
+    "ignorewarnings": 1
+}
+
+FILE = {'file':('down-vote.png', open(FILE_PATH, 'rb'), 'multipart/form-data')}
+
+R = S.post(URL, files=FILE, data=PARAMS_7)
+DATA = R.json()
+print(DATA)
+
+# uploading no-preview png
+
+FILE_PATH = 'media/No-preview.png'
+
+PARAMS_8 = {
+    "action": "upload",
+    "filename": "No-preview.png",
+    "format": "json",
+    "token": CSRF_TOKEN,
+    "ignorewarnings": 1
+}
+
+FILE = {'file':('No-preview.png', open(FILE_PATH, 'rb'), 'multipart/form-data')}
+
+R = S.post(URL, files=FILE, data=PARAMS_8)
+DATA = R.json()
+print(DATA)

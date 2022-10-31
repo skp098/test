@@ -151,6 +151,7 @@ wfLoadExtension('mediawiki-extensions-PageForms');
 wfLoadExtension('Upvote');
 wfLoadExtension('comment-extension');
 wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'YouTube' );
 
 wfLoadExtension( 'WikiEditor' );
 $wgWikiEditorRealtimePreview = true;
@@ -188,5 +189,10 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 $gPlaceApiKey = "AIzaSyDuzoNq49SnDQhfY5QTtBzT9QZvZLSXzmQ";
 
 
-$wgDebugLogFile = "./debug-{$wgDBname}.log";
-$wgDebugComments = true;
+// Adding capthca system
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+$wgCaptchaClass = 'ReCaptchaNoCaptcha';
+$wgReCaptchaSiteKey = '6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2';
+$wgReCaptchaSecretKey = '6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk';
+
+$wgCaptchaTriggers['createaccount'] = true;

@@ -32,3 +32,9 @@
 [submodule "extensions/WikiEditor"]
 	path = extensions/WikiEditor
 	url = ../../objective-earth/extensions//WikiEditor.git
+[submodule "extensions/ConfirmEdit"]
+	path = extensions/ConfirmEdit
+	url = ../../objective-earth/extensions/ConfirmEdit.git
+[submodule "extensions/YouTube"]
+	path = extensions/YouTube
+	url = ../../objective-earth/extensions/YouTube.git
