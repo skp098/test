@@ -192,7 +192,10 @@ $gPlaceApiKey = "AIzaSyDuzoNq49SnDQhfY5QTtBzT9QZvZLSXzmQ";
 // Adding capthca system
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
 $wgCaptchaClass = 'ReCaptchaNoCaptcha';
-$wgReCaptchaSiteKey = '6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2';
-$wgReCaptchaSecretKey = '6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk';
+// $wgReCaptchaSiteKey = '6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2';
+// $wgReCaptchaSecretKey = '6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk';
+
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY', "6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2");
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET', "6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk");
 
 $wgCaptchaTriggers['createaccount'] = true;
