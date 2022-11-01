@@ -40,6 +40,10 @@ spec:
                   key: adminPassword
             - name: WG_SERVER
               value: $WG_SERVER
+            - name: GCAPTCHA_KEY
+              value: $MAIN_GKEY
+            - name: GCAPTCHA_SECRET
+              value: $MAIN_GSECRET
       imagePullSecrets:
         - name: $REGISTRY
 ---

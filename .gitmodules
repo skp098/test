@@ -26,3 +26,19 @@
 	path = extensions/Cargo
 	url = ../../objective-earth/extensions/Cargo.git
 	branch = main
+[submodule "extensions/ParserFunctions"]
+	path = extensions/ParserFunctions
+	url = ../../objective-earth/extensions/ParserFunctions.git
+	branch = main
+[submodule "extensions/WikiEditor"]
+	path = extensions/WikiEditor
+	url = ../../objective-earth/extensions//WikiEditor.git
+	branch = main
+[submodule "extensions/ConfirmEdit"]
+	path = extensions/ConfirmEdit
+	url = ../../objective-earth/extensions/ConfirmEdit.git
+	branch = main
+[submodule "extensions/YouTube"]
+	path = extensions/YouTube
+	url = ../../objective-earth/extensions/YouTube.git
+	branch = main
