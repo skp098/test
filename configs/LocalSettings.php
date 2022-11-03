@@ -199,3 +199,6 @@ $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY', "6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_
 $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET', "6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk");
 
 $wgCaptchaTriggers['createaccount'] = true;
+
+echo "Site Key: ".$wgReCaptchaSiteKey;
+echo "Site Secret: ".$wgReCaptchaSiteKey;
