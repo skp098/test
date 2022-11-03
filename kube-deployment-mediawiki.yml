@@ -32,7 +32,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysqlauth
-                  key: rootPassword
+                  key: rootPasswordkube-deployment-mediawiki.yml
             - name: MEDIAWIKI_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:

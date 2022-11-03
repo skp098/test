@@ -138,6 +138,8 @@ build:
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER"'|'
       -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
+      -e 's|$MAIN_GKEY|'"$DEVELOP_GKEY"'|'
+      -e 's|$MAIN_GSECRET|'"$DEVELOP_GSECRET"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -164,6 +166,8 @@ deploy-staging:
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
     URL: $HOST_STAGING
+    MAIN_GKEY: $DEVELOP_GKEY
+    MAIN_GSECRET: $DEVELOP_GSECRET
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
