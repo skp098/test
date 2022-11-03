@@ -18,11 +18,11 @@ variables:
   MEDIAWIKI_DB_USER: root
   MEDIAWIKI_DB_NAME: oearth
 
-  MAIN_GKEY: 6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2
-  MAIN_GSECRET: 6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk
+  GKEY_PROD: 6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2
+  GSECRET_PROD: 6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk
 
-  DEVELOP_GKEY: 6Le06ckiAAAAAJJ8pic2S5hPtqvpx8BhC6xSq17x
-  DEVELOP_GSECRET: 6Le06ckiAAAAAAgD4358sqkXE3C1V1r7FtY_1lW-
+  GKEY_DEV: 6Le06ckiAAAAAJJ8pic2S5hPtqvpx8BhC6xSq17x
+  GSECRET_DEV: 6Le06ckiAAAAAAgD4358sqkXE3C1V1r7FtY_1lW-
 
   HOST_TEST: $CI_MERGE_REQUEST_ID_STR.oe-test.smarter.codes
   HOST_STAGING: oe-staging.smarter.codes
@@ -45,8 +45,6 @@ setup-staging:
   stage: .pre
   script:
     - sed -i 's|= main|= develop|g' .gitmodules
-    - sed -i 's/MAIN_GKEY/DEVELOP_GKEY/g' kube-deployment-mediawiki.yml
-    - sed -i 's/MAIN_GSECRET/DEVELOP_GSECRET/g' kube-deployment-mediawiki.yml
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
     - tar -zcvf extensions.tar.gz extensions
@@ -136,10 +134,8 @@ build:
       -e 's|$MEDIAWIKI_DB_HOST|'"$MEDIAWIKI_DB_HOST"'|'
       -e 's|$MEDIAWIKI_DB_USER|'"$MEDIAWIKI_DB_USER"'|'
       -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
-      -e 's|$MAIN_GKEY|'"$MAIN_GKEY"'|'
-      -e 's|$MAIN_GSECRET|'"$MAIN_GSECRET"'|'
-      -e 's|$DEVELOP_GKEY|'"$DEVELOP_GKEY"'|'
-      -e 's|$DEVELOP_GSECRET|'"$DEVELOP_GSECRET"'|'
+      -e 's|$GKEY|'"$GKEY"'|'
+      -e 's|$GSECRET|'"$GSECRET"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -166,6 +162,8 @@ deploy-staging:
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
     URL: $HOST_STAGING
+    GKEY: $GKEY_DEV
+    GSECRET: $GSECRET_DEV
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -181,6 +179,8 @@ deploy-prod:
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
     URL: $HOST_PROD
+    GKEY: $GKEY_PROD
+    GSECRET: $GSECRET_PROD
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD
