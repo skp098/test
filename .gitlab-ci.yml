@@ -45,6 +45,8 @@ setup-staging:
   stage: .pre
   script:
     - sed -i 's|= main|= develop|g' .gitmodules
+    - sed -i 's/MAIN_GKEY/DEVELOP_GKEY/g' kube-deployment-mediawiki.yml
+    - sed -i 's/MAIN_GSECRET/DEVELOP_GSECRET/g' kube-deployment-mediawiki.yml
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
     - tar -zcvf extensions.tar.gz extensions
@@ -136,6 +138,8 @@ build:
       -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
       -e 's|$MAIN_GKEY|'"$MAIN_GKEY"'|'
       -e 's|$MAIN_GSECRET|'"$MAIN_GSECRET"'|'
+      -e 's|$DEVELOP_GKEY|'"$DEVELOP_GKEY"'|'
+      -e 's|$DEVELOP_GSECRET|'"$DEVELOP_GSECRET"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -162,8 +166,6 @@ deploy-staging:
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
     URL: $HOST_STAGING
-    MAIN_GKEY: $DEVELOP_GKEY
-    MAIN_GSECRET: $DEVELOP_GSECRET
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -179,8 +181,6 @@ deploy-prod:
     NAMESPACE: $CI_COMMIT_BRANCH
     INSTANCES: 1
     URL: $HOST_PROD
-    MAIN_GKEY: $MAIN_GKEY
-    MAIN_GSECRET: $MAIN_GSECRET
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD
