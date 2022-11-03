@@ -45,8 +45,6 @@ setup-staging:
   stage: .pre
   script:
     - sed -i 's|= main|= develop|g' .gitmodules
-    - sed -i 's/MAIN_GKEY/DEVELOP_GKEY/g' kube-deployment-mediawiki.yml
-    - sed -i 's/MAIN_GSECRET/DEVELOP_GSECRET/g' kube-deployment-mediawiki.yml
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
     - tar -zcvf extensions.tar.gz extensions
