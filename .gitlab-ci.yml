@@ -114,6 +114,12 @@ build:
       -e 's|$INSTANCES|'"$INSTANCES"'|'
       kube-deployment-mysql.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mysql.yml
+    - echo REGISTRY_USER $CI_REGISTRY_USER
+    - echo REGISTRY_PASSWORD $CI_REGISTRY_PASSWORD
+    - echo Registry $CI_REGISTRY
+    - echo username $CI_DEPLOY_USER
+    - echo password $CI_DEPLOY_PASSWORD
+    - echo email $GITLAB_USER_EMAIL
     - >-
       kubectl create secret
       docker-registry $REGISTRY
