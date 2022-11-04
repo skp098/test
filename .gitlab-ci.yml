@@ -137,6 +137,7 @@ build:
       -e 's|$MEDIAWIKI_DB_NAME|'"$MEDIAWIKI_DB_NAME"'|'
       -e 's|$GKEY|'"$GKEY"'|'
       -e 's|$GSECRET|'"$GSECRET"'|'
+      -e 's|$GPLACE_API_KEY|'"$GPLACE_API_KEY"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -165,6 +166,7 @@ deploy-staging:
     URL: $HOST_STAGING
     GKEY: $GKEY_DEV
     GSECRET: $GSECRET_DEV
+    GPLACE_API_KEY: $GPLACE_API_KEY
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -182,6 +184,7 @@ deploy-prod:
     URL: $HOST_PROD
     GKEY: $GKEY_PROD
     GSECRET: $GSECRET_PROD
+    GPLACE_API_KEY: $GPLACE_API_KEY
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD

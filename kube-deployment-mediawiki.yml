@@ -44,6 +44,8 @@ spec:
               value: $GKEY
             - name: GCAPTCHA_SECRET
               value: $GSECRET
+            - name: GPLACE_API_KEY
+              value: $GPLACE_API_KEY
       imagePullSecrets:
         - name: $REGISTRY
 ---
