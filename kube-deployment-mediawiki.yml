@@ -41,9 +41,11 @@ spec:
             - name: WG_SERVER
               value: $WG_SERVER
             - name: GCAPTCHA_KEY
-              value: $MAIN_GKEY
+              value: $GKEY
             - name: GCAPTCHA_SECRET
-              value: $MAIN_GSECRET
+              value: $GSECRET
+            - name: GPLACE_API_KEY
+              value: $GPLACE_API_KEY
       imagePullSecrets:
         - name: $REGISTRY
 ---
