@@ -193,8 +193,8 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
 $wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY', "6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2");
-$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET', "6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk");
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 $wgCaptchaTriggers['createaccount'] = true;
 $wgCaptchaTriggers['edit']          = false;
