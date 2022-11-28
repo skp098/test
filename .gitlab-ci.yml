@@ -132,6 +132,9 @@ build:
       -e 's|$GKEY|'"$GKEY"'|'
       -e 's|$GSECRET|'"$GSECRET"'|'
       -e 's|$GPLACE_API_KEY|'"$GPLACE_API_KEY"'|'
+      -e 's|$SMTP_UN|'"$SMTP_UN"'|'
+      -e 's|$SMTP_PW|'"$SMTP_PW"'|'
+      -e 's|$P_SENDER|'"$P_SENDER"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -161,6 +164,9 @@ deploy-staging:
     GKEY: $GKEY_DEV
     GSECRET: $GSECRET_DEV
     GPLACE_API_KEY: $GPLACE_API_KEY
+    SMTP_UN: $SMTP_UN_DEV
+    SMTP_PW: $SMTP_PW_DEV
+    P_SENDER: $P_SENDER_DEV
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -179,6 +185,9 @@ deploy-prod:
     GKEY: $GKEY_PROD
     GSECRET: $GSECRET_PROD
     GPLACE_API_KEY: $GPLACE_API_KEY
+    SMTP_UN: $SMTP_UN_PROD
+    SMTP_PW: $SMTP_PW_PROD
+    P_SENDER: $P_SENDER_PROD
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD

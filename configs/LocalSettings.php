@@ -53,8 +53,8 @@ $wgLogos = [
 $wgEnableEmail = true;
 $wgEnableUserEmail = true; # UPO
 
-$wgEmergencyContact = "apache@🌻.invalid";
-$wgPasswordSender = "apache@🌻.invalid";
+$wgEmergencyContact = "";
+$wgPasswordSender = loadenv('P_SENDER');
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
@@ -207,3 +207,14 @@ $wgCachePages = false;
 
 // giveing users permisstion to move/rename pages
 $wgGroupPermissions['user']['suppressredirect'] = true;
+
+
+// email settings
+
+$wgSMTP = [
+    'host'=> "email-smtp.ap-south-1.amazonaws.com",
+    'port'     => 587,
+    'auth'     => true,
+    'username' => loadenv('SMTP_UN'),
+    'password' => loadenv('SMTP_PW')
+];
