@@ -6,6 +6,8 @@ Everyone or anyone can contribute here. We welcome any type of contribution, not
 
 ## Getting Started
 
+
+
 To get an overview of the project, read the [README](https://github.com/Objective-Earth/product-design). Here are few links to help you getting started!
 
 - [Glossary](https://www.notion.so/smartercodes/Glossary-8116fb4bdb1742778c23f69d00852f07)
