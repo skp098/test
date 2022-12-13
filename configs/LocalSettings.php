@@ -166,6 +166,8 @@ $wgScribuntoDefaultEngine = 'luastandalone';
 $wgGroupPermissions['user']['editinterface'] = true;
 $wgGroupPermissions['user']['editsitecss'] = true;
 
+$wgGroupPermissions['user']['delete'] = true;
+
 // Define constants for my additional namespaces.
 define("NS_WELCOME", 5000); // This MUST be even.
 define("NS_WELCOME_TALK", 5001); // This MUST be the following odd integer.
@@ -208,6 +210,7 @@ $wgCachePages = false;
 // giveing users permisstion to move/rename pages
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
+$wgMaxUploadSize = 10000000;
 
 // email settings
 
