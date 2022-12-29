@@ -27,9 +27,9 @@ spec:
       labels:
         app: $APP
     spec:
-      securityContext:
-            fsGroup: 2000 
-            runAsUser: 2000
+      # securityContext:
+      #       fsGroup: 2000 
+      #       runAsUser: 2000
       containers:
         - name: container-$APP
           image: $IMAGE_TAG

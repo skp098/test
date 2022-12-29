@@ -139,21 +139,21 @@ build:
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
 
-deploy-test:
-  variables:
-    CONTEXT: $CONTEXT_DEV
-    NAMESPACE: $CI_MERGE_REQUEST_ID_STR
-    INSTANCES: 1
-    URL: $HOST_TEST
-  environment:
-    name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID_STR
-    url: https://$HOST_TEST
-    on_stop: teardown-mr
-  extends:
-    - .deploy-conf
-  resource_group: deploy-test
-  only:
-    - merge_requests
+# deploy-test:
+#   variables:
+#     CONTEXT: $CONTEXT_DEV
+#     NAMESPACE: $CI_MERGE_REQUEST_ID_STR
+#     INSTANCES: 1
+#     URL: $HOST_TEST
+#   environment:
+#     name: testing/$CI_PROJECT_NAME-$CI_MERGE_REQUEST_ID_STR
+#     url: https://$HOST_TEST
+#     on_stop: teardown-mr
+#   extends:
+#     - .deploy-conf
+#   resource_group: deploy-test
+#   only:
+#     - merge_requests
 
 deploy-staging:
   variables:
