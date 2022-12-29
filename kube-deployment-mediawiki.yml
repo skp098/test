@@ -34,6 +34,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: $PORT
+          volumeMounts:
+            - name: oe-test-volume
+              mountPath: /var/www/html/images
           env:
             - name: MEDIAWIKI_DB_TYPE
               value: $MEDIAWIKI_DB_TYPE
@@ -62,10 +65,7 @@ spec:
             - name: GPLACE_API_KEY
               value: $GPLACE_API_KEY
       imagePullSecrets:
-        - name: $REGISTRY
-          volumeMounts:
-            - name: oe-test-volume
-              mountPath: /var/www/html/images         
+        - name: $REGISTRY      
       volumes:
         - name: oe-test-volume
           persistentVolumeClaim:
