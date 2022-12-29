@@ -28,8 +28,8 @@ spec:
         app: $APP
     spec:
       securityContext:
-            fsGroup: 1000 
-            runAsUser: 1000
+            fsGroup: 2000 
+            runAsUser: 2000
       containers:
         - name: container-$APP
           image: $IMAGE_TAG
