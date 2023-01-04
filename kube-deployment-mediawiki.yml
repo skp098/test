@@ -38,7 +38,7 @@ spec:
           ports:
             - containerPort: $PORT
           volumeMounts:
-            - name: oe-test-volume
+            - name: oe-test-volume-$APP
               mountPath: /var/www/html/images
           env:
             - name: MEDIAWIKI_DB_TYPE
@@ -70,7 +70,7 @@ spec:
       imagePullSecrets:
         - name: $REGISTRY      
       volumes:
-        - name: oe-test-volume
+        - name: oe-test-volume-$APP
           persistentVolumeClaim:
               claimName: pvc-$APP
 ---
