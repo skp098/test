@@ -210,6 +210,9 @@ $wgCachePages = false;
 // giveing users permisstion to move/rename pages
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
+//stopping registration on oe
+$wgGroupPermissions['*']['createaccount'] = false;
+
 $wgMaxUploadSize = 10000000;
 
 // email settings
