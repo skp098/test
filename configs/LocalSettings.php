@@ -188,7 +188,7 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 
 
 // Google Place API Key
-$gPlaceApiKey = loadenv('GPLACE_API_KEY');
+$gPlaceApiKey = loadenv('GPLACE_API_KEY'); 
 
 
 // Adding capthca system
