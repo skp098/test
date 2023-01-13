@@ -166,6 +166,8 @@ $wgScribuntoDefaultEngine = 'luastandalone';
 $wgGroupPermissions['user']['editinterface'] = true;
 $wgGroupPermissions['user']['editsitecss'] = true;
 
+$wgGroupPermissions['user']['delete'] = true;
+
 // Define constants for my additional namespaces.
 define("NS_WELCOME", 5000); // This MUST be even.
 define("NS_WELCOME_TALK", 5001); // This MUST be the following odd integer.
@@ -186,15 +188,15 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 
 
 // Google Place API Key
-$gPlaceApiKey = loadenv('GPLACE_API_KEY');
+$gPlaceApiKey = loadenv('GPLACE_API_KEY'); 
 
 
 // Adding capthca system
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
 $wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY', "6LePJ8kiAAAAAFE_q8ras0ljCFxpwwUy_l4R84Z2");
-$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET', "6LePJ8kiAAAAANe82zeJgpRNEO6bW1epc4mLCzwk");
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 $wgCaptchaTriggers['createaccount'] = true;
 $wgCaptchaTriggers['edit']          = false;
@@ -208,6 +210,10 @@ $wgCachePages = false;
 // giveing users permisstion to move/rename pages
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
+//stopping registration on oe
+$wgGroupPermissions['*']['createaccount'] = false;
+
+$wgMaxUploadSize = 10000000;
 
 // email settings
 
