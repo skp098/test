@@ -191,12 +191,21 @@ $wgCargoAllowedSQLFunctions[] = 'LENGTH';
 $gPlaceApiKey = loadenv('GPLACE_API_KEY'); 
 
 
-// Adding capthca system
-wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-$wgCaptchaClass = 'ReCaptchaNoCaptcha';
+// Adding google captcha system
 
-$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
+
+// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
+$wgCaptchaClass = 'FancyCaptcha';
+$wgCaptchaDirectory = "./captcha-images";
+$wgCaptchaSecret = "M3l1czZxZ3Vy";
+
+
+//enabling and disabling captcha on following actions
 
 $wgCaptchaTriggers['createaccount'] = true;
 $wgCaptchaTriggers['edit']          = false;
