@@ -204,7 +204,6 @@ $wgCaptchaClass = 'FancyCaptcha';
 $wgCaptchaDirectory = "./captcha-images";
 $wgCaptchaSecret = "M3l1czZxZ3Vy";
 
-
 //enabling and disabling captcha on following actions
 
 $wgCaptchaTriggers['createaccount'] = true;
