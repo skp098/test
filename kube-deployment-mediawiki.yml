@@ -40,6 +40,7 @@ spec:
           volumeMounts:
             - name: oe-media-volume-$APP
               mountPath: /var/www/html/images
+              mountPath: /var/www/html/captcha-images
           env:
             - name: MEDIAWIKI_DB_TYPE
               value: $MEDIAWIKI_DB_TYPE

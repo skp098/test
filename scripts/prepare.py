@@ -1,3 +1,4 @@
+import os
 from os import chdir, getenv, system
 from time import sleep
 
@@ -31,6 +32,9 @@ add_int_admin = f'php maintenance/createAndPromote.php InternalAdmin {admin} --b
 update_command = f'php maintenance/update.php'
 
 chdir(html_path)
+
+if not os.path.exists('captcha-images'):
+    os.makedirs('captcha-images')
 
 if database not in dbs:
     system("mv LocalSettings.php LocalSettings.php.bk || :")
