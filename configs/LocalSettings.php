@@ -243,3 +243,4 @@ wfLoadExtension( 'StopForumSpam' );
 
 
 $wgEnableDnsBlacklist = true;
+$wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );
