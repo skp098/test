@@ -1,7 +1,10 @@
 #!/bin/bash
 
-apt update && apt install python3-pip -y
-pip install mysql-connector-python requests
+cd /var/www/html
+
+cp composer.local.json-sample composer.local.json
+rm -f composer.lock
+composer install --no-dev
 
 cd /scripts
 
