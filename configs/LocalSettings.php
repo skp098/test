@@ -78,7 +78,7 @@ $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 $wgSharedTables[] = "actor";
 
 ## Shared memory settings
-$wgMainCacheType = CACHE_NONE;
+$wgMainCacheType = CACHE_DB;
 $wgMemCachedServers = [];
 
 ## To enable image uploads, make sure the 'images' directory
@@ -240,3 +240,6 @@ $wgSMTP = [
 // adding extension to prevent spam
 
 wfLoadExtension( 'StopForumSpam' );
+
+
+$wgEnableDnsBlacklist = true;
