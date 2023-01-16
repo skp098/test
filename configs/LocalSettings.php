@@ -99,7 +99,7 @@ $wgPingback = true;
 $wgLanguageCode = "en";
 
 # Time zone
-$wgLocaltimezone = "UTC";
+$wgLocaltimezone = "Asia/Kolkata";
 
 ## Set $wgCacheDirectory to a writable directory on the web server
 ## to make your wiki go slightly faster. The directory should not
@@ -219,7 +219,8 @@ $wgCachePages = false;
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
 //stopping registration on oe
-$wgGroupPermissions['*']['createaccount'] = false;
+// $wgGroupPermissions['*']['createaccount'] = false;
+// $wgAPIModules['createaccount'] = 'ApiDisabled';
 
 $wgMaxUploadSize = 10000000;
 
@@ -232,3 +233,7 @@ $wgSMTP = [
     'username' => loadenv('SMTP_UN'),
     'password' => loadenv('SMTP_PW')
 ];
+
+// adding extension to prevent spam
+
+wfLoadExtension( 'StopForumSpam' );
