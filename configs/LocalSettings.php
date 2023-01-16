@@ -254,3 +254,10 @@ wfLoadExtension( 'StopForumSpam' );
 
 $wgEnableDnsBlacklist = true;
 $wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );
+
+
+// Allowing only sysop to edit or create pages
+
+$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['user']['edit'] = false;
+$wgGroupPermissions['sysop']['edit'] = true;
