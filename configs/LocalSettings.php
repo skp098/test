@@ -78,7 +78,7 @@ $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 $wgSharedTables[] = "actor";
 
 ## Shared memory settings
-$wgMainCacheType = CACHE_NONE;
+$wgMainCacheType = CACHE_DB;
 $wgMemCachedServers = [];
 
 ## To enable image uploads, make sure the 'images' directory
@@ -99,7 +99,7 @@ $wgPingback = true;
 $wgLanguageCode = "en";
 
 # Time zone
-$wgLocaltimezone = "UTC";
+$wgLocaltimezone = "Asia/Kolkata";
 
 ## Set $wgCacheDirectory to a writable directory on the web server
 ## to make your wiki go slightly faster. The directory should not
@@ -193,22 +193,25 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 
 // Adding google captcha system
 
-// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+$wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
-wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
-$wgCaptchaClass = 'FancyCaptcha';
-$wgCaptchaDirectory = "./captcha-images";
-$wgCaptchaSecret = "M3l1czZxZ3Vy";
+// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
+// $wgCaptchaClass = 'FancyCaptcha';
+// $wgCaptchaDirectory = "./captcha-images";
+// $wgCaptchaSecret = "M3l1czZxZ3Vy";
 
 //enabling and disabling captcha on following actions
 
 $wgCaptchaTriggers['createaccount'] = true;
-$wgCaptchaTriggers['edit']          = false;
-$wgCaptchaTriggers['addurl']        = false;
+$wgCaptchaTriggers['edit']          = true;
+$wgCaptchaTriggers['create']        = true;
+$wgCaptchaTriggers['createtalk']    = true;
+$wgCaptchaTriggers['addurl']        = true;
+$wgCaptchaTriggers['badlogin']      = true;
 
 // set cache none
 
@@ -219,7 +222,8 @@ $wgCachePages = false;
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
 //stopping registration on oe
-$wgGroupPermissions['*']['createaccount'] = false;
+// $wgGroupPermissions['*']['createaccount'] = false;
+// $wgAPIModules['createaccount'] = 'ApiDisabled';
 
 $wgMaxUploadSize = 10000000;
 
@@ -232,3 +236,21 @@ $wgSMTP = [
     'username' => loadenv('SMTP_UN'),
     'password' => loadenv('SMTP_PW')
 ];
+
+// adding extension to prevent spam
+
+wfLoadExtension( 'AbuseFilter' );
+$wgGroupPermissions['sysop']['abusefilter-modify'] = true;
+$wgGroupPermissions['*']['abusefilter-log-detail'] = true;
+$wgGroupPermissions['*']['abusefilter-view'] = true;
+$wgGroupPermissions['*']['abusefilter-log'] = true;
+$wgGroupPermissions['sysop']['abusefilter-privatedetails'] = true;
+$wgGroupPermissions['sysop']['abusefilter-modify-restricted'] = true;
+$wgGroupPermissions['sysop']['abusefilter-revert'] = true;
+
+
+wfLoadExtension( 'StopForumSpam' );
+
+
+$wgEnableDnsBlacklist = true;
+$wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );

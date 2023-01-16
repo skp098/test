@@ -58,7 +58,7 @@ services:
       - docker_net
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin
     environment:
       PMA_HOST: mysqldb
       PMA_PORT: 3306
