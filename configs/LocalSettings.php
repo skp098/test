@@ -193,11 +193,11 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 
 // Adding google captcha system
 
-wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-$wgCaptchaClass = 'ReCaptchaNoCaptcha';
+// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 // wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
 // $wgCaptchaClass = 'FancyCaptcha';
@@ -206,12 +206,12 @@ $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 //enabling and disabling captcha on following actions
 
-$wgCaptchaTriggers['createaccount'] = true;
-$wgCaptchaTriggers['edit']          = true;
-$wgCaptchaTriggers['create']        = true;
-$wgCaptchaTriggers['createtalk']    = true;
-$wgCaptchaTriggers['addurl']        = true;
-$wgCaptchaTriggers['badlogin']      = true;
+// $wgCaptchaTriggers['createaccount'] = true;
+// $wgCaptchaTriggers['edit']          = true;
+// $wgCaptchaTriggers['create']        = true;
+// $wgCaptchaTriggers['createtalk']    = true;
+// $wgCaptchaTriggers['addurl']        = true;
+// $wgCaptchaTriggers['badlogin']      = true;
 
 // set cache none
 
