@@ -32,7 +32,7 @@
 	branch = main
 [submodule "extensions/WikiEditor"]
 	path = extensions/WikiEditor
-	url = ../../objective-earth/extensions//WikiEditor.git
+	url = ../../objective-earth/extensions/WikiEditor.git
 	branch = main
 [submodule "extensions/ConfirmEdit"]
 	path = extensions/ConfirmEdit
