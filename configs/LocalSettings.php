@@ -222,8 +222,8 @@ $wgCachePages = false;
 $wgGroupPermissions['user']['suppressredirect'] = true;
 
 //stopping registration on oe
-$wgGroupPermissions['*']['createaccount'] = false;
-$wgAPIModules['createaccount'] = 'ApiDisabled';
+// $wgGroupPermissions['*']['createaccount'] = false;
+// $wgAPIModules['createaccount'] = 'ApiDisabled';
 
 $wgMaxUploadSize = 10000000;
 
