@@ -265,3 +265,7 @@ $wgGroupPermissions['bureaucrat']['edit'] = true;
 $wgGroupPermissions['*']['delete'] = false;
 $wgGroupPermissions['user']['delete'] = false;
 $wgGroupPermissions['bureaucrat']['delete'] = true;
+
+$wgGroupPermissions['*']['move'] = false;
+$wgGroupPermissions['user']['move'] = false;
+$wgGroupPermissions['bureaucrat']['move'] = true;
