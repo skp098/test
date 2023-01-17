@@ -269,3 +269,7 @@ $wgGroupPermissions['bureaucrat']['delete'] = true;
 $wgGroupPermissions['*']['move'] = false;
 $wgGroupPermissions['user']['move'] = false;
 $wgGroupPermissions['bureaucrat']['move'] = true;
+
+// Loading extensions to remove spam pages
+wfLoadExtension( 'Nuke' );
+wfLoadExtension( 'SmiteSpam' );
