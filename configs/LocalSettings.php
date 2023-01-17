@@ -272,4 +272,4 @@ $wgGroupPermissions['bureaucrat']['move'] = true;
 
 // Loading extensions to remove spam pages
 wfLoadExtension( 'Nuke' );
-wfLoadExtension( 'SmiteSpam' );
+// wfLoadExtension( 'SmiteSpam' );
