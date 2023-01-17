@@ -193,11 +193,11 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 
 // Adding google captcha system
 
-// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+$wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 // wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
 // $wgCaptchaClass = 'FancyCaptcha';
@@ -265,3 +265,11 @@ $wgGroupPermissions['bureaucrat']['edit'] = true;
 $wgGroupPermissions['*']['delete'] = false;
 $wgGroupPermissions['user']['delete'] = false;
 $wgGroupPermissions['bureaucrat']['delete'] = true;
+
+$wgGroupPermissions['*']['move'] = false;
+$wgGroupPermissions['user']['move'] = false;
+$wgGroupPermissions['bureaucrat']['move'] = true;
+
+// Loading extensions to remove spam pages
+wfLoadExtension( 'Nuke' );
+wfLoadExtension( 'SmiteSpam' );
