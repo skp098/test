@@ -239,21 +239,21 @@ $wgSMTP = [
 
 // adding extension to prevent spam
 
-wfLoadExtension( 'AbuseFilter' );
-$wgGroupPermissions['sysop']['abusefilter-modify'] = true;
-$wgGroupPermissions['*']['abusefilter-log-detail'] = true;
-$wgGroupPermissions['*']['abusefilter-view'] = true;
-$wgGroupPermissions['*']['abusefilter-log'] = true;
-$wgGroupPermissions['sysop']['abusefilter-privatedetails'] = true;
-$wgGroupPermissions['sysop']['abusefilter-modify-restricted'] = true;
-$wgGroupPermissions['sysop']['abusefilter-revert'] = true;
+// wfLoadExtension( 'AbuseFilter' );
+// $wgGroupPermissions['sysop']['abusefilter-modify'] = true;
+// $wgGroupPermissions['*']['abusefilter-log-detail'] = true;
+// $wgGroupPermissions['*']['abusefilter-view'] = true;
+// $wgGroupPermissions['*']['abusefilter-log'] = true;
+// $wgGroupPermissions['sysop']['abusefilter-privatedetails'] = true;
+// $wgGroupPermissions['sysop']['abusefilter-modify-restricted'] = true;
+// $wgGroupPermissions['sysop']['abusefilter-revert'] = true;
 
 
-wfLoadExtension( 'StopForumSpam' );
+// wfLoadExtension( 'StopForumSpam' );
 
 
-$wgEnableDnsBlacklist = true;
-$wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );
+// $wgEnableDnsBlacklist = true;
+// $wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );
 
 
 # Disable anonymous editing and deleting
@@ -269,7 +269,3 @@ $wgGroupPermissions['bureaucrat']['delete'] = true;
 $wgGroupPermissions['*']['move'] = false;
 $wgGroupPermissions['user']['move'] = false;
 $wgGroupPermissions['bureaucrat']['move'] = true;
-
-// Loading extensions to remove spam pages
-wfLoadExtension( 'Nuke' );
-// wfLoadExtension( 'SmiteSpam' );
