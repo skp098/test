@@ -273,12 +273,12 @@ $wgGroupPermissions['bureaucrat']['move'] = true;
 wfLoadExtension( 'capiunto' );
 wfLoadExtension( 'templatestyles' );
 wfLoadExtension( 'categoryTree' );
-wfLoadExtension( 'scribunto' )
+wfLoadExtension( 'scribunto' );
 
-// $wgTOCWidth = 500;
+$wgTOCWidth = 500;
 $wgAllowCopyUploads = true;
 $wgCopyUploadsFromSpecialUpload = true;
-$wgGroupPermissions['user']['upload_by_url'] = true;;
+$wgGroupPermissions['user']['upload_by_url'] = true;
 $wgScribuntoDefaultEngine = 'luastandalone';
 $wgScribuntoEngineConf['luastandalone']['luaPath'] = '/usr/bin/lua5.1';
 $wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt';
