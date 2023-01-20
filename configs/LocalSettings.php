@@ -275,7 +275,7 @@ wfLoadExtension( 'templatestyles' );
 wfLoadExtension( 'categoryTree' );
 wfLoadExtension( 'scribunto' )
 
-$wgTOCWidth = 500;
+// $wgTOCWidth = 500;
 $wgAllowCopyUploads = true;
 $wgCopyUploadsFromSpecialUpload = true;
 $wgGroupPermissions['user']['upload_by_url'] = true;;
