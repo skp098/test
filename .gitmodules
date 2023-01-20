@@ -42,3 +42,15 @@
 	path = extensions/YouTube
 	url = ../../objective-earth/extensions/YouTube.git
 	branch = main
+[submodule "extensions/capiunto"]
+	path = extensions/capiunto
+	url = ../../objective-earth/extensions/capiunto.git
+[submodule "extensions/categorytree"]
+	path = extensions/categorytree
+	url = ../../objective-earth/extensions/categorytree.git
+[submodule "extensions/scribunto"]
+	path = extensions/scribunto
+	url = ../../objective-earth/extensions/scribunto.git
+[submodule "extensions/templatestyles"]
+	path = extensions/templatestyles
+	url = ../../objective-earth/extensions/templatestyles.git
