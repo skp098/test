@@ -272,7 +272,7 @@ $wgGroupPermissions['bureaucrat']['move'] = true;
 
 wfLoadExtension( 'capiunto' );
 wfLoadExtension( 'templatestyles' );
-wfLoadExtension( 'categoryTree' );
+wfLoadExtension( 'categorytree' );
 wfLoadExtension( 'scribunto' );
 
 $wgTOCWidth = 500;
