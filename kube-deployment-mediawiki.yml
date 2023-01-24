@@ -87,42 +87,6 @@ spec:
       protocol: TCP
 ---
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: apache-deployment
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: apache-$APP
-  template:
-    metadata:
-      labels:
-        app: apache-$APP
-    spec:
-      containers:
-        - name: apache-$APP
-          image: httpd
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-      imagePullSecrets:
-        - name: $REGISTRY      
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: apache-$APP
-spec:
-  type: ClusterIP
-  selector:
-    app: apache-$APP
-  ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -146,13 +110,6 @@ spec:
                 name: entrypoint-$APP
                 port:
                   number: $PORT
-          - path: /test-ingress
-            pathType: Exact
-            backend:
-              service:
-                name: apache-$APP
-                port:
-                  number: 80
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
