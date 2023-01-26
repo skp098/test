@@ -193,11 +193,11 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 
 // Adding google captcha system
 
-// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
+wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+$wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 // wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
 // $wgCaptchaClass = 'FancyCaptcha';
@@ -237,25 +237,6 @@ $wgSMTP = [
     'password' => loadenv('SMTP_PW')
 ];
 
-// adding extension to prevent spam
-
-wfLoadExtension( 'AbuseFilter' );
-$wgGroupPermissions['sysop']['abusefilter-modify'] = true;
-$wgGroupPermissions['*']['abusefilter-log-detail'] = true;
-$wgGroupPermissions['*']['abusefilter-view'] = true;
-$wgGroupPermissions['*']['abusefilter-log'] = true;
-$wgGroupPermissions['sysop']['abusefilter-privatedetails'] = true;
-$wgGroupPermissions['sysop']['abusefilter-modify-restricted'] = true;
-$wgGroupPermissions['sysop']['abusefilter-revert'] = true;
-
-
-wfLoadExtension( 'StopForumSpam' );
-
-
-$wgEnableDnsBlacklist = true;
-$wgDnsBlacklistUrls = array( 'xbl.spamhaus.org', 'dnsbl.tornevall.org', 'opm.tornevall.org' );
-
-
 # Disable anonymous editing and deleting
 
 $wgGroupPermissions['*']['edit'] = false;
@@ -265,3 +246,20 @@ $wgGroupPermissions['bureaucrat']['edit'] = true;
 $wgGroupPermissions['*']['delete'] = false;
 $wgGroupPermissions['user']['delete'] = false;
 $wgGroupPermissions['bureaucrat']['delete'] = true;
+
+$wgGroupPermissions['*']['move'] = false;
+$wgGroupPermissions['user']['move'] = false;
+$wgGroupPermissions['bureaucrat']['move'] = true;
+
+wfLoadExtension( 'capiunto' );
+wfLoadExtension( 'templatestyles' );
+wfLoadExtension( 'categorytree' );
+wfLoadExtension( 'scribunto' );
+
+$wgTOCWidth = 500;
+$wgAllowCopyUploads = true;
+$wgCopyUploadsFromSpecialUpload = true;
+$wgGroupPermissions['user']['upload_by_url'] = true;
+$wgScribuntoDefaultEngine = 'luastandalone';
+$wgScribuntoEngineConf['luastandalone']['luaPath'] = '/usr/bin/lua5.1';
+$wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt';
