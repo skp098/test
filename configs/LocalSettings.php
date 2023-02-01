@@ -266,25 +266,29 @@ $wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt'
 
 //settings to allow cors
 
-$allowedOrigins = array(    
-  "https://home.oe-staging.smarter.codes",
-  "https://home.objective.earth"
-); 
+if(isset($_SERVER['HTTP_ORIGIN'])){
 
-$origin = $_SERVER['HTTP_ORIGIN'];
-
-if (in_array($origin, $allowedOrigins)) {
-  header("Access-Control-Allow-Origin: $origin");
-  header("Access-Control-Allow-Methods: GET, OPTIONS");
-  header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
-}
-
-$pattern = "/^https:\/\/[^.]+\.oe-test\.smarter\.codes$/";
-
-if (preg_match($pattern, $origin)) {
-  header("Access-Control-Allow-Origin: $origin");
-  header("Access-Control-Allow-Methods: GET, OPTIONS");
-  header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
+  $allowedOrigins = array(    
+    "https://home.oe-staging.smarter.codes",
+    "https://home.objective.earth"
+  ); 
+  
+  $origin = $_SERVER['HTTP_ORIGIN'];
+  
+  if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
+  }
+  
+  $pattern = "/^https:\/\/[^.]+\.oe-test\.smarter\.codes$/";
+  
+  if (preg_match($pattern, $origin)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
+  }
+  
 }
 
 
