@@ -9,7 +9,7 @@ variables:
   IMAGE_TAG_LATEST: $CI_REGISTRY_IMAGE:latest
   REGISTRY: gitlab-$CI_PROJECT_NAME-registry
 
-  AGENT: objective-earth/objective-earth-wiki
+  AGENT: smarter-codes/objective-earth/objective-earth-wiki
   CONTEXT_DEV: $AGENT:dev-agent
   CONTEXT_PROD: $AGENT:prod-agent
 
