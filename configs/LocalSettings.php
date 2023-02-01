@@ -290,5 +290,3 @@ if(isset($_SERVER['HTTP_ORIGIN'])){
   }
   
 }
-
-
