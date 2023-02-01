@@ -277,6 +277,6 @@ if (strpos($_SERVER['REQUEST_URI'], $wgServer . "/api.php") === 0) {
   if (in_array($origin, $allowedOrigins)) {
     header("Access-Control-Allow-Origin: $origin");
   }
-  header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
   header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 }
