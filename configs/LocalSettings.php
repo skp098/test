@@ -268,15 +268,23 @@ $wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt'
 
 $wgServer = 'http://' . $_SERVER['HTTP_HOST'];
 if (strpos($_SERVER['REQUEST_URI'], $wgServer . "/api.php") === 0) {
-  $allowedOrigins = array(
-    "https://mr-201430855.oe-test.smarter.codes/",
+  $allowedOrigins = array(    
     "https://home.oe-staging.smarter.codes",
     "https://home.objective.earth"
-  );
+  ); 
+
   $origin = $_SERVER['HTTP_ORIGIN'];
+
   if (in_array($origin, $allowedOrigins)) {
     header("Access-Control-Allow-Origin: $origin");
   }
+
+  $pattern = "/^https:\/\/[^.]+\.oe-test\.smarter\.codes$/";
+  
+  if (preg_match($pattern, $origin)) {
+    header("Access-Control-Allow-Origin: $origin");
+  }
+
   header("Access-Control-Allow-Methods: GET, OPTIONS");
   header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
 }
