@@ -263,3 +263,20 @@ $wgGroupPermissions['user']['upload_by_url'] = true;
 $wgScribuntoDefaultEngine = 'luastandalone';
 $wgScribuntoEngineConf['luastandalone']['luaPath'] = '/usr/bin/lua5.1';
 $wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt';
+
+//settings to allow cors
+
+$wgServer = 'http://' . $_SERVER['HTTP_HOST'];
+if (strpos($_SERVER['REQUEST_URI'], $wgServer . "/api.php") === 0) {
+  $allowedOrigins = array(
+    "https://mr-201430855.oe-test.smarter.codes/",
+    "https://home.oe-staging.smarter.codes",
+    "https://home.objective.earth"
+  );
+  $origin = $_SERVER['HTTP_ORIGIN'];
+  if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+  }
+  header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+  header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
+}
