@@ -135,6 +135,9 @@ build:
       -e 's|$SMTP_UN|'"$SMTP_UN"'|'
       -e 's|$SMTP_PW|'"$SMTP_PW"'|'
       -e 's|$P_SENDER|'"$P_SENDER"'|'
+      -e 's|$DONATION_WEB|'"$DONATION_WEB"'|'
+      -e 's|$OAUTH_CLIENT_ID|'"$OAUTH_CLIENT_ID"'|'
+      -e 's|$OAUTH_CLIENT_SECRET|'"$OAUTH_CLIENT_SECRET"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -167,6 +170,9 @@ deploy-staging:
     SMTP_UN: $SMTP_UN_DEV
     SMTP_PW: $SMTP_PW_DEV
     P_SENDER: $P_SENDER_DEV
+    DONATION_WEB: $DONATION_WEB_DEV
+    OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID_DEV
+    OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET_DEV
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -188,6 +194,9 @@ deploy-prod:
     SMTP_UN: $SMTP_UN_PROD
     SMTP_PW: $SMTP_PW_PROD
     P_SENDER: $P_SENDER_PROD
+    DONATION_WEB: $DONATION_WEB_PROD
+    OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID_PROD
+    OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET_PROD
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD

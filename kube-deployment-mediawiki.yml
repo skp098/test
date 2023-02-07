@@ -66,6 +66,18 @@ spec:
               value: $GSECRET
             - name: GPLACE_API_KEY
               value: $GPLACE_API_KEY
+            - name: SMTP_UN
+              value: $SMTP_UN
+            - name: SMTP_PW
+              value: $SMTP_PW
+            - name: P_SENDER
+              value: $P_SENDER
+            - name: DONATION_WEB
+              value: $DONATION_WEB
+            - name: OAUTH_CLIENT_ID
+              value: $OAUTH_CLIENT_ID
+            - name: OAUTH_CLIENT_SECRET
+              value: $OAUTH_CLIENT_SECRET
       imagePullSecrets:
         - name: $REGISTRY      
       volumes:
