@@ -315,5 +315,5 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 // $wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
 
 //making oe mobile friendly
-wfLoadExtension( 'MobileFrontend' );
-$wgDefaultMobileSkin = 'vector-2022';
+// wfLoadExtension( 'MobileFrontend' );
+// $wgDefaultMobileSkin = 'vector-2022';
