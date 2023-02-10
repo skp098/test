@@ -293,26 +293,26 @@ if(isset($_SERVER['HTTP_ORIGIN'])){
 
 //setting up oauth 
 
-// wfLoadExtension( 'MW-OAuth2Client' );
+wfLoadExtension( 'MW-OAuth2Client' );
 
-// $client_id = loadenv('OAUTH_CLIENT_ID');
-// $client_secret = loadenv('OAUTH_CLIENT_SECRET');
+$client_id = loadenv('OAUTH_CLIENT_ID');
+$client_secret = loadenv('OAUTH_CLIENT_SECRET');
 
-// $donation_web_url = loadenv('DONATION_WEB');
+$donation_web_url = loadenv('DONATION_WEB');
 
-// $wgOAuth2Client['client']['id']     = $client_id; // The client ID assigned to you by the provider
-// $wgOAuth2Client['client']['secret'] = $client_secret; // The client secret assigned to you by the provider
+$wgOAuth2Client['client']['id']     = $client_id; // The client ID assigned to you by the provider
+$wgOAuth2Client['client']['secret'] = $client_secret; // The client secret assigned to you by the provider
 
-// $wgOAuth2Client['configuration']['authorize_endpoint']     = "$donation_web_url/wp-json/moserver/authorize"; // Authorization URL
-// $wgOAuth2Client['configuration']['access_token_endpoint']  = "$donation_web_url/wp-json/moserver/token"; // Token URL
-// $wgOAuth2Client['configuration']['api_endpoint']           = "$donation_web_url/wp-json/moserver/resource"; // URL to fetch user JSON
-// $wgOAuth2Client['configuration']['redirect_uri']           = "$wgServer/index.php/Special:OAuth2Client/callback"; // URL for OAuth2 server to redirect to
+$wgOAuth2Client['configuration']['authorize_endpoint']     = "$donation_web_url/wp-json/moserver/authorize"; // Authorization URL
+$wgOAuth2Client['configuration']['access_token_endpoint']  = "$donation_web_url/wp-json/moserver/token"; // Token URL
+$wgOAuth2Client['configuration']['api_endpoint']           = "$donation_web_url/wp-json/moserver/resource"; // URL to fetch user JSON
+$wgOAuth2Client['configuration']['redirect_uri']           = "$wgServer/index.php/Special:OAuth2Client/callback"; // URL for OAuth2 server to redirect to
 
-// $wgOAuth2Client['configuration']['username'] = 'username'; // JSON path to username
-// $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
+$wgOAuth2Client['configuration']['username'] = 'username'; // JSON path to username
+$wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 
-// $wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
-// $wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
+$wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
+$wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
 
 //making oe mobile friendly
 // wfLoadExtension( 'MobileFrontend' );
