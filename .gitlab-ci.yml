@@ -201,6 +201,7 @@ deploy-prod:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD
   before_script:
+    - git config --global --add safe.directory '*'
     - git submodule sync --recursive
     - git submodule update --init --recursive --remote
   extends:
