@@ -202,6 +202,7 @@ deploy-prod:
     url: https://$HOST_PROD
   before_script:
     - chown -R $USER:$USER .
+    - git config --global --add safe.directory /builds/smarter-codes/objective-earth/objective-earth-wiki
     - git submodule sync --recursive
     - git submodule update --init --recursive --remote
   extends:
