@@ -19,4 +19,5 @@ COPY ./configs/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 COPY ./media/logo.png /var/www/html/logo/logo.png
 COPY ./configs/LocalSettings.php /var/www/html/LocalSettings.php
 RUN apt-get update && apt install lua5.1
+RUN chmod 755 extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
 COPY ./scripts /scripts

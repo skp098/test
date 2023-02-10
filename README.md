@@ -52,4 +52,9 @@ Open bug reports and feature requests (not questions) on [GitLab](https://gitlab
 
 ## License
 
+<<<<<<< HEAD
 This project is licensed under the terms of the GPL v3 license. See [LICENSE](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/LICENSE) for additional details.
+ 
+=======
+This project is licensed under the terms of the GPL v3 license. See [LICENSE](https://gitlab.com/objective-earth/objective-earth-wiki/-/blob/master/LICENSE) for additional details.
+>>>>>>> develop
