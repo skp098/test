@@ -1,60 +1,60 @@
 [submodule "extensions/PollResults"]
 	path = extensions/PollResults
-	url = ../../smarter-codes/objective-earth/extensions/PollResults.git
+	url = ../../objective-earth/extensions/PollResults.git
 	branch = main
 [submodule "extensions/EmbeddedSearch"]
 	path = extensions/EmbeddedSearch
-	url = ../../smarter-codes/objective-earth/extensions/EmbeddedSearch.git
+	url = ../../objective-earth/extensions/EmbeddedSearch.git
 	branch = main
 [submodule "extensions/mediawiki-extensions-PageForms"]
 	path = extensions/mediawiki-extensions-PageForms
-	url = ../../smarter-codes/objective-earth/extensions/mediawiki-extensions-PageForms.git
+	url = ../../objective-earth/extensions/mediawiki-extensions-PageForms.git
 	branch = main
 [submodule "extensions/mediawiki-extensions-AJAXPoll"]
 	path = extensions/mediawiki-extensions-AJAXPoll
-	url = ../../smarter-codes/objective-earth/extensions/mediawiki-extensions-AJAXPoll.git
+	url = ../../objective-earth/extensions/mediawiki-extensions-AJAXPoll.git
 	branch = main
 [submodule "extensions/upvote-extension"]
 	path = extensions/Upvote
-	url = ../../smarter-codes/objective-earth/extensions/upvote-extension.git
+	url = ../../objective-earth/extensions/upvote-extension.git
 	branch = main
 [submodule "extensions/comment-extension"]
 	path = extensions/comment-extension
-	url = ../../smarter-codes/objective-earth/extensions/comment-extension.git
+	url = ../../objective-earth/extensions/comment-extension.git
 	branch = main
 [submodule "extensions/Cargo"]
 	path = extensions/Cargo
-	url = ../../smarter-codes/objective-earth/extensions/Cargo.git
+	url = ../../objective-earth/extensions/Cargo.git
 	branch = main
 [submodule "extensions/ParserFunctions"]
 	path = extensions/ParserFunctions
-	url = ../../smarter-codes/objective-earth/extensions/ParserFunctions.git
+	url = ../../objective-earth/extensions/ParserFunctions.git
 	branch = main
 [submodule "extensions/WikiEditor"]
 	path = extensions/WikiEditor
-	url = ../../smarter-codes/objective-earth/extensions/WikiEditor.git
+	url = ../../objective-earth/extensions/WikiEditor.git
 	branch = main
 [submodule "extensions/ConfirmEdit"]
 	path = extensions/ConfirmEdit
-	url = ../../smarter-codes/objective-earth/extensions/ConfirmEdit.git
+	url = ../../objective-earth/extensions/ConfirmEdit.git
 	branch = main
 [submodule "extensions/YouTube"]
 	path = extensions/YouTube
-	url = ../../smarter-codes/objective-earth/extensions/YouTube.git
+	url = ../../objective-earth/extensions/YouTube.git
 	branch = main
 [submodule "extensions/capiunto"]
 	path = extensions/capiunto
-	url = ../../smarter-codes/objective-earth/extensions/capiunto.git
+	url = ../../objective-earth/extensions/capiunto.git
 	branch = main
 [submodule "extensions/categorytree"]
 	path = extensions/categorytree
-	url = ../../smarter-codes/objective-earth/extensions/categorytree.git
+	url = ../../objective-earth/extensions/categorytree.git
 	branch = main
 [submodule "extensions/scribunto"]
 	path = extensions/scribunto
-	url = ../../smarter-codes/objective-earth/extensions/scribunto.git
+	url = ../../objective-earth/extensions/scribunto.git
 	branch = main
 [submodule "extensions/templatestyles"]
 	path = extensions/templatestyles
-	url = ../../smarter-codes/objective-earth/extensions/templatestyles.git
+	url = ../../objective-earth/extensions/templatestyles.git
 	branch = main
