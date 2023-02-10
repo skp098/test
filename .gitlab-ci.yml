@@ -25,6 +25,7 @@ variables:
 setup-test:
   stage: .pre
   script:
+    - git config --global --add safe.directory /builds/smarter-codes/objective-earth/objective-earth-wiki
     - git submodule sync --recursive
     - git submodule update --init --recursive
     - tar -zcvf extensions.tar.gz extensions
@@ -38,6 +39,7 @@ setup-test:
 setup-staging:
   stage: .pre
   script:
+    - git config --global --add safe.directory /builds/smarter-codes/objective-earth/objective-earth-wiki
     - sed -i 's|= main|= develop|g' .gitmodules
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
@@ -52,6 +54,7 @@ setup-staging:
 setup-prod:
   stage: .pre
   script:
+    - git config --global --add safe.directory /builds/smarter-codes/objective-earth/objective-earth-wiki
     - git submodule sync --recursive
     - git submodule update --init --remote --recursive
     - tar -zcvf extensions.tar.gz extensions
