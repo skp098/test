@@ -200,9 +200,6 @@ deploy-prod:
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD
-  before_script:
-    - git submodule sync --recursive
-    - git submodule update --init --recursive --remote
   extends:
     - .deploy-conf
   resource_group: deploy-prod
