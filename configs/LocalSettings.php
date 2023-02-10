@@ -263,3 +263,57 @@ $wgGroupPermissions['user']['upload_by_url'] = true;
 $wgScribuntoDefaultEngine = 'luastandalone';
 $wgScribuntoEngineConf['luastandalone']['luaPath'] = '/usr/bin/lua5.1';
 $wgScribuntoEngineConf['luastandalone']['errorFile'] = '/var/www/html/error.txt';
+
+//settings to allow cors
+
+if(isset($_SERVER['HTTP_ORIGIN'])){
+
+  $allowedOrigins = array(    
+    "https://home.oe-staging.smarter.codes",
+    "https://home.objective.earth"
+  ); 
+  
+  $origin = $_SERVER['HTTP_ORIGIN'];
+  
+  if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
+  }
+  
+  $pattern = "/^https:\/\/[^.]+\.oe-test\.smarter\.codes$/";
+  
+  if (preg_match($pattern, $origin)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");  
+  }
+  
+}
+
+//setting up oauth 
+
+wfLoadExtension( 'MW-OAuth2Client' );
+
+$client_id = loadenv('OAUTH_CLIENT_ID');
+$client_secret = loadenv('OAUTH_CLIENT_SECRET');
+
+$donation_web_url = loadenv('DONATION_WEB');
+
+$wgOAuth2Client['client']['id']     = $client_id; // The client ID assigned to you by the provider
+$wgOAuth2Client['client']['secret'] = $client_secret; // The client secret assigned to you by the provider
+
+$wgOAuth2Client['configuration']['authorize_endpoint']     = "$donation_web_url/wp-json/moserver/authorize"; // Authorization URL
+$wgOAuth2Client['configuration']['access_token_endpoint']  = "$donation_web_url/wp-json/moserver/token"; // Token URL
+$wgOAuth2Client['configuration']['api_endpoint']           = "$donation_web_url/wp-json/moserver/resource"; // URL to fetch user JSON
+$wgOAuth2Client['configuration']['redirect_uri']           = "$wgServer/index.php/Special:OAuth2Client/callback"; // URL for OAuth2 server to redirect to
+
+$wgOAuth2Client['configuration']['username'] = 'username'; // JSON path to username
+$wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
+
+// $wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
+// $wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
+
+//making oe mobile friendly
+// wfLoadExtension( 'MobileFrontend' );
+// $wgDefaultMobileSkin = 'vector-2022';
