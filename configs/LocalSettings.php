@@ -37,6 +37,8 @@ $wgScriptPath = "";
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = loadenv('WG_SERVER', "http://localhost");
 
+$wgAppEnv = loadenv('WG_APP_ENV', "staging");
+
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
 

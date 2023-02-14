@@ -17,7 +17,10 @@ RUN cp composer.local.json-sample composer.local.json && \
 
 COPY ./configs/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 COPY ./media/logo.png /var/www/html/logo/logo.png
+COPY ./media/donation-heart.png /var/www/html/images/donation-heart.png
+COPY ./media/donation-info.png /var/www/html/images/donation-info.png
 COPY ./configs/LocalSettings.php /var/www/html/LocalSettings.php
+
 RUN apt-get update && apt install lua5.1
 RUN chmod 755 extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
 COPY ./scripts /scripts
