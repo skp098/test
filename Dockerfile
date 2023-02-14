@@ -23,4 +23,9 @@ COPY ./configs/LocalSettings.php /var/www/html/LocalSettings.php
 
 RUN apt-get update && apt install lua5.1
 RUN chmod 755 extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
+
+WORKDIR /var/www/html/extensions/MW-OAuth2Client/vendors/oauth2-client
+RUN composer install -n
+WORKDIR /var/www/html
+
 COPY ./scripts /scripts
