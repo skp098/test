@@ -313,8 +313,8 @@ $wgOAuth2Client['configuration']['redirect_uri']           = "$wgServer/index.ph
 $wgOAuth2Client['configuration']['username'] = 'username'; // JSON path to username
 $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 
-$wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
-$wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
+// $wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
+// $wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
 
 //making oe mobile friendly
 // wfLoadExtension( 'MobileFrontend' );
