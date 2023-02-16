@@ -710,6 +710,7 @@
 		"Gadgets::allowLegacy": "MobileFrontendHooks::onAllowLegacyGadgets",
 		"CentralAuthLoginRedirectData": "MobileFrontendHooks::onCentralAuthLoginRedirectData",
 		"CentralAuthSilentLoginRedirect": "MobileFrontendHooks::onCentralAuthSilentLoginRedirect",
+		"ResourceLoaderRegisterModules": "MobileFrontendEditorHooks::onResourceLoaderRegisterModules",
 		"OutputPageParserOutput": "MobileFrontendHooks::onOutputPageParserOutput",
 		"HTMLFileCache::useFileCache": "MobileFrontendHooks::onHTMLFileCacheUseFileCache",
 		"LoginFormValidErrorMessages": "MobileFrontendHooks::onLoginFormValidErrorMessages",
