@@ -1,7 +1,8 @@
 @import '../../mobile.less/mobile.variables.less';
+@import 'mediawiki.mixins.less';
 
 .editor-overlay {
-	box-sizing: border-box;
+	.box-sizing( border-box );
 
 	// Main editor and edit summary
 	textarea {
@@ -80,19 +81,18 @@
 	.preview {
 		display: none;
 
-		// Hide section heading toggling indicators as they are non-functional in the preview.
-		.section-heading .indicator {
-			display: none;
-		}
+		// Hide section heading indicators as they are non-functional in the preview.
+		&.content .section-heading {
+			width: 100%;
 
-		// Expand sections
-		.collapsible-block {
-			display: block;
+			.indicator {
+				display: none;
+			}
 		}
 	}
 
 	.wikitext-editor {
-		box-sizing: border-box;
+		.box-sizing( border-box );
 		font-size: inherit;
 		padding: 0;
 		padding-top: 1em;

@@ -10,8 +10,9 @@ class ApiParseExtenderTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider getData
 	 * @covers \MobileFrontend\Api\ApiParseExtender::onAPIGetAllowedParams
+	 * @covers \MobileFrontend\Api\ApiParseExtender::onAPIAfterExecute
 	 */
-	public function testApi( array $params, string $expected ) {
+	public function testApi( array $params, $expected ) {
 		$this->setMwGlobals( 'wgMFRemovableClasses',
 			[
 				'base' => [ '.nomobile' ]
@@ -20,19 +21,10 @@ class ApiParseExtenderTest extends MediaWikiIntegrationTestCase {
 		$this->doTest( $params, $expected );
 	}
 
-	private function doTest( array $params, string $expected ) {
-		// MobileFrontendContentProvider may use HTTP requests which are forbidden in test environment, so disable.
-		$this->clearHook( 'MobileFrontendContentProvider' );
-		$params += [ 'action' => 'parse', 'wrapoutputclass' => '', 'useskin' => 'minerva' ];
-
-		$request = new FauxRequest( $params );
-		$mainContext = new DerivativeContext( RequestContext::getMain() );
-		$mainContext->setRequest( $request );
-		MobileContext::resetInstanceForTesting();
-		$context = MobileContext::singleton();
-		$context->setContext( $mainContext );
-
-		$api = new ApiMain( $context );
+	private function doTest( array $params, $expected ) {
+		$params += [ 'action' => 'parse', 'wrapoutputclass' => '' ];
+		$req = new FauxRequest( $params );
+		$api = new ApiMain( $req );
 		$api->execute();
 		$data = $api->getResult()->getResultData( null, [
 			'BC' => [],
@@ -53,23 +45,21 @@ class ApiParseExtenderTest extends MediaWikiIntegrationTestCase {
 					'mobileformat' => '',
 					'text' => "I exist\n\n<span class='nomobile'>I don't</span>"
 				],
-				'<section class="mf-section-0" id="mf-section-0"><p>I exist</p><p></p></section>'
-			],
+				'<section class="mf-section-0" id="mf-section-0"><p>I exist</p><p></p></section>' ],
 			[
 				[
-					'mobileformat' => '1',
+					'mobileformat' => 'html',
 					'text' => "Lede<h2>Section1</h2>Text<h2>Section2</h2>Text"
 				],
 				'<section class="mf-section-0" id="mf-section-0"><p>Lede</p></section>' .
-				'<h2 class="section-heading" onclick="mfTempOpenSection(1)">' .
+				'<h2 class="section-heading">' .
 				self::SECTION_INDICATOR .
 				'<span class="mw-headline" id="Section1">Section1</span></h2>' .
-				'<section class="mf-section-1 collapsible-block" id="mf-section-1"><p>Text</p></section>' .
-				'<h2 class="section-heading" onclick="mfTempOpenSection(2)">' .
+				'<section class="mf-section-1" id="mf-section-1"><p>Text</p></section>' .
+				'<h2 class="section-heading">' .
 				self::SECTION_INDICATOR .
 				'<span class="mw-headline" id="Section2">Section2</span></h2>' .
-				'<section class="mf-section-2 collapsible-block" id="mf-section-2"><p>Text</p></section>'
-			],
+				'<section class="mf-section-2" id="mf-section-2"><p>Text</p></section>' ],
 		];
 	}
 }

@@ -135,7 +135,7 @@ SearchGateway.prototype = {
 			} );
 			// sort in order of index
 			results.sort( function ( a, b ) {
-				return a.index - b.index;
+				return a.index < b.index ? -1 : 1;
 			} );
 		}
 
@@ -157,12 +157,11 @@ SearchGateway.prototype = {
 		if ( !this.isCached( query ) ) {
 			xhr = this.api.get( this.getApiData( query ) );
 			request = xhr
-				.then( function ( data, jqXHR ) {
+				.then( function ( data ) {
 					// resolve the Deferred object
 					return {
 						query: query,
-						results: self._processData( query, data ),
-						searchId: jqXHR && jqXHR.getResponseHeader( 'x-search-id' )
+						results: self._processData( query, data )
 					};
 				}, function () {
 					// reset cached result, it maybe contains no value

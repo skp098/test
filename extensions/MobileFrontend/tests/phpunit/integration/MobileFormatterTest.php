@@ -229,7 +229,7 @@ class MobileFormatterTest extends MediaWikiIntegrationTestCase {
 					. $this->makeSectionHtml( 1, $longLine ),
 				$enableSections
 			],
-			// T38670
+			// Bug 36670
 			[
 				'<h2><span class="mw-headline" id="History"><span id="Overview"></span>'
 					. 'History</span><a class="edit-page" href="#editor/2">Edit</a></h2>'

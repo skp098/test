@@ -67,8 +67,8 @@ class MobileFormatter extends HtmlFormatter {
 	protected function parseItemsToRemove() {
 		$removals = parent::parseItemsToRemove();
 
-		// Remove specified content in content namespaces
-		if ( in_array( $this->title->getNamespace(), $this->config->get( 'ContentNamespaces' ), true ) ) {
+		// Don't remove elements in special pages
+		if ( !$this->title->isSpecialPage() ) {
 			$mfRemovableClasses = $this->config->get( 'MFRemovableClasses' );
 			$removableClasses = $mfRemovableClasses['base'];
 			if ( $this->context->isBetaGroupMember() ) {

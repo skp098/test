@@ -89,7 +89,7 @@ EditorGateway.prototype = {
 			if ( this.oldId ) {
 				options.rvstartid = this.oldId;
 			}
-			// See T52136 - passing rvsection will fail with non wikitext
+			// See Bug 50136 - passing rvsection will fail with non wikitext
 			if ( this.sectionId ) {
 				options.rvsection = this.sectionId;
 			}
@@ -244,16 +244,14 @@ EditorGateway.prototype = {
 
 		util.extend( options, {
 			action: 'parse',
-			// Enable section preview mode to avoid errors (T51218)
+			// Enable section preview mode to avoid errors (bug 49218)
 			sectionpreview: true,
 			// Hide section edit links
 			disableeditsection: true,
-			// needed for pre-save transform to work (T55692)
+			// needed for pre-save transform to work (bug 53692)
 			pst: true,
-			// Output mobile HTML (T56243)
+			// Output mobile HTML (bug 54243)
 			mobileformat: true,
-			useskin: mw.config.get( 'skin' ),
-			disabletoc: true,
 			title: this.title,
 			prop: [ 'text', 'sections' ]
 		} );

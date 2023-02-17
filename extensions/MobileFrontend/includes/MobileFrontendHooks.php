@@ -5,9 +5,6 @@ use MediaWiki\Auth\AuthManager;
 use MediaWiki\ChangeTags\Taggable;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\ResourceLoader as RL;
-use MediaWiki\ResourceLoader\ResourceLoader;
-use MobileFrontend\Api\ApiParseExtender;
 use MobileFrontend\ContentProviders\DefaultContentProvider;
 use MobileFrontend\Models\MobilePage;
 use MobileFrontend\Transforms\LazyImageTransform;
@@ -44,7 +41,7 @@ class MobileFrontendHooks {
 		$mobileContext = MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' );
 
 		if ( $mobileContext->shouldDisplayMobileView() ) {
-			// Force non-table based layouts (see T65428)
+			// Force non-table based layouts (see bug 63428)
 			$wgHTMLFormAllowTableFormat = false;
 			// Turn on MediaWiki UI styles so special pages with form are styled.
 			// FIXME: Remove when this becomes the default.
@@ -56,18 +53,45 @@ class MobileFrontendHooks {
 	 * Obtain the default mobile skin
 	 *
 	 * @param Config $config
-	 * @throws SkinException If a factory function isn't registered for the skin name
+	 * @throws RuntimeException if default mobile skin is incorrectly configured
 	 * @return Skin
 	 */
-	protected static function getDefaultMobileSkin( Config $config ): Skin {
-		$defaultSkin = $config->get( 'DefaultMobileSkin' );
+	protected static function getDefaultMobileSkin( Config $config ) {
+		$skinClass = $config->has( 'MFDefaultSkinClass' )
+			? $config->get( 'MFDefaultSkinClass' )
+			: null;
 
-		if ( !$defaultSkin ) {
+		$skinName = $config->get( 'DefaultMobileSkin' );
+		$knownSkinKeys = [
+			'SkinVector' => 'vector',
+			'SkinMinerva' => 'minerva',
+			'SkinTimeless' => 'timeless',
+			'SkinMonoBook' => 'monobook',
+		];
+
+		if ( class_exists( $skinClass ) ) {
+			// For a best attempt at backward compatibility check the array of known skins
+			$defaultSkin = $knownSkinKeys[$skinClass] ?? null;
+			$message = 'Use of $wgMFDefaultSkinClass has been deprecated, ' .
+				'please use $wgDefaultMobileSkin and provide the skin name. ';
+			if ( $defaultSkin ) {
+				$message .= 'You can replace it  with $wgDefaultMobileSkin = ' .
+					"'$defaultSkin';";
+			} else {
+				$defaultSkin = 'minerva';
+			}
+			// Now warn so the user fixes this.
+			wfWarn( $message );
+		} elseif ( $skinName ) {
+			$defaultSkin = $skinName;
+		} else {
 			$defaultSkin = $config->get( 'DefaultSkin' );
 		}
 
 		$factory = MediaWikiServices::getInstance()->getSkinFactory();
-		return $factory->makeSkin( Skin::normalizeKey( $defaultSkin ) );
+		$skin = $factory->makeSkin( Skin::normalizeKey( $defaultSkin ) );
+
+		return $skin;
 	}
 
 	/**
@@ -217,38 +241,6 @@ class MobileFrontendHooks {
 	}
 
 	/**
-	 * BeforeDisplayNoArticleText hook handler
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforeDisplayNoArticleText
-	 *
-	 * @param Article $article The (empty) article
-	 * @return bool This hook can abort
-	 */
-	public static function onBeforeDisplayNoArticleText( $article ) {
-		/** @var MobileContext $context */
-		$context = MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' );
-		$displayMobileView = $context->shouldDisplayMobileView();
-
-		$title = $article->getTitle();
-
-		// if the page is a userpage
-		// @todo: Upstream to core (T248347).
-		if ( $displayMobileView &&
-			$title->inNamespaces( NS_USER ) &&
-			!$title->isSubpage()
-		) {
-			$out = $article->getContext()->getOutput();
-			$userpagetext = ExtMobileFrontend::blankUserPageHTML( $out, $title );
-			if ( $userpagetext ) {
-				// Replace the default message with ours
-				$out->addHTML( $userpagetext );
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * OutputPageBeforeHTML hook handler
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBeforeHTML
 	 *
@@ -263,7 +255,7 @@ class MobileFrontendHooks {
 		$services = MediaWikiServices::getInstance();
 		/** @var MobileContext $context */
 		$context = $services->getService( 'MobileFrontend.Context' );
-		$title = $out->getTitle();
+		$title = $context->getTitle();
 		$config = $services->getService( 'MobileFrontend.Config' );
 
 		$displayMobileView = $context->shouldDisplayMobileView();
@@ -277,6 +269,17 @@ class MobileFrontendHooks {
 			return;
 		}
 
+		// if the page is a userpage
+		// @todo: Upstream to core (T248347).
+		$isView = Action::getActionName( $out ) === 'view';
+		if ( $displayMobileView && $title->inNamespaces( NS_USER ) && !$title->isSubpage() && $isView ) {
+			$userpagetext = ExtMobileFrontend::blankUserPageHTML( $out, $title );
+			if ( $userpagetext ) {
+				$text = $userpagetext;
+				return;
+			}
+		}
+
 		$options = $config->get( 'MFMobileFormatterOptions' );
 		$excludeNamespaces = $options['excludeNamespaces'] ?? [];
 		// Perform a few extra changes if we are in mobile mode
@@ -288,21 +291,13 @@ class MobileFrontendHooks {
 			&$provider, $out
 		] );
 
-		$isParse = ApiParseExtender::isParseAction(
-			$context->getRequest()->getText( 'action' )
-		);
-
+		// T245160 - don't run the mobile formatter on old revisions.
+		// Note if not the default content provider we ignore this requirement.
 		if ( get_class( $provider ) === $originalProviderClass ) {
 			// This line is important to avoid the default content provider running unnecessarily
 			// on desktop views.
 			$useContentProvider = $displayMobileView;
-			$runMobileFormatter = $displayMobileView && (
-				// T245160 - don't run the mobile formatter on old revisions.
-				// Note if not the default content provider we ignore this requirement.
-				$title->getLatestRevID() > 0 ||
-				// Always allow the formatter in ApiParse
-				$isParse
-			);
+			$runMobileFormatter = $displayMobileView && $title->getLatestRevID() > 0;
 		} else {
 			// When a custom content provider is enabled, always use it.
 			$useContentProvider = true;
@@ -313,11 +308,8 @@ class MobileFrontendHooks {
 			$text = ExtMobileFrontend::domParseWithContentProvider(
 				$provider, $out, $runMobileFormatter
 			);
-			// Assume we don't need while-JS-is-loading toggle support if we are using the API
-			if ( !$isParse ) {
-				$nonce = $out->getCSP()->getNonce();
-				$text = MakeSectionsTransform::interimTogglingSupport( $nonce ) . $text;
-			}
+			$nonce = $out->getCSP()->getNonce();
+			$text = MakeSectionsTransform::interimTogglingSupport( $nonce ) . $text;
 		}
 	}
 
@@ -339,13 +331,6 @@ class MobileFrontendHooks {
 		if ( $isMobile && !$userMode->isEnabled() ) {
 			$bodyAttrs['class'] .= ' mw-mf-amc-disabled';
 		}
-
-		if ( $isMobile ) {
-			// Add a class to the body so that TemplateStyles (which can only
-			// access html and body) and gadgets have something to check for.
-			// @stable added in 1.38
-			$bodyAttrs['class'] .= ' mw-mf';
-		}
 	}
 
 	/**
@@ -364,7 +349,7 @@ class MobileFrontendHooks {
 			return;
 		}
 
-		// T45123: force mobile URLs only for local redirects
+		// Bug 43123: force mobile URLs only for local redirects
 		if ( $context->isLocalUrl( $redirect ) ) {
 			$out->addVaryHeader( 'X-Subdomain' );
 			$redirect = $context->getMobileUrl( $redirect );
@@ -437,15 +422,15 @@ class MobileFrontendHooks {
 		if ( $ctx->shouldDisplayMobileView() ) {
 			$services = MediaWikiServices::getInstance();
 			$config = $services->getService( 'MobileFrontend.Config' );
-			unset( $pages['MediaWiki:Common.css'] );
-			unset( $pages['MediaWiki:Print.css'] );
+			unset( $pages[ 'MediaWiki:Common.css' ] );
+			unset( $pages[ 'MediaWiki:Print.css' ] );
 			// MediaWiki:<skinname>.css suffers from the same problems as MediaWiki:Common.css
 			// in that it has traditionally been written for desktop skins and is bloated.
 			// We have always removed this on mobile for this reason.
 			// If we loaded this there is absolutely no point in MediaWiki:Mobile.css! (T248415)
-			unset( $pages["MediaWiki:$ucaseSkin.css"] );
+			unset( $pages[ "MediaWiki:$ucaseSkin.css" ] );
 			if ( $config->get( 'MFSiteStylesRenderBlocking' ) ) {
-				$pages['MediaWiki:Mobile.css'] = [ 'type' => 'style' ];
+				$pages[ 'MediaWiki:Mobile.css' ] = [ 'type' => 'style' ];
 			}
 		}
 	}
@@ -462,10 +447,10 @@ class MobileFrontendHooks {
 		$services = MediaWikiServices::getInstance();
 		$config = $services->getService( 'MobileFrontend.Config' );
 		if ( $ctx->shouldDisplayMobileView() ) {
-			unset( $pages['MediaWiki:Common.js'] );
-			$pages['MediaWiki:Mobile.js'] = [ 'type' => 'script' ];
+			unset( $pages[ 'MediaWiki:Common.js' ] );
+			$pages[ 'MediaWiki:Mobile.js' ] = [ 'type' => 'script' ];
 			if ( !$config->get( 'MFSiteStylesRenderBlocking' ) ) {
-				$pages['MediaWiki:Mobile.css'] = [ 'type' => 'style' ];
+				$pages[ 'MediaWiki:Mobile.css' ] = [ 'type' => 'style' ];
 			}
 		}
 	}
@@ -1177,7 +1162,7 @@ class MobileFrontendHooks {
 		/** @var MobileContext $context */
 		$context = $services->getService( 'MobileFrontend.Context' );
 		$config = $services->getService( 'MobileFrontend.Config' );
-		$logos = RL\SkinModule::getAvailableLogos( $config );
+		$logos = ResourceLoaderSkinModule::getAvailableLogos( $config );
 		$mfLogo = $logos['icon'] ?? false;
 
 		// do nothing in desktop mode
