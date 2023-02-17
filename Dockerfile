@@ -3,7 +3,7 @@ FROM mediawiki:1.38
 RUN apt update && apt install -y \
     wget python3-pip zip unzip libzip-dev && \
     docker-php-ext-install zip && \
-    apt install vim -n
+    apt install -y vim
 RUN pip install mysql-connector-python requests
 RUN wget -cO - https://getcomposer.org/composer-2.phar > composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
