@@ -319,3 +319,19 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 //making oe mobile friendly
 wfLoadExtension( 'MobileFrontend' );
 $wgDefaultMobileSkin = 'vector-2022';
+
+
+// Adding google analytic script in head tag of oe production
+
+if($wgAppEnv=='production'){
+	// Define a function to append the HTML code to the <head> tag
+	function add_html_to_head(&$out, &$skin) {
+		$out->addHeadItem('my_html_code', "
+<!-- Google tag (gtag.js) -->
+<script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WWT6MZSN23');</script>
+		");
+	}
+	// Register the function to the BeforePageDisplay hook
+	$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
+}
