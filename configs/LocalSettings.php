@@ -324,25 +324,16 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 wfLoadExtension( 'MobileFrontend' );
 $wgDefaultMobileSkin = 'vector-2022';
 
-// Define a function to append the HTML code to the <head> tag
-function add_og_image(&$out, &$skin) {
-
-  $out->addHeadItem('my_html_code', "
-<!-- Adding OG Image -->
-<meta property='og:image' content='$wgServer/media/logo.png'>
-  ");
-}
-	// Register the function to the BeforePageDisplay hook
-$wgHooks['BeforePageDisplay'][] = 'add_og_image';
-
 $wgGroupPermissions['OE-Contributor']['edit'] = true;
 
 // Define a function to append the HTML code to the <head> tag
 function add_html_to_head(&$out, &$skin) {
 
-  global $wgServer,$wgAppEnv; 
+  global $wgServer,$wgAppEnv;
   $out->addHeadItem('my_html_code_1', "
     <!-- Adding OG Image -->
+    <meta property='og:title' content='Objective Earth'>
+    <meta property='og:description' content='Welcome to Objective.Earth! Objective.Earth is a social network, where you can talk about Problems of a region and Solutions for those problems.'>
     <meta property='og:image' content='$wgServer/media/logo.png'>
   ");
 
