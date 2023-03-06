@@ -295,7 +295,7 @@ if(isset($_SERVER['HTTP_ORIGIN'])){
 
 //setting up oauth on staging 
 
-if($wgAppEnv=='staging'){
+if($wgServer=='https://oe-staging.smarter.codes'){
 
 wfLoadExtension( 'MW-OAuth2Client' );
 
@@ -335,10 +335,19 @@ function add_html_to_head(&$out, &$skin) {
     <meta property='og:title' content='Objective Earth'>
     <meta property='og:description' content='Welcome to Objective.Earth! Objective.Earth is a social network, where you can talk about Problems of a region and Solutions for those problems.'>
     <meta property='og:image' content='$wgServer/media/logo.png'>
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content='$wgServer'>
+
+    <!-- Twitter Specefic -->
+
+    <meta name='twitter:title' content='Objective Earth'>
+    <meta name='twitter:description' content='Welcome to Objective.Earth! Objective.Earth is a social network, where you can talk about Problems of a region and Solutions for those problems.'>
+    <meta name='twitter:image' content='$wgServer/media/logo.png'>
+
   ");
 
   // Adding google analytic script in head tag of oe production
-  if($wgAppEnv=='production'){
+  if($wgServer=='https://objective.earth'){
     $out->addHeadItem('my_html_code', "
       <!-- Google tag (gtag.js) -->
       <script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
