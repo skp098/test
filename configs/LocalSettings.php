@@ -195,11 +195,11 @@ $gPlaceApiKey = loadenv('GPLACE_API_KEY');
 
 // Adding google captcha system
 
-wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
-$wgCaptchaClass = 'ReCaptchaNoCaptcha';
+// wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/ReCaptchaNoCaptcha' ]);
+// $wgCaptchaClass = 'ReCaptchaNoCaptcha';
 
-$wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
-$wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
+// $wgReCaptchaSiteKey = loadenv('GCAPTCHA_KEY');
+// $wgReCaptchaSecretKey = loadenv('GCAPTCHA_SECRET');
 
 // wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/FancyCaptcha' ]);
 // $wgCaptchaClass = 'FancyCaptcha';
