@@ -335,3 +335,5 @@ if($wgAppEnv=='production'){
 	// Register the function to the BeforePageDisplay hook
 	$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
 }
+
+$wgGroupPermissions['OE-Contributor']['edit'] = true;
