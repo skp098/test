@@ -37,7 +37,7 @@ $wgScriptPath = "";
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = loadenv('WG_SERVER', "http://localhost");
 
-$wgAppEnv = loadenv('APP_ENV', "staging");
+$wgAppEnv = loadenv('WG_APP_ENV');
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -324,20 +324,36 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 wfLoadExtension( 'MobileFrontend' );
 $wgDefaultMobileSkin = 'vector-2022';
 
+// Define a function to append the HTML code to the <head> tag
+function add_og_image(&$out, &$skin) {
 
-// Adding google analytic script in head tag of oe production
-
-if($wgAppEnv=='production'){
-	// Define a function to append the HTML code to the <head> tag
-	function add_html_to_head(&$out, &$skin) {
-		$out->addHeadItem('my_html_code', "
-<!-- Google tag (gtag.js) -->
-<script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
-<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WWT6MZSN23');</script>
-		");
-	}
-	// Register the function to the BeforePageDisplay hook
-	$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
+  $out->addHeadItem('my_html_code', "
+<!-- Adding OG Image -->
+<meta property='og:image' content='$wgServer/media/logo.png'>
+  ");
 }
+	// Register the function to the BeforePageDisplay hook
+$wgHooks['BeforePageDisplay'][] = 'add_og_image';
 
 $wgGroupPermissions['OE-Contributor']['edit'] = true;
+
+// Define a function to append the HTML code to the <head> tag
+function add_html_to_head(&$out, &$skin) {
+
+  global $wgServer,$wgAppEnv; 
+  $out->addHeadItem('my_html_code_1', "
+    <!-- Adding OG Image -->
+    <meta property='og:image' content='$wgServer/media/logo.png'>
+  ");
+
+  // Adding google analytic script in head tag of oe production
+  if($wgAppEnv=='production'){
+    $out->addHeadItem('my_html_code', "
+      <!-- Google tag (gtag.js) -->
+      <script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
+      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WWT6MZSN23');</script>
+    ");
+  }
+}
+// Register the function to the BeforePageDisplay hook
+$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
