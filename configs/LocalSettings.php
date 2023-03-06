@@ -37,7 +37,7 @@ $wgScriptPath = "";
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = loadenv('WG_SERVER', "http://localhost");
 
-$wgAppEnv = loadenv('WG_APP_ENV', "staging");
+$wgAppEnv = loadenv('APP_ENV', "staging");
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -293,7 +293,9 @@ if(isset($_SERVER['HTTP_ORIGIN'])){
   
 }
 
-//setting up oauth 
+//setting up oauth on staging 
+
+if($wgAppEnv=='staging'){
 
 wfLoadExtension( 'MW-OAuth2Client' );
 
@@ -315,6 +317,8 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 
 // $wgOAuth2Client['configuration']['scopes'] = 'email'; //Permissions
 // $wgOAuth2Client['configuration']['scopes'] = 'username'; //Permissions
+
+}
 
 //making oe mobile friendly
 wfLoadExtension( 'MobileFrontend' );
