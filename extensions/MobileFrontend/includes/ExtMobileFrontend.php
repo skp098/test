@@ -1,7 +1,6 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
-use MobileFrontend\Api\ApiParseExtender;
 use MobileFrontend\ContentProviders\IContentProvider;
 use MobileFrontend\Transforms\LazyImageTransform;
 use MobileFrontend\Transforms\MakeSectionsTransform;
@@ -86,8 +85,7 @@ class ExtMobileFrontend {
 
 		$title = $out->getTitle();
 		$ns = $title->getNamespace();
-		$action = $context->getRequest()->getText( 'action', 'view' );
-		$isView = $action === 'view' || ApiParseExtender::isParseAction( $action );
+		$isView = $context->getRequest()->getText( 'action', 'view' ) == 'view';
 
 		$enableSections = (
 			// Don't collapse sections e.g. on JS pages

@@ -138,6 +138,7 @@ build:
       -e 's|$DONATION_WEB|'"$DONATION_WEB"'|'
       -e 's|$OAUTH_CLIENT_ID|'"$OAUTH_CLIENT_ID"'|'
       -e 's|$OAUTH_CLIENT_SECRET|'"$OAUTH_CLIENT_SECRET"'|'
+      -e 's|$APP_ENV|'"$APP_ENV"'|'
       -e 's|$PORT|'"80"'|'
       kube-deployment-mediawiki.yml
     - kubectl apply --namespace=$NAMESPACE -f kube-deployment-mediawiki.yml
@@ -173,6 +174,7 @@ deploy-staging:
     DONATION_WEB: $DONATION_WEB_DEV
     OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID_DEV
     OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET_DEV
+    APP_ENV: "staging"
   environment:
     name: staging/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_STAGING
@@ -197,6 +199,7 @@ deploy-prod:
     DONATION_WEB: $DONATION_WEB_PROD
     OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID_PROD
     OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET_PROD
+    APP_ENV: "production"
   environment:
     name: production/$CI_PROJECT_NAME-$CI_COMMIT_BRANCH
     url: https://$HOST_PROD

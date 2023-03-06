@@ -4,5 +4,10 @@
 			"Chinamoonroll"
 		]
 	},
-	"apihelp-parse-param-noimages": "Pademang gambar ring luaran sélulér"
+	"apihelp-mobileview-description": "Ngawaliang data sané karereh antuk cingakan sélulér.",
+	"apihelp-mobileview-summary": "Ngawaliang data sané karereh antuk cingakan sélulér.",
+	"apihelp-mobileview-param-page": "Murda kaca antuk kaprosés",
+	"apihelp-mobileview-param-redirect": "Kija ja pangalihan patutt kasarengin.",
+	"apihelp-parse-param-noimages": "Pademang gambar ring luaran sélulér",
+	"apiwarn-mobilefrontend-sectionsnotfound": "{{PLURAL:$2|Pahan}} $1 ten katemu."
 }

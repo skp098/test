@@ -159,7 +159,7 @@ module.exports = {
 					},
 					{
 						code: 'sr-el',
-						name: 'srpski (latinica)'
+						name: 'srpski (latinica)‎'
 					},
 					{
 						code: 'es',

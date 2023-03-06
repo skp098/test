@@ -3,7 +3,7 @@
 // It also ensures we add test coverage for files without any
 // (loosely inspired by https://github.com/istanbuljs/nyc/issues/594)
 // If a module cannot be tested with Node.js it needs to be added to .nyrc.json
-let sandbox, fakeRouter;
+let sandbox;
 const path = require( 'path' ),
 	config = require( '../../.nycrc.json' ),
 	glob = require( 'glob' ),
@@ -30,10 +30,8 @@ QUnit.module( 'MobileFrontend imports', {
 				LookupElement: () => {}
 			}
 		};
-		fakeRouter = new OO.EventEmitter();
-		fakeRouter.getPath = sandbox.stub().returns( '' );
-		fakeRouter.back = sandbox.spy();
-		sandbox.stub( mw.loader, 'require' ).withArgs( 'mediawiki.router' ).returns( fakeRouter );
+		// FIXME: Belongs to mock mediawiki - remove when https://github.com/wikimedia/mw-node-qunit/pull/6
+		global.mw.trackSubscribe = () => {};
 		// Several modules load ext.eventLogging - we will simulate this failing.
 		sandbox.stub( mw.loader, 'using' ).returns( util.Deferred().reject() );
 	},

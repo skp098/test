@@ -1,6 +1,6 @@
 var browser = require( './Browser' ).getSingleton(),
 	util = require( './util' ),
-	escapeSelector = util.escapeSelector,
+	escapeHash = util.escapeHash,
 	arrowOptions = {
 		name: 'expand',
 		type: '',
@@ -122,21 +122,15 @@ Toggler.prototype.toggle = function ( $heading, page ) {
 		$content = $heading.next();
 
 	$heading.toggleClass( 'open-block' );
+	$heading.data( 'indicator' ).remove();
 
 	arrowOptions.rotation = wasExpanded ? 0 : 180;
-	indicator = new Icon( arrowOptions );
-	$heading.data( 'indicator' ).attr( 'class', indicator.getClassName() );
+	indicator = new Icon( arrowOptions ).prependTo( $heading );
+	$heading.data( 'indicator', indicator );
 
 	$headingLabel.attr( 'aria-expanded', !wasExpanded );
 
-	if ( $content.hasClass( 'open-block' ) ) {
-		$content.removeClass( 'open-block' );
-		// jquery doesn't allow custom values for the hidden attribute it seems.
-		$content.get( 0 ).setAttribute( 'hidden', 'until-found' );
-	} else {
-		$content.addClass( 'open-block' );
-		$content.removeAttr( 'hidden' );
-	}
+	$content.toggleClass( 'open-block' );
 
 	/* T239418 We consider this event as a low-priority one and emit it asynchronously.
 	This ensures that any logic associated with section toggling is async and not contributing
@@ -187,34 +181,29 @@ function enableKeyboardActions( toggler, $heading, page ) {
  *
  * @memberof Toggler
  * @instance
- * @param {string} id An element ID within the $container
+ * @param {string} selector A css selector that identifies a single element
  * @param {Object} $container jQuery element to search in
  * @param {Page} page
- * @return {boolean} Target ID was found
  */
-Toggler.prototype.reveal = function ( id, $container, page ) {
-	var $target;
+Toggler.prototype.reveal = function ( selector, $container, page ) {
+	var $target, $heading;
+
 	// jQuery will throw for hashes containing certain characters which can break toggling
 	try {
-		$target = $container.find( '#' + escapeSelector( id ) );
+		$target = $container.find( escapeHash( selector ) );
+		$heading = $target.parents( '.collapsible-heading' );
+		// The heading is not a section heading, check if in a content block!
+		if ( !$heading.length ) {
+			$heading = $target.parents( '.collapsible-block' ).prev( '.collapsible-heading' );
+		}
+		if ( $heading.length && !$heading.hasClass( 'open-block' ) ) {
+			this.toggle( $heading, page );
+		}
+		if ( $heading.length ) {
+			// scroll again after opening section (opening section makes the page longer)
+			window.scrollTo( 0, $target.offset().top );
+		}
 	} catch ( e ) {}
-	if ( !$target || !$target.length ) {
-		return false;
-	}
-
-	var $heading = $target.parents( '.collapsible-heading' );
-	// The heading is not a section heading, check if in a content block!
-	if ( !$heading.length ) {
-		$heading = $target.parents( '.collapsible-block' ).prev( '.collapsible-heading' );
-	}
-	if ( $heading.length && !$heading.hasClass( 'open-block' ) ) {
-		this.toggle( $heading, page );
-	}
-	if ( $heading.length ) {
-		// scroll again after opening section (opening section makes the page longer)
-		window.scrollTo( 0, $target.offset().top );
-	}
-	return true;
 };
 
 /**
@@ -267,7 +256,7 @@ Toggler.prototype._enable = function ( $container, prefix, page, isClosed ) {
 					// (a link in a section heading)
 					// See T117880
 					if ( !ev.target.href ) {
-						// prevent taps/clicks on edit button after toggling (T58209)
+						// prevent taps/clicks on edit button after toggling (bug 56209)
 						ev.preventDefault();
 						self.toggle( $heading, page );
 					}
@@ -298,12 +287,7 @@ Toggler.prototype._enable = function ( $container, prefix, page, isClosed ) {
 					// the only way we can tell screen readers what element we're
 					// referring to via `aria-controls`.
 					id: id
-				} )
-				.on( 'beforematch', function () {
-					self.toggle( $heading, page );
-				} )
-				.addClass( 'collapsible-block-js' )
-				.get( 0 ).setAttribute( 'hidden', 'until-found' );
+				} );
 
 			enableKeyboardActions( self, $heading, page );
 			if (
@@ -320,30 +304,30 @@ Toggler.prototype._enable = function ( $container, prefix, page, isClosed ) {
 		}
 	} );
 
+	/* eslint-disable no-restricted-properties */
 	/**
 	 * Checks the existing hash and toggles open any section that contains the fragment.
 	 *
 	 * @method
 	 */
 	function checkHash() {
-		// eslint-disable-next-line no-restricted-properties
 		var hash = window.location.hash;
+		var decodedHash;
 		if ( hash.indexOf( '#' ) === 0 ) {
-			hash = hash.slice( 1 );
-			// Per https://html.spec.whatwg.org/multipage/browsing-the-web.html#target-element
-			// we try the raw fragment first, then the percent-decoded fragment.
-			if ( !self.reveal( hash, $container, page ) ) {
-				var decodedHash = mw.util.percentDecodeFragment( hash );
-				if ( decodedHash ) {
-					self.reveal( decodedHash, $container, page );
-				}
+			// Non-latin characters in the hash will be provided percent-encoded, which
+			// jQuery would later fail to cope with.
+			try {
+				decodedHash = decodeURIComponent( hash );
+				self.reveal( decodedHash, $container, page );
+			} catch ( e ) {
+				// sometimes decoding will fail e.g. T262599, T264914. If that happens ignore.
 			}
 		}
 	}
 
 	/**
-	 * Checks the value of wgInternalRedirectTargetUrl and sets the hash if present.
-	 * checkHash() will reveal the collapsed section that contains it afterwards.
+	 * Checks the value of wgInternalRedirectTargetUrl and reveals the collapsed
+	 * section that contains it if present
 	 *
 	 * @method
 	 */
@@ -352,10 +336,11 @@ Toggler.prototype._enable = function ( $container, prefix, page, isClosed ) {
 			internalRedirectHash = internalRedirect ? internalRedirect.split( '#' )[1] : false;
 
 		if ( internalRedirectHash ) {
-			// eslint-disable-next-line no-restricted-properties
 			window.location.hash = internalRedirectHash;
+			self.reveal( internalRedirectHash, $container, page );
 		}
 	}
+	/* eslint-enable no-restricted-properties */
 
 	checkInternalRedirectAndHash();
 	checkHash();

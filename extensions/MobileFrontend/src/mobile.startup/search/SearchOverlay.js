@@ -57,8 +57,6 @@ function SearchOverlay( params ) {
 	this.gateway = options.gateway || new options.gatewayClass( this.api );
 
 	this.router = options.router;
-
-	this.currentSearchId = null;
 }
 
 mfExtend( SearchOverlay, Overlay, {
@@ -70,9 +68,8 @@ mfExtend( SearchOverlay, Overlay, {
 	 * @instance
 	 */
 	onClickSearchContent: function () {
-		var
-			$form = this.$el.find( 'form' ),
-			$el = $form[ 0 ].parentNode;
+		var $el = util.getDocument().find( 'body' ),
+			$form = this.$el.find( 'form' );
 
 		// Add fulltext input to force fulltext search
 		this.parseHTML( '<input>' )
@@ -86,10 +83,8 @@ mfExtend( SearchOverlay, Overlay, {
 		// http://www.w3.org/TR/2011/WD-html5-20110113/webappapis.html#queue-a-task
 		setTimeout( function () {
 			// Firefox doesn't allow submission of a form not in the DOM
-			// so temporarily re-add it if it's gone.
-			if ( !$form[ 0 ].parentNode ) {
-				$form.appendTo( $el );
-			}
+			// so temporarily re-add it
+			$form.appendTo( $el );
 			$form.trigger( 'submit' );
 		}, 0 );
 	},
@@ -123,9 +118,7 @@ mfExtend( SearchOverlay, Overlay, {
 	 * @param {jQuery.Event} ev
 	 */
 	onClickResult: function ( ev ) {
-		var
-			self = this,
-			$link = this.$el.find( ev.currentTarget );
+		var $link = this.$el.find( ev.currentTarget );
 		/**
 		 * Fired when the user clicks a search result
 		 *
@@ -140,16 +133,6 @@ mfExtend( SearchOverlay, Overlay, {
 		// when navigating to search results
 		ev.preventDefault();
 		this.router.back().then( function () {
-			// T308288: Appends the current search id as a url param on clickthroughs
-			if ( this.currentSearchId ) {
-				var clickUri = new mw.Uri( location.href );
-				clickUri.query.searchToken = this.currentSearchId;
-				self.router.navigateTo( document.title, {
-					path: clickUri.toString(),
-					useReplaceState: true
-				} );
-				this.currentSearchId = null;
-			}
 			// Router.navigate does not support changing href.
 			// FIXME: Needs upstream change T189173
 			// eslint-disable-next-line no-restricted-properties
@@ -180,16 +163,6 @@ mfExtend( SearchOverlay, Overlay, {
 		this.$searchContent = searchResults.$el.hide();
 		// FIXME: `this.$resultContainer` should not be set. Isolate to SearchResultsView class.
 		this.$resultContainer = searchResults.$el.find( '.results-list-container' );
-
-		// On iOS a touchstart event while the keyboard is open will result in a scroll
-		// leading to an accidental click (T299846)
-		// Stopping propagation when the input is focused will prevent scrolling while
-		// the keyboard is collapsed.
-		this.$resultContainer[ 0 ].addEventListener( 'touchstart', ( ev ) => {
-			if ( document.activeElement === this.$input[0] ) {
-				ev.stopPropagation();
-			}
-		} );
 
 		/**
 		 * Hide the spinner and abort timed spinner shows.
@@ -270,7 +243,6 @@ mfExtend( SearchOverlay, Overlay, {
 					var xhr;
 					xhr = self.gateway.search( query );
 					self._pendingQuery = xhr.then( function ( data ) {
-						this.currentSearchId = data.searchId;
 						// FIXME: Given this manipulates SearchResultsView
 						// this should be moved into that class
 						// check if we're getting the rights response in case of out of

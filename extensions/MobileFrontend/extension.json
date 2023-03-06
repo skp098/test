@@ -47,6 +47,7 @@
 		"Uploads": "SpecialUploads"
 	},
 	"APIModules": {
+		"mobileview": "MobileFrontend\\Api\\ApiMobileView",
 		"webapp-manifest": "MobileFrontend\\Api\\ApiWebappManifest"
 	},
 	"MessagesDirs": {
@@ -94,6 +95,10 @@
 		"SpecialMobileLanguages": "includes/specials/SpecialMobileLanguages.php",
 		"MobileSpecialPage": "includes/specials/MobileSpecialPage.php",
 		"MobileSpecialPageFeed": "includes/specials/MobileSpecialPageFeed.php"
+	},
+	"TestAutoloadClasses": {
+		"MockApiMobileView": "tests/phpunit/integration/api/MockApiMobileView.php",
+		"MockWikiPage": "tests/phpunit/integration/api/MockWikiPage.php"
 	},
 	"ResourceModules": {
 		"mobile.pagelist.styles": {
@@ -272,7 +277,7 @@
 				"mediawiki.util",
 				"mediawiki.api",
 				"mediawiki.router",
-				"web2017-polyfills"
+				"jquery.throttle-debounce"
 			],
 			"messages": [
 				"mobile-frontend-license-links",
@@ -670,12 +675,12 @@
 	},
 	"Hooks": {
 		"APIGetAllowedParams": "MobileFrontend\\Api\\ApiParseExtender::onAPIGetAllowedParams",
+		"APIAfterExecute": "MobileFrontend\\Api\\ApiParseExtender::onAPIAfterExecute",
 		"APIQuerySiteInfoGeneralInfo": "MobileFrontendHooks::onAPIQuerySiteInfoGeneralInfo",
 		"AuthChangeFormFields": "MobileFrontendHooks::onAuthChangeFormFields",
 		"RequestContextCreateSkin": "MobileFrontendHooks::onRequestContextCreateSkin",
 		"BeforeInitialize": "MobileFrontendHooks::onBeforeInitialize",
 		"MediaWikiPerformAction": "MobileFrontendHooks::onMediaWikiPerformAction",
-		"BeforeDisplayNoArticleText": "MobileFrontendHooks::onBeforeDisplayNoArticleText",
 		"OutputPageBeforeHTML": "MobileFrontendHooks::onOutputPageBeforeHTML",
 		"OutputPageBodyAttributes": "MobileFrontendHooks::onOutputPageBodyAttributes",
 		"ResourceLoaderSiteStylesModulePages": "MobileFrontendHooks::onResourceLoaderSiteStylesModulePages",
@@ -745,7 +750,7 @@
 			"value": {
 				"base": false,
 				"beta": false,
-				"amc": true
+				"amc": false
 			}
 		},
 		"MFUseDesktopSpecialWatchlistPage": {
@@ -791,7 +796,6 @@
 			"value": "X-Subdomain"
 		},
 		"MFRemovableClasses": {
-			"description": "Selectors for elements to be removed from the HTML in content namespaces (defined in wgContentNamespaces) to save bandwidth.",
 			"value": {
 				"beta": [],
 				"base": [

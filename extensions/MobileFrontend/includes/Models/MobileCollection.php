@@ -23,7 +23,7 @@ class MobileCollection implements IteratorAggregate, Countable, Emptiable {
 	 * Return size of the collection
 	 * @return int
 	 */
-	public function count(): int {
+	public function count() {
 		return count( $this->pages );
 	}
 
@@ -47,7 +47,7 @@ class MobileCollection implements IteratorAggregate, Countable, Emptiable {
 	/**
 	 * @return ArrayIterator
 	 */
-	public function getIterator(): ArrayIterator {
+	public function getIterator() {
 		return new ArrayIterator( $this->pages );
 	}
 }

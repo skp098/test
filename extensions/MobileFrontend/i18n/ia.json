@@ -167,7 +167,6 @@
 	"mobile-frontend-talk-reply": "Responder",
 	"mobile-frontend-talk-reply-info": "Nota que tu responsa essera automaticamente signate con tu nomine de usator.",
 	"mobile-frontend-talk-topic-error": "Le topico non pote esser addite a causa de un error incognite.",
-	"mobile-frontend-talk-topic-error-protected": "Iste pagina de discussion es protegite. Tu non ha le permission de adder topicos a illo.",
 	"mobile-frontend-talk-topic-error-permission": "Le topico non pote esser addite. Tu non ha le permission de modificar pagina.",
 	"mobile-frontend-talk-topic-error-spam": "Le topico ha essite refusate perque illo contine un fragmento de spam.",
 	"mobile-frontend-talk-topic-error-badtoken": "Un error ha occurrite sur le servitor. Tu modification non pote esser salveguardate. Tenta recargar iste pagina.",

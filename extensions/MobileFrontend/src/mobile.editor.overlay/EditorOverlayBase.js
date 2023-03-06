@@ -7,6 +7,7 @@ var Overlay = require( '../mobile.startup/Overlay' ),
 	icons = require( '../mobile.startup/icons' ),
 	Button = require( '../mobile.startup/Button' ),
 	Icon = require( '../mobile.startup/Icon' ),
+	toast = require( '../mobile.startup/showOnPageReload' ),
 	mfExtend = require( '../mobile.startup/mfExtend' ),
 	blockMessageDrawer = require( './blockMessageDrawer' ),
 	MessageBox = require( '../mobile.startup/MessageBox' ),
@@ -226,7 +227,8 @@ mfExtend( EditorOverlayBase, Overlay, {
 		}
 	},
 	/**
-	 * Executed when page save is complete. Updates urls and shows toast message.
+	 * Executed when page save is complete. Handles reloading the page, showing toast
+	 * messages.
 	 *
 	 * @memberof EditorOverlayBase
 	 * @instance
@@ -251,10 +253,6 @@ mfExtend( EditorOverlayBase, Overlay, {
 			msg = mw.msg( 'mobile-frontend-editor-success' );
 		}
 
-		if ( !mw.config.get( 'wgPostEditConfirmationDisabled' ) ) {
-			this.showSaveCompleteMsg( msg );
-		}
-
 		/**
 		 * Fired after an edit was successfully saved, like postEdit in MediaWiki core.
 		 *
@@ -266,39 +264,34 @@ mfExtend( EditorOverlayBase, Overlay, {
 		 */
 		mw.hook( 'postEditMobile' ).fire( { newRevId: newRevId } );
 
+		if ( !mw.config.get( 'wgPostEditConfirmationDisabled' ) ) {
+			toast.showOnPageReload( msg, { type: 'success' } );
+		}
+
 		// Ensure we don't lose this event when logging
 		this.log( {
 			action: 'saveSuccess',
 			// eslint-disable-next-line camelcase
 			revision_id: newRevId
 		} );
-		setTimeout( function () {
-			// Wait for any other teardown navigation to happen (e.g. router.back())
-			// before setting our final location.
-			if ( self.sectionId ) {
-				// Ideally we'd want to do this via replaceState (see T189173)
-				// eslint-disable-next-line no-restricted-properties
-				window.location.hash = '#' + self.sectionId;
-			} else {
-				// Cancel the hash fragment
-				// otherwise clicking back after a save will take you back to the editor.
-				// We avoid calling the hide method of the overlay here as this can be asynchronous
-				// and may conflict with the window.reload call below.
-				// eslint-disable-next-line no-restricted-properties
-				window.location.hash = '#';
-			}
-		} );
-	},
-	/**
-	 * Show a save-complete message to the user
-	 *
-	 * @inheritdoc
-	 * @memberof VisualEditorOverlay
-	 * @instance
-	 * @param {string} msg Message
-	 */
-	showSaveCompleteMsg: function ( msg ) {
-		mw.notify( msg, { type: 'success' } );
+		if ( self.sectionId ) {
+			// Ideally we'd want to do this via replaceState (see T189173)
+			// eslint-disable-next-line no-restricted-properties
+			window.location.hash = '#' + self.sectionId;
+		} else {
+			// Cancel the hash fragment
+			// otherwise clicking back after a save will take you back to the editor.
+			// We avoid calling the hide method of the overlay here as this can be asynchronous
+			// and may conflict with the window.reload call below.
+			// eslint-disable-next-line no-restricted-properties
+			window.location.hash = '#';
+		}
+
+		// Note the "#" may be in the URL.
+		// If so, using window.location alone will not reload the page
+		// we need to forcefully refresh
+		// eslint-disable-next-line no-restricted-properties
+		window.location.reload();
 	},
 	/**
 	 * Executed when page save fails. Handles logging the error. Subclasses
@@ -524,7 +517,11 @@ mfExtend( EditorOverlayBase, Overlay, {
 							mechanism: 'cancel',
 							type: 'abandon'
 						} );
-						self.onExit();
+						// May not be set if overlay has not been previously shown
+						if ( self.allowCloseWindow ) {
+							self.allowCloseWindow.release();
+						}
+						mw.hook( 'mobileFrontend.editorClosed' ).fire();
 						exit();
 					}
 				} );
@@ -544,15 +541,12 @@ mfExtend( EditorOverlayBase, Overlay, {
 				type: ( this.target && this.target.edited ) ? 'abandon' : 'nochange'
 			} );
 		}
-		this.onExit();
-		exit();
-	},
-	onExit: function () {
-		// May not be set if overlay has not been previously shown
+		// If undefined .show may not have been called
 		if ( this.allowCloseWindow ) {
 			this.allowCloseWindow.release();
 		}
 		mw.hook( 'mobileFrontend.editorClosed' ).fire();
+		exit();
 	},
 	/**
 	 * Sets additional values used for anonymous editing warning.

@@ -17,8 +17,6 @@ const
  * @param {boolean} props.showSuggestedLanguages If the suggested languages
  *  section should be rendered.
  * @param {string} [props.deviceLanguage] the device's primary language
- * @param {Function} [props.onOpen] callback that fires on opening the searcher
- * @param {Function} [props.onBannerClick] callback that fires when banner is clicked
  */
 function LanguageSearcher( props ) {
 	/**
@@ -38,7 +36,6 @@ function LanguageSearcher( props ) {
 			{
 				className: 'language-searcher',
 				events: {
-					'click .language-search-banner': props.onBannerClick,
 					'click a': 'onLinkClick',
 					'input .search': 'onSearchInput'
 				},
@@ -52,22 +49,11 @@ function LanguageSearcher( props ) {
 				allLanguages: languages.all,
 				allLanguagesCount: languages.all.length,
 				suggestedLanguages: languages.suggested,
-				suggestedLanguagesCount: languages.suggested.length,
-				showSuggestedLanguagesHeader: languages.suggested.length > 0
+				suggestedLanguagesCount: languages.suggested.length
 			},
 			props
 		)
 	);
-
-	// defer event to be emitted after event handler has been registered
-	const onOpen = props.onOpen;
-	if ( !onOpen ) {
-		return;
-	}
-	const searcher = this;
-	setTimeout( () => {
-		onOpen( searcher );
-	}, 0 );
 }
 
 mfExtend( LanguageSearcher, View, {
@@ -84,10 +70,8 @@ mfExtend( LanguageSearcher, View, {
 </div>
 
 <div class="overlay-content-body">
-	{{#showSuggestedLanguagesHeader}}
-	<h3 class="list-header">{{suggestedLanguagesHeader}}</h3>
-	{{/showSuggestedLanguagesHeader}}
 	{{#suggestedLanguagesCount}}
+	<h3 class="list-header">{{suggestedLanguagesHeader}}</h3>
 	<ol class="site-link-list suggested-languages">
 		{{#suggestedLanguages}}
 			<li>
@@ -101,11 +85,7 @@ mfExtend( LanguageSearcher, View, {
 		{{/suggestedLanguages}}
 	</ol>
 	{{/suggestedLanguagesCount}}
-	{{#bannerHTML}}
-	<div class="language-search-banner">
-		{{{.}}}
-	</div>
-	{{/bannerHTML}}
+
 	{{#allLanguagesCount}}
 	<h3 class="list-header">{{allLanguagesHeader}} ({{allLanguagesCount}})</h3>
 	<ul class="site-link-list all-languages">
@@ -138,18 +118,6 @@ mfExtend( LanguageSearcher, View, {
 		this.$languageItems = this.$siteLinksList.find( 'a' );
 		this.$subheaders = this.$el.find( 'h3' );
 		this.$emptyResultsSection = this.$el.find( '.empty-results' );
-	},
-	/**
-	 * Method that can be called outside MF extension to render
-	 * a banner inside the language overlay.
-	 *
-	 * @stable for use inside ContentTranslation
-	 * @param {string} bannerHTML
-	 */
-	addBanner: function ( bannerHTML ) {
-		this.options.bannerHTML = bannerHTML;
-		this.options.showSuggestedLanguagesHeader = true;
-		this.render();
 	},
 	/**
 	 * Article link click event handler
