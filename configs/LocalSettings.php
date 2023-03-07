@@ -37,7 +37,7 @@ $wgScriptPath = "";
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = loadenv('WG_SERVER', "http://localhost");
 
-$wgAppEnv = loadenv('APP_ENV', "staging");
+$wgAppEnv = loadenv('WG_APP_ENV');
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -295,7 +295,7 @@ if(isset($_SERVER['HTTP_ORIGIN'])){
 
 //setting up oauth on staging 
 
-if($wgAppEnv=='staging'){
+if($wgServer=='https://oe-staging.smarter.codes'){
 
 wfLoadExtension( 'MW-OAuth2Client' );
 
@@ -324,20 +324,36 @@ $wgOAuth2Client['configuration']['email'] = 'email'; // JSON path to email
 wfLoadExtension( 'MobileFrontend' );
 $wgDefaultMobileSkin = 'vector-2022';
 
-
-// Adding google analytic script in head tag of oe production
-
-if($wgAppEnv=='production'){
-	// Define a function to append the HTML code to the <head> tag
-	function add_html_to_head(&$out, &$skin) {
-		$out->addHeadItem('my_html_code', "
-<!-- Google tag (gtag.js) -->
-<script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
-<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WWT6MZSN23');</script>
-		");
-	}
-	// Register the function to the BeforePageDisplay hook
-	$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
-}
-
 $wgGroupPermissions['OE-Contributor']['edit'] = true;
+
+// Define a function to append the HTML code to the <head> tag
+function add_html_to_head(&$out, &$skin) {
+
+  global $wgServer,$wgAppEnv;
+  $out->addHeadItem('my_html_code_1', "
+    <!-- Adding OG Image -->
+    <meta property='og:title' content='Objective Earth'>
+    <meta property='og:description' content='Welcome to Objective.Earth! Objective.Earth is a social network, where you can talk about Problems of a region and Solutions for those problems.'>
+    <meta property='og:image' content='$wgServer/media/logo.png'>
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content='$wgServer'>
+
+    <!-- Twitter Specefic -->
+
+    <meta name='twitter:title' content='Objective Earth'>
+    <meta name='twitter:description' content='Welcome to Objective.Earth! Objective.Earth is a social network, where you can talk about Problems of a region and Solutions for those problems.'>
+    <meta name='twitter:image' content='$wgServer/media/logo.png'>
+
+  ");
+
+  // Adding google analytic script in head tag of oe production
+  if($wgServer=='https://objective.earth'){
+    $out->addHeadItem('my_html_code', "
+      <!-- Google tag (gtag.js) -->
+      <script async src='https://www.googletagmanager.com/gtag/js?id=G-WWT6MZSN23'></script>
+      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-WWT6MZSN23');</script>
+    ");
+  }
+}
+// Register the function to the BeforePageDisplay hook
+$wgHooks['BeforePageDisplay'][] = 'add_html_to_head';
